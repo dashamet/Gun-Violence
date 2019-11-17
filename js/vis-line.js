@@ -1,5 +1,5 @@
 // Creating variables for the SVG dimensions
-var margin = {top: 20, right: 20, bottom: 30, left: 50},
+var margin = {top: 30, right: 20, bottom: 30, left: 80},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -12,6 +12,21 @@ var parseTime = d3.timeParse("%Y")
 
 // Setting up a colour scale
 var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+// Creating a function to format the pop-up text
+function groupTxt(group) {
+    if (group === "intentional_homicides") {
+        return " killed by homicide";
+    } else if(group === "intentional_suicides"){
+        return " dead by suicide";
+    } else if(group === "unintentional_deaths"){
+        return " killed in an accident";
+    } else if(group === "unintentional_injuries"){
+        return " injured in an accident";
+    } else if(group === "intentional_injuries"){
+        return " injured by violence";
+    }
+}
 
 // define the 1st line
 var valueline = d3.line()
@@ -67,7 +82,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
             return {
                 name: name,
                 values: data.map(function(d) {
-                    return {year: d.year, victims: d[name]};
+                    return {year: d.year, victims: d[name], type: name};
                 })
             };
         });
@@ -81,7 +96,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
     x.domain(d3.extent(data, function(d) { return d.year; }));
     y.domain([0, d3.max(data, function(d) {
         return Math.max(d.intentional_homicides, d.intentional_suicides, d.unintentional_deaths, d.unintentional_injuries,
-            d.intentional_injuries); })]);
+            d.intentional_injuries); })+1000]);
 
     // Add the valueline path.
     svg.append("path")
@@ -175,7 +190,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
                 if (isNaN(d.victims)) {
                     return "<strong>" + d.year.getFullYear() + "</strong>" + " <br> " + "No data available"
                 } else {
-                    return "<strong>" + d.year.getFullYear() + "</strong>" + " <br> " + d.victims
+                    return "<strong>" + d.year.getFullYear() + "</strong>" + " <br> " + d.victims + groupTxt(d.type)
                 }
             })
                 .style("left", (d3.event.pageX + 10) + "px")
@@ -199,5 +214,11 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
     svg.append("g")
         .call(d3.axisLeft(y));
 
-
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left + 10)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Number of victims");
 });
