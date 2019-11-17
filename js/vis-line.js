@@ -1,6 +1,6 @@
 // Creating variables for the SVG dimensions
-var margin = {top: 30, right: 20, bottom: 30, left: 80},
-    width = 960 - margin.left - margin.right,
+var margin = {top: 30, right: 180, bottom: 30, left: 80},
+    width = 1200 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 // Setting the ranges
@@ -11,7 +11,7 @@ var y = d3.scaleLinear().range([height, 0]);
 var parseTime = d3.timeParse("%Y")
 
 // Setting up a colour scale
-var color = d3.scaleOrdinal(d3.schemeCategory10);
+var color = d3.scaleOrdinal()
 
 // Creating a function to format the pop-up text
 function groupTxt(group) {
@@ -102,7 +102,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
     svg.append("path")
         .data([data])
         .attr("class", "line")
-        .style("stroke", "green")
+        .style("stroke", "#4daf4a")
         .style("fill","none")
         .attr("stroke-width", 2)
         .attr("d", valueline);
@@ -111,7 +111,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
     svg.append("path")
         .data([data])
         .attr("class", "line")
-        .style("stroke", "red")
+        .style("stroke", "#e41a1c")
         .style("fill","none")
         .attr("stroke-width", 1.5)
         .attr("d", valueline2)
@@ -120,7 +120,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
     svg.append("path")
         .data([data])
         .attr("class", "line")
-        .style("stroke", "blue")
+        .style("stroke", "#377eb8")
         .style("fill","none")
         .attr("stroke-width", 1.5)
         .attr("d", valueline3);
@@ -128,14 +128,14 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
     // Add the valueline4 paths.
     svg.append("path")
         .datum(data.filter(valueline4.defined()))
-        .attr("stroke", "orange")
+        .attr("stroke", "#ff7f00")
         .style("stroke-dasharray", ("3, 3"))
         .style("fill","none")
         .attr("d", valueline4);
 
     svg.append("path")
         .datum(data)
-        .attr("stroke", "orange")
+        .attr("stroke", "#ff7f00")
         .style("fill","none")
         .attr("stroke-width", 1.5)
         .attr("d", valueline4);
@@ -143,14 +143,14 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
     // Add the valueline5 paths.
     svg.append("path")
         .datum(data.filter(valueline5.defined()))
-        .attr("stroke", "black")
+        .attr("stroke", "#984ea3")
         .style("stroke-dasharray", ("3, 3"))
         .style("fill","none")
         .attr("d", valueline5);
 
     svg.append("path")
         .datum(data)
-        .attr("stroke", "black")
+        .attr("stroke", "#984ea3")
         .style("fill","none")
         .attr("stroke-width", 1.5)
         .attr("d", valueline5);
@@ -177,7 +177,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         })
         .attr("cx", function(d){return x(d.year)})
         .attr("cy", function(d){return y(d.victims)})
-        .attr("fill", "black")
+        .attr("fill", function(d){return color[d.type]})
         .attr("stroke", "black")
         .on('mouseover', function (d, i) {
             d3.select(this).transition()
@@ -214,6 +214,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
     svg.append("g")
         .call(d3.axisLeft(y));
 
+    // Add the Y Axis label
     svg.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - margin.left + 10)
@@ -221,4 +222,50 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .attr("dy", "1em")
         .style("text-anchor", "middle")
         .text("Number of victims");
+
+    // Add a title
+    svg.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 - (margin.top / 2) + 10)
+        .attr("text-anchor", "middle")
+        .style("font-size", "20px")
+        .text("Firearm Deaths and Injuries Broken Down by Cause");
+
+    svg.append("text")
+        .attr("transform", "translate("+(width+10)+","+y(data[0].intentional_suicides + 300)+")")
+        .attr("dy", ".35em")
+        .attr("text-anchor", "start")
+        .style("fill", "#e41a1c")
+        .text("Suicides");
+
+    svg.append("text")
+        .attr("transform", "translate("+(width+10)+","+y(data[0].intentional_homicides)+")")
+        .attr("dy", ".35em")
+        .attr("text-anchor", "start")
+        .style("fill", "#4daf4a")
+        .text("Homicides");
+
+    svg.append("text")
+        .attr("transform", "translate("+(width-197)+","+y(data[0].unintentional_injuries - 700)+")")
+        .attr("dy", ".35em")
+        .attr("text-anchor", "start")
+        .style("fill", "#ff7f00")
+        .text("Injuries from accidents");
+
+    svg.append("text")
+        .attr("transform", "translate("+(width-95)+","+y(data[0].intentional_homicides + 5500)+")")
+        .attr("dy", ".35em")
+        .attr("text-anchor", "start")
+        .style("fill", "#984ea3")
+        .text("Injuries from violence");
+
+    svg.append("text")
+        .attr("transform", "translate("+(width+10)+","+y(data[0].unintentional_deaths)+")")
+        .attr("dy", ".35em")
+        .attr("text-anchor", "start")
+        .style("fill", "#377eb8")
+        .text("Deaths from accidents");
+
+
+
 });
