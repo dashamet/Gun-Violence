@@ -16,7 +16,7 @@ var path = d3.geoPath()
 
 queue()
     .defer(d3.json, "data/us.topo.json")
-    .defer(d3.json, "data/us-states.json")
+    //.defer(d3.json, "data/us-states.json")
     .await(createVisualization);
 
 function createVisualization(error, data) {
