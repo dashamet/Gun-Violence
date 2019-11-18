@@ -7,18 +7,24 @@ var svgM1 = d3.select("#map1").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-var projection = d3.geoMercator()
+var projection = d3.geoAlbersUsa()
     .translate([width / 2, height / 2])
-    .scale([100]);
+    .scale([width * 0.16]);
 
 var path = d3.geoPath()
-    .projection(d3.geoAlbersUsa());
+    .projection(projection);
 
-d3.json("data/us-states.json", function(data) {
+queue()
+    .defer(d3.json, "data/us.topo.json")
+    .defer(d3.json, "data/us-states.json")
+    .await(createVisualization);
+
+function createVisualization(error, data) {
     console.log(data);
-    var us = topojson.feature(data, data.objects.states).features;
+    var us = topojson.feature(data, data.objects.state).features;
     svgM1.selectAll("map1")
         .data(us)
         .enter().append("path")
-        .attr("d", path);
-});
+        .attr("d", path)
+        .attr("fill", "indianred");
+}
