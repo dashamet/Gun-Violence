@@ -14,7 +14,11 @@ div.tooltip {
 /* for index.html */
 body {
     font-family: Georgia, cursive;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 10px;
 }
+
 
 h1 {
     font-family: Georgia, cursive;
