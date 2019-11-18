@@ -9,16 +9,15 @@ var svgM1 = d3.select("#map1").append("svg")
 
 var projection = d3.geoMercator()
     .translate([width / 2, height / 2])
-    .scale([1000]);
+    .scale([100]);
 
 var path = d3.geoPath()
-    .projection(projection);
+    .projection(d3.geoAlbersUsa());
 
-
-d3.json("data/us.topo.json", function(data) {
+d3.json("data/us-states.json", function(data) {
     console.log(data);
-    var us = topojson.feature(data, data.objects.state).features;
-    svgM1.selectAll("path")
+    var us = topojson.feature(data, data.objects.states).features;
+    svgM1.selectAll("map1")
         .data(us)
         .enter().append("path")
         .attr("d", path);
