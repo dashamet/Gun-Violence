@@ -9,7 +9,7 @@ var svgM1 = d3.select("#map1").append("svg")
 
 var projection = d3.geoAlbersUsa()
     .translate([width / 2, height / 2])
-    .scale([width * 0.16]);
+    .scale([width * 0.9]);
 
 var path = d3.geoPath()
     .projection(projection);
