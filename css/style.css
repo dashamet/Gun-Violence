@@ -19,7 +19,6 @@ body {
     padding-bottom: 10px;
 }
 
-
 h1 {
     font-family: Georgia, cursive;
     font-weight: bold;
@@ -49,5 +48,9 @@ h2 {
     font-size: 20px;
     font-weight: bold;
     color: darkred;
+}
+
+.center {
+    text-align: center;
 }
 
