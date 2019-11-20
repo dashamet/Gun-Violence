@@ -182,7 +182,8 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .on('mouseover', function (d, i) {
             d3.select(this).transition()
                 .duration('50')
-                .attr('opacity', '.85');
+                .attr('opacity', '.85')
+                .attr('r', 8);
             div.transition()
                 .duration(50)
                 .style("opacity", 1);
