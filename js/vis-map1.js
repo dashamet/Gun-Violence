@@ -27,4 +27,12 @@ function createVisualization(error, data) {
         .enter().append("path")
         .attr("d", path)
         .attr("fill", "indianred");
+
+    d3.csv("us-state-names.csv", function(csv){
+        // extract just the names and Ids
+        var names = {};
+        csv.forEach(function(d,i){
+            names[d.id] = d.name;
+        })
+    })
 }
