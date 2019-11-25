@@ -1,6 +1,6 @@
-var margin = {top: 30, right: 180, bottom: 30, left: 80},
-    width = 1200 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+var margin = {top: 30, right: 80, bottom: 50, left: 80},
+    width = 900 - margin.left - margin.right,
+    height = 550 - margin.top - margin.bottom;
 
 let marginTop = 10;
 var svgD = d3.select("#memorial-viz").append("svg")
@@ -11,7 +11,7 @@ var svgD = d3.select("#memorial-viz").append("svg")
 
 d3.csv("data/allShootings.csv", function(data) {
     console.log("allShootings", data);
-    const dotR = width/300;
+    const dotR = width/200;
     const dotSpacing = 12;
     let dots = svgD.selectAll('.dot')
         .data(data);
@@ -19,27 +19,66 @@ d3.csv("data/allShootings.csv", function(data) {
         .attr('class', function(d){
             return `customCircle ${d.age} ${d.Type} ${d.gender}`
         })
-        .attr('cx', function(d,i){
-            return i%50*dotSpacing
-        })
-        .attr('cy', function(d,i){
-            const rowNum = (i-i%50)/50
-            return dotSpacing*(rowNum+1)
-        })
+        // .attr('cx', function(d,i){
+        //     return i%50*dotSpacing
+        // })
+        // .attr('cy', function(d,i){
+        //     const rowNum = (i-i%50)/50
+        //     return dotSpacing*(rowNum+1)
+        // })
         .attr('r', dotR);
 
+    const nCol = 25;
+    d3.selectAll('.customCircle.Killed')
+        .attr('fill', 'darkRed')
+        .attr('cx', function(d,i){
+            return width/2-i%nCol*dotSpacing-30
+            //return width/50*(3.5+i%40)
+        })
+        .attr('cy', function(d,i){
+            const rowNum = (i-i%nCol)/nCol
+            return dotSpacing*(rowNum+1)
+        });
+    d3.selectAll('.customCircle.Injured')
+        .attr('r', dotR)
+        .attr('fill', 'darkBlue')
+        .attr('cx', function(d,i){
+            return i%nCol*dotSpacing + width/2 + 30
+            //return width/50*(3.5+i%40)*3
+        })
+        .attr('cy', function(d,i){
+            const rowNum = (i-i%nCol)/nCol;
+            return dotSpacing*(rowNum+1)
+            //return (Math.trunc(i / 40)) * height/50 + marginTop;
+        });
+    svgD
+        .append("text")
+        .attr("class", "dotLabel")
+        .text("Killed")
+        .attr("x", (width/2+(-nCol*dotSpacing-30)/2))
+        .attr("y", 0)
+        .style("text-anchor", "middle");
+    svgD
+        .append("text")
+        .attr("class", "dotLabel")
+        .text("Injured")
+        .attr("x", (nCol*dotSpacing)/2 + width/2 + 30)
+        .attr("y", 0)
+        .style("text-anchor", "middle");
+
     function animateGender(){
-        const nCol = 30
+        d3.selectAll(".dotLabel").remove();
+        const nCol = 25;
         d3.selectAll('.customCircle.male')
             .transition()
             .duration(800)
-            .attr('fill', 'red')
+            //.attr('fill', 'red')
             .attr('r', dotR)
             .attr('cx', function(d,i){
-                return i%nCol*dotSpacing
+                return width/2-i%nCol*dotSpacing-30
             })
             .attr('cy', function(d,i){
-                const rowNum = (i-i%nCol)/nCol
+                const rowNum = (i-i%nCol)/nCol;
                 return dotSpacing*(rowNum+1)
             });
 
@@ -47,42 +86,60 @@ d3.csv("data/allShootings.csv", function(data) {
             .transition()
             .duration(800)
             .attr('r', dotR)
-            .attr('fill', 'blue')
+            //.attr('fill', 'blue')
             .attr('cx', function(d,i){
-                return i%nCol*dotSpacing + width/2
+                return i%nCol*dotSpacing + width/2 + 30
             })
             .attr('cy', function(d,i){
-                const rowNum = (i-i%nCol)/nCol
+                const rowNum = (i-i%nCol)/nCol;
                 return dotSpacing*(rowNum+1)
             });
         d3.selectAll('.customCircle.unknown')
             .transition()
             .duration(800)
-            .attr('r', 3)
-            .attr('fill', 'grey')
+            .attr('r', dotR)
+            //.attr('fill', 'grey')
             .attr('cx', function(d,i){
-                return i%100*dotSpacing
+                return i%100*dotSpacing+40
             })
             .attr('cy', function(d,i){
                 if (i<100){
-                    return height
+                    return height - 20
                 }
                 else{
-                    return height - dotSpacing
+                    return height - 20 - dotSpacing
                 }
             })
+        svgD.append("text")
+            .attr("class", "dotLabel")
+            .text("Boys")
+            .attr("x", width/2+(-nCol*dotSpacing-30)/2)
+            .attr("y", 0)
+            .style("text-anchor", "middle");
+        svgD.append("text")
+            .attr("class", "dotLabel")
+            .text("Girls")
+            .attr("x", nCol*dotSpacing/2 + width/2 + 30)
+            .attr("y", 0)
+            .style("text-anchor", "middle");
+        svgD.append("text")
+            .attr("class", "dotLabel")
+            .text("unknown")
+            .attr("x", width/2)
+            .attr("y", height)
+            .style("text-anchor", "middle")
     }
 
     function animateDeathInjury(){
-        const nCol = 30
+        svgD.selectAll(".dotLabel").remove();
+        const nCol = 25;
 
         d3.selectAll('.customCircle.Killed')
             .transition()
             .duration(800)
-            .attr('fill', 'darkBlue')
-            .attr('r', dotR)
+            .attr('fill', 'darkRed')
             .attr('cx', function(d,i){
-                return i%nCol*dotSpacing
+                return width/2-i%nCol*dotSpacing-30
                 //return width/50*(3.5+i%40)
             })
             .attr('cy', function(d,i){
@@ -92,10 +149,10 @@ d3.csv("data/allShootings.csv", function(data) {
         d3.selectAll('.customCircle.Injured')
             .transition()
             .duration(800)
-            .attr('r', 3)
-            .attr('fill', 'darkGrey')
+            .attr('r', dotR)
+            .attr('fill', 'darkBlue')
             .attr('cx', function(d,i){
-                return i%nCol*dotSpacing + width/2
+                return i%nCol*dotSpacing + width/2 + 30
                 //return width/50*(3.5+i%40)*3
             })
             .attr('cy', function(d,i){
@@ -103,18 +160,41 @@ d3.csv("data/allShootings.csv", function(data) {
                 return dotSpacing*(rowNum+1)
                 //return (Math.trunc(i / 40)) * height/50 + marginTop;
             });
+        svgD
+            .append("text")
+            .attr("class", "dotLabel")
+            .text("Killed")
+            .attr("x", (width/2+(-nCol*dotSpacing-30)/2))
+            .attr("y", 0)
+            .style("text-anchor", "middle");
+        svgD
+            .append("text")
+            .attr("class", "dotLabel")
+            .text("Injured")
+            .attr("x", (nCol*dotSpacing)/2 + width/2 + 30)
+            .attr("y", 0)
+            .style("text-anchor", "middle");
     }
 
     function animateAge(){
-        const nCol = 30;
+        d3.selectAll(".dotLabel").remove()
+        // var force = d3.layout.force()
+        //     .nodes(nodes)
+        //     .size([width, height])
+        //     .gravity(.02)
+        //     .charge(0)
+        //     .on("tick", tick)
+        //     .start();
+
+        const nCol = 25;
 
         d3.selectAll('.customCircle.child')
             .transition()
             .duration(800)
-            .attr('fill', 'pink')
+            //.attr('fill', 'pink')
             .attr('r', dotR)
             .attr('cx', function(d,i){
-                return i%nCol*dotSpacing
+                return  width/2-i%nCol*dotSpacing-30
                 //return width/50*(3.5+i%40)
             })
             .attr('cy', function(d,i){
@@ -124,10 +204,10 @@ d3.csv("data/allShootings.csv", function(data) {
         d3.selectAll('.customCircle.teen')
             .transition()
             .duration(800)
-            .attr('r', 3)
-            .attr('fill', 'purple')
+            .attr('r', dotR)
+            //.attr('fill', 'purple')
             .attr('cx', function(d,i){
-                return i%nCol*dotSpacing + width/2
+                return i%nCol*dotSpacing + width/2 + 30
                 //return width/50*(3.5+i%40)*3
             })
             .attr('cy', function(d,i){
@@ -135,31 +215,30 @@ d3.csv("data/allShootings.csv", function(data) {
                 return dotSpacing*(rowNum+1)
                 //return (Math.trunc(i / 40)) * height/50 + marginTop;
             });
-    }
-
-    function animateOrig(){
-        d3.selectAll('.customCircle')
-            .transition()
-            .duration(800)
-            .attr('fill', 'black')
-            .attr('r', dotR)
-            .attr('cx', function(d,i){
-                return i%60*dotSpacing
-            })
-            .attr('cy', function(d,i){
-                const rowNum = (i-i%60)/60
-                return dotSpacing*(rowNum+1)
-            })
-            .attr('r', dotR);
+        svgD
+            .append("text")
+            .attr("class", "dotLabel")
+            .text("Child")
+            .attr("x", (width/2+(-nCol*dotSpacing-30)/2))
+            .attr("y", 0)
+            .style("text-anchor", "middle")
+        svgD
+            .append("text")
+            .attr("class", "dotLabel")
+            .text("Teen")
+            .attr("x", (nCol*dotSpacing)/2 + width/2 + 30)
+            .attr("y", 0)
+            .style("text-anchor", "middle")
     }
 
     function animateAgeInj(){
-        const barWidth = 12;
+        svgD.selectAll("text.dotLabel").remove()
+        const barWidth = 11;
         d3.selectAll('.customCircle.child.Killed')
             .transition()
             .duration(800)
-            .attr('r', 3)
-            .attr('fill', 'darkGreen')
+            .attr('r', dotR)
+            //.attr('fill', 'red')
             .attr('cx', function(d,i){
                 return i%barWidth*dotSpacing
             })
@@ -170,8 +249,8 @@ d3.csv("data/allShootings.csv", function(data) {
         d3.selectAll('.customCircle.child.Injured')
             .transition()
             .duration(800)
-            .attr('r', 3)
-            .attr('fill', 'green')
+            .attr('r', dotR)
+            //.attr('fill', 'blue')
             .attr('cx', function(d,i){
                 return i%barWidth*dotSpacing + 1/5*width
             })
@@ -182,8 +261,8 @@ d3.csv("data/allShootings.csv", function(data) {
         d3.selectAll('.customCircle.teen.Killed')
             .transition()
             .duration(800)
-            .attr('r', 3)
-            .attr('fill', 'darkBlue')
+            .attr('r', dotR)
+            //.attr('fill', 'darkRed')
             .attr('cx', function(d,i){
                 return i%barWidth*dotSpacing + width/2
             })
@@ -194,8 +273,8 @@ d3.csv("data/allShootings.csv", function(data) {
         d3.selectAll('.customCircle.teen.Injured')
             .transition()
             .duration(800)
-            .attr('r', 3)
-            .attr('fill', 'blue')
+            .attr('r', dotR)
+            //.attr('fill', 'darkBlue')
             .attr('cx', function(d,i){
                 return i%barWidth*dotSpacing + 7*width/10
             })
@@ -203,6 +282,44 @@ d3.csv("data/allShootings.csv", function(data) {
                 const rowNum = (i-i%barWidth)/barWidth;
                 return height - dotSpacing*(rowNum+1)
             });
+        svgD
+            .append("text")
+            .attr("class", "dotLabel")
+            .text("Child")
+            .attr("x", (width/2+(-nCol*dotSpacing-30)/2))
+            .attr("y", 0)
+            .style("text-anchor", "middle");
+        svgD
+            .append("text")
+            .attr("class", "dotLabel")
+            .text("Teen")
+            .attr("x", (nCol*dotSpacing)/2 + width/2 + 30)
+            .attr("y", 0)
+            .style("text-anchor", "middle");
+        svgD.append("text")
+            .attr("class", "dotLabel")
+            .text("Killed")
+            .attr("x", barWidth/2*dotSpacing)
+            .attr("y", height+10)
+            .style("text-anchor", "middle");
+        svgD.append("text")
+            .attr("class", "dotLabel")
+            .text("Injured")
+            .attr("x", barWidth/2*dotSpacing + 1/5*width)
+            .attr("y", height+10)
+            .style("text-anchor", "middle")
+        svgD.append("text")
+            .attr("class", "dotLabel")
+            .text("Killed")
+            .attr("x", barWidth/2*dotSpacing + width/2)
+            .attr("y", height+10)
+            .style("text-anchor", "middle")
+        svgD.append("text")
+            .attr("class", "dotLabel")
+            .text("Injured")
+            .attr("x", barWidth/2*dotSpacing + 7/10*width)
+            .attr("y", height+10)
+            .style("text-anchor", "middle")
     }
 
 
@@ -211,10 +328,10 @@ d3.csv("data/allShootings.csv", function(data) {
     setInterval (animateCircles, 10000);
 
     function animateCircles(){
-        animateGender()
-        setTimeout(function() {animateDeathInjury()}, 2000);
+        //animateAge();
+        setTimeout(function() {animateGender()}, 2000);
         setTimeout(function() {animateAge()}, 4000);
-        setTimeout(function() {animateOrig()}, 6000);
-        setTimeout(function() {animateAgeInj(), 8000})
+        setTimeout(function() {animateAgeInj()}, 6000);
+        setTimeout(function() {animateDeathInjury()}, 8000);
     }
 });
