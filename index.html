@@ -7,116 +7,26 @@
     <title>CS171 Final Project</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery.pagepiling.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<h1> Underage and Under Fire: </h1>
-<h2> An Exploration of Child and Teenage Firearm Injuries and Deaths </h2>
-
-<div id="intro">
-    *Intro text* here, explain problem and hook
-    <br>
-    <br>
-    How have the frequency and major causes of youth death by firearms changed over time?
-</div>
-
-<div class="center" id="line-graph"> </div>
-
-<br> *text* about why we chose children and teens to be the focus of our project <br><br>
-<strong>in 2018:</strong>
-<div id="transition-to-maps">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
-                <u> 1.5 MILLION </u> children injured
-            </div>
-            <div class="col-sm-6">
-                <u> 1.1 MILLION </u> children killed
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <u> 3.1 MILLION </u> teens injured
-            </div>
-            <div class="col-sm-6">
-                <u> 1.8 MILLION </u> teens killed
-            </div>
-        </div>
+<div id="pagepiling">
+    <div class="section sec1 center" id="typewriter"></div>
+    <div class="section sec2 center">
+        <p style="display:none">In fact, gun violence is the second most common cause of death among young people in the United States.
+            This is a crisis.
+            ↓</p>
+        From 2001 to 2017, gun violence took the lives of <span class="value stat">49163</span> young people and injured <span class="value stat">262350</span>.
+        <ul id="result"></ul>
     </div>
+    <div class="section sec3 center" id="line-graph"> <h3>Violence is the leading cause of firearm-related injuries and deaths, and it's on the rise.</h3></div>
+    <div class="section sec4 center" id="map1"> <h3 style> Children and teenagers across the country have been harmed and killed by guns. </h3></div>
+    <div class="section sec5 center" id="memorial-viz"><h3> Male teens are the largest group of victims among youth.</h3></div>
+    <div class="section sec6 center" id="map2"><h3> Policy has power.</h3></div>
+
 </div>
-
-<br><br>*insert images here*<br><br><br>
-
-<div class="center" id="map1"></div>
-Visualization Above: interactive map of children/teen injuries/deaths in the United States per year with:<br>
-A drop-down menu to select data for either children or teenagers<br>
-A drop-down menu to select data for either deaths or non-fatal<br>
-A check-box menu to select the year(s) to display on the map<br>
-
-<br>
-<br> *text* outlining the causes of firearms death (suicides, unintentional, homicide) in teens and children with a visualization
-to support this <br><br>
-<div class = "center" id="memorial">
-        Visualization: Recent Firearm Deaths and Injuries <br>
-        The last 500 documented firearm deaths and injuries
-    <div id = "memorial-viz"></div>
-</div><br>
-
-<br> *text* that mentions the <strong> crucial </strong> correlation between policy and firearm deaths/injuries in children
-and teens<br><br>
-
-<div class="center" id="map2"></div>
-Visualization Above: Average Number of Deaths in States With and Without Gun Control Legislation in which: <br>
-Clicking on a specific state opens a pop-up of a line graph<br>
-A drop-down menu to select the type of policy
-<br><br>
-
-<br> <strong> <u> PUNCHLINE </u></strong><br>
-next steps as to how the audience can do to help this ongoing crisis <br>
-include links to donate and raise awareness by contacting local representative to get
-more legislation passed
-<br><br>
-
-<div class="section" id="creditsSection">
-    <i class="fa fa-arrow-circle-o-up fa-3x upbutton" aria-hidden="true"></i>
-
-    <div class="containervertical">
-        <div class="row">
-            <div class="col-xs-12 col-md-12">
-                <h2>Acknowledgements</h2>
-                <p> *text* with thank you and acknowledgement of CS171 staff</p>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-md-4">
-                    <h3>Data sources</h3>
-                    <ul>
-                        <li><a href="https://www.cdc.gov/nchs/pressroom/sosmap/firearm_mortality/firearm.html"><mark>CDC Firearm Mortality</mark> </a> </li>
-                        <li><a href="https://www.cdc.gov/injury/wisqars/index.html"><mark>CDC WIQUARS Data </mark></a> </li>
-                        <li><a href="https://www.gunviolencearchive.org/reports"><mark>Gun Violence Archives</mark> </a> </li>
-                        <li><a href="https://www.rand.org/pubs/tools/TL283-1.html"><mark>Gun Control Policy Data</mark></a> </li>
-                        <li><a href="https://lawcenter.giffords.org/gun-laws/policy-areas/child-consumer-safety/
-                           child-access-prevention/?fbclid=IwAR0L33f84evVGdr80PqcbF6dkFVtzPECKRLsi4dcvmNyjel0EOlcdbY1RE0#federal"><mark>Gun Laws Data</mark> </a> </li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-md-5">
-                    <h3>Images</h3>
-                        <ul>
-                            add image sources
-                        </ul>
-                </div>
-                <div class="col-xs-12 col-md-3">
-                    <h3>Process Book</h3>
-                    <a href="https://docs.google.com/document/d/1cwD3-cQMEhZHYYeOAjc17EDM-yCXPW24efqupfw35rI/edit#"> Link to our process book to see more information </a>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <script src="js/jquery.min.js"></script>
 <script src="js/popper.min.js"></script>
@@ -126,6 +36,9 @@ more legislation passed
 <script src="js/d3-tip.js"></script>
 <script src="js/colorbrewer.js"></script>
 <script src="js/topojson.v1.min.js"></script>
+<script src="js/jquery.pagepiling.js"></script>
+<script src="js/my.js"></script>
+
 
 <script src="js/vis-line.js"></script>
 <script src="js/vis-map1.js"></script>
