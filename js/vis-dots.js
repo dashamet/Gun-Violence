@@ -325,13 +325,13 @@ d3.csv("data/allShootings.csv", function(data) {
 
 
     // animation
-    setInterval (animateCircles, 10000);
+    setInterval (animateCircles, 12500);
 
     function animateCircles(){
         //animateAge();
-        setTimeout(function() {animateGender()}, 2000);
-        setTimeout(function() {animateAge()}, 4000);
-        setTimeout(function() {animateAgeInj()}, 6000);
-        setTimeout(function() {animateDeathInjury()}, 8000);
+        setTimeout(function() {animateGender()}, 2500);
+        setTimeout(function() {animateAge()}, 5000);
+        setTimeout(function() {animateAgeInj()}, 7500);
+        setTimeout(function() {animateDeathInjury()}, 10000);
     }
 });
