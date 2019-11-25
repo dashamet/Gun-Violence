@@ -54,7 +54,8 @@ function createVisualization(error, data) {
             .data(us)
             .enter().append("path")
             .attr("d", path)
-            .attr("fill", "lightgrey")
+            .attr("fill", "black")
+            .style("stroke", "#fff")
     });
 
 
@@ -89,8 +90,8 @@ function createVisualization(error, data) {
                 .attr("cy", function (d) {
                     return d.y;
                 })
-                .attr("r", 5)
-                .attr("fill", "black")
+                .attr("r", 4)
+                .attr("fill", "red")
                 .attr("transform", function (d) {
                     return "translate(" + projection([+d.Longitude, +d.Latitude]) + ")"
 
@@ -102,7 +103,11 @@ function createVisualization(error, data) {
                     div.transition()
                         .duration(200)
                         .style("opacity", .9);
-                    div.text("Gender: "+ d.ParticipantGender + " , " +d.ParticipantAgeGroup)
+                    div.html(function () {
+                            return "<strong>" + "Name: " + "</strong>" + d.ParticipantName + " <br> "
+                                + "<strong>" + "Incident location: " + "</strong>" + d.Address
+                        })
+                        //.text(d.ParticipantGender.charAt(0).toUpperCase() + d.ParticipantGender.substring(1)+ ", " +d.ParticipantAgeGroup)
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                 })
@@ -144,8 +149,8 @@ function createVisualization(error, data) {
                 .attr("cy", function (d) {
                     return d.y;
                 })
-                .attr("r", 5)
-                .attr("fill", "indianred")
+                .attr("r", 4)
+                .attr("fill", "red")
                 .attr("transform", function (d) {
                     return "translate(" + projection([+d.Longitude, +d.Latitude]) + ")"
 
@@ -157,7 +162,12 @@ function createVisualization(error, data) {
                     div.transition()
                         .duration(200)
                         .style("opacity", .9);
-                    div.text("Gender: " + d.ParticipantGender +"\n" +d.ParticipantAgeGroup)
+                    div.html(function () {
+                        return "<strong>" + "Name: " + "</strong>" + d.ParticipantName + " <br> "
+                            + "<strong>" + "Incident location: " + "</strong>" + d.Address
+                    })
+                        //.text(d.ParticipantGender.charAt(0).toUpperCase() + d.ParticipantGender.substring(1)+ ", " +d.ParticipantAgeGroup)
+                        .text("Name: " + d.ParticipantName + ", Incident location: " + d.Address)
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                 })

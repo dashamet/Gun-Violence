@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('#pagepiling').pagepiling({
-        sectionsColor: ['white', 'white', 'white', 'white', 'white', 'white']
+        sectionsColor: ['white', 'black', 'white', 'white', 'white', 'white', 'white']
     })
 
     // Number counter on slide 2
@@ -31,7 +31,7 @@ $(document).ready(function() {
                 var newLine = $('<li class="line">' + nextLine + '</li>');
                 $('#result').append(newLine);
                 newLine.animate({ 'margin-left':0 }, 300);
-                counter /= 7
+                counter /= 8.5
                 timer = setTimeout(displayLine,counter);
             }
         }

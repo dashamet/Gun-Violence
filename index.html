@@ -21,15 +21,21 @@
         From 2001 to 2017, gun violence took the lives of <span class="value stat">49163</span> young people and injured <span class="value stat">262350</span>.
         <ul id="result"></ul>
     </div>
-    <div class="section sec3 center" id="line-graph"> <h3>Violence is the leading cause of firearm-related injuries and deaths, and it's on the rise.</h3></div>
-    <div class="section sec4 center" id="map1"> <h3 style> Children and teenagers across the country have been harmed and killed by guns. </h3>
+    <div class="section sec3 center" id="line-graph">
+        <h3>Violence is the leading cause of firearm-related injuries and deaths, and it's on the rise.</h3>
+        <h5>Hover over a line to isolate a cause. Hover over a point to see the totals for a specific year. </h5>
+
+    </div>
+    <div class="section sec4 center" id="map1">
+        <h3> Children and teenagers across the country have been injured and killed by guns. </h3>
+        <h5> Each point represents a victim. Hover over a point to show more detail.</h5>
     <!--  dropdown  -->
         <form class="form-inline">
             <div class="form-group">
-                <label for="ranking-type">Show Data for </label>
+                <label for="ranking-type">Show data for: &nbsp</label>
                 <select class="form-control" id="ranking-type">
-                    <option value="injured">Children and Teen Injuries</option>
-                    <option value="deaths">Children and Teen Deaths</option>
+                    <option value="injured">Injuries</option>
+                    <option value="deaths">Deaths</option>
                 </select>
             </div>
         </form>
@@ -37,59 +43,32 @@
     </div>
     <div class="section sec5 center" id="memorial-viz"><h3> Male teens are the largest group of victims among youth.</h3></div>
     <div class="section sec6 center" id="map2"><h3> Policy has power.</h3>
-        <p> The effect of gun control laws for not only children and teens, but for adults as well</p>
 
         <!--  dropdown  -->
         <form class="form-inline">
             <div class="form-group">
-                <label for="data-value">States with:</label>
+                <label for="data-value">States with: &nbsp</label>
                 <select class="form-control" id="data-value">
-                    <option value="handgun">Handgun Background Check</option>
-                    <option value="longgun">Long Gun Backgroun Check</option>
-                    <option value="total">Total Background Checks </option>
+                    <option value="handgun">Handgun background checks</option>
+                    <option value="longgun">Long Gun background checks</option>
+                    <option value="total">Total background checks </option>
                 </select>
             </div>
         </form>
     </div>
-    <div class="section sec6 center"><h3> Acknowledgements </h3>
-        <div class="containervertical">
-            <div class="row">
-                <div class="col-xs-12 col-md-12">
-                    <p> Thank you to the CS171 staff for the countless support in labs, lecture, and on piazza. </p>
-                </div>
-                <div class="col-xs-12 col-md-12">
-                    <p> About Us: </p>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-md-4">
-                        <h3>Data sources</h3>
-                        <ul>
-                            <li><a href="https://www.cdc.gov/nchs/pressroom/sosmap/firearm_mortality/firearm.html"><mark>CDC Firearm Mortality</mark> </a> </li>
-                            <li><a href="https://www.cdc.gov/injury/wisqars/index.html"><mark>CDC WIQUARS Data </mark></a> </li>
-                            <li><a href="https://www.gunviolencearchive.org/reports"><mark>Gun Violence Archives</mark> </a> </li>
-                            <li><a href="https://www.rand.org/pubs/tools/TL283-1.html"><mark>Gun Control Policy Data</mark></a> </li>
-                            <li><a href="https://lawcenter.giffords.org/gun-laws/policy-areas/child-consumer-safety/
-                           child-access-prevention/?fbclid=IwAR0L33f84evVGdr80PqcbF6dkFVtzPECKRLsi4dcvmNyjel0EOlcdbY1RE0#federal"><mark>Gun Laws Data</mark> </a> </li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-12 col-md-5">
-                        <h3>Images</h3>
-                        <ul>
-                            <ul>
-                                add image sources
-                            </ul>
-                    </div>
-                    <div class="col-xs-12 col-md-3">
-                        <h3>Process Book</h3>
-                        <a href="https://docs.google.com/document/d/1cwD3-cQMEhZHYYeOAjc17EDM-yCXPW24efqupfw35rI/edit#"> Link to our process book to see more information </a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="section sec7"><h3 style="text-align:center;"> Behind the Scenes </h3>
+            <ul style="list-style-type:none;">
+                <li class="step"><h3><span class="num">1</span> Acquire Data</h3></li>
+                    <ul>
+                        <li><a href="https://www.cdc.gov/injury/wisqars/index.html">CDC WISQARS Data</a><span class="data-source">  - We used this data for the line graph breaking down causes of death and injuries over time. </span></li>
+                        <li><a href="https://www.gunviolencearchive.org/reports">Gun Violence Archive</a><span class="data-source"> - We obtained two datasets from this source: youth injured by firearms and youth killed by firearms. We used these datasets for the animated dot visualization and the map with points representing victims.</span></li>
+                        <li><a href="https://www.rand.org/pubs/tools/TL283-1.html">RAND State Firearm Law Database</a><span class="data-source"> - We relied on this extensive dataset of states' firearm policies for our choropleth map showing the correlation between policies and gun deaths.</span></li>
+                    </ul>
+                <li class="step"><h3><span class="num">2</span> Design, Code, and Repeat</h3></li>
+                <img src="css/img/process.jpg" alt="test" width="600" height="400">
+            </ul>
     </div>
+        <div class="section sec8 center"><h3>About the authors</h3></div>
 
 </div>
 
