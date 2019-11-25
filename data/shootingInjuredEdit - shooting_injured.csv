@@ -1,4 +1,4 @@
-Incident Date,State,Address,,Latitude,Longitude,Participant Gender,Participant Name,Participant Age Group
+IncidentDate,State,Address,,Latitude,Longitude,ParticipantGender,ParticipantName,ParticipantAgeGroup
 14-Nov-19,Illinois,"4700 block of N Monticello Ave,Chicago",,41.9666834,-87.7196452,male,N/A,Teen 12-17
 14-Nov-19,Ohio,"1711 Penworth Dr,Columbus",,40.0734455,-82.9720043,female,N/A,Teen 12-17
 14-Nov-19,California,"21900 Centurion Way,Santa Clarita",,34.4420796,-118.5176074,male,N/A,Teen 12-17
