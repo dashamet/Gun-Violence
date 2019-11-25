@@ -109,7 +109,7 @@ d3.csv("data/allShootings.csv", function(data) {
                 else{
                     return height - 20 - dotSpacing
                 }
-            })
+            });
         svgD.append("text")
             .attr("class", "dotLabel")
             .text("Boys")
