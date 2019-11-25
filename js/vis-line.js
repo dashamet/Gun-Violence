@@ -1,5 +1,5 @@
 // Creating variables for the SVG dimensions
-var margin = {top: 30, right: 220, bottom: 10, left: 60},
+var margin = {top: 10, right: 220, bottom: 20, left: 60},
     width = 1100 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -324,7 +324,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
     //.text("Firearm Deaths and Injuries Broken Down by Cause");
 
     svg.append("text")
-        .attr("transform", "translate("+(width-108)+","+y(data[0].intentional_homicides)+")")
+        .attr("transform", "translate("+(width+90)+","+y(data[0].intentional_homicides)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
@@ -333,7 +333,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .attr("id", "line1");
 
     svg.append("text")
-        .attr("transform", "translate("+(width-108)+","+y(data[0].intentional_suicides + 300)+")")
+        .attr("transform", "translate("+(width+90)+","+y(data[0].intentional_suicides + 300)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
@@ -342,7 +342,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .attr("id", "line2");
 
     svg.append("text")
-        .attr("transform", "translate("+(width-108)+","+y(data[0].unintentional_deaths)+")")
+        .attr("transform", "translate("+(width + 90)+","+y(data[0].unintentional_deaths)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
@@ -351,7 +351,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .attr("id", "line3");
 
     svg.append("text")
-        .attr("transform", "translate("+(width-289)+","+y(data[0].unintentional_injuries - 698)+")")
+        .attr("transform", "translate("+(width-90)+","+y(data[0].unintentional_injuries - 698)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
@@ -360,7 +360,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .attr("id", "line4");
 
     svg.append("text")
-        .attr("transform", "translate("+(width-197)+","+y(data[0].intentional_injuries + 2400)+")")
+        .attr("transform", "translate("+(width)+","+y(data[0].intentional_injuries + 2400)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
