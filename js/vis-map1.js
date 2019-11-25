@@ -7,6 +7,12 @@ var svgM1 = d3.select("#map1").append("svg")
     .attr("width", width)
     .attr("height", height);
 
+// Append Div for tooltip to SVG
+var div = d3.select("#map1")
+    .append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
 var projection = d3.geoAlbersUsa()
     .translate([width / 2, height / 2])
     .scale([width * 0.9]);
@@ -27,7 +33,7 @@ queue()
 
 function createVisualization(error, data) {
 
-    // get load csv state names to topojson use data
+    // load csv state names to topojson use data
     // http://bl.ocks.org/phil-pedruco/10447085
 
     //change options with dropdown
@@ -71,13 +77,6 @@ function createVisualization(error, data) {
             // 500
             console.log(newData.length);
 
-            var toolTip1 = d3.tip()
-                .attr("class", "d3-tip")
-                .offset([-8, 0])
-                .html(function(d) { return "Name:"+ d.ParticipantName+ "<br>" + "Gender:" + d.ParticipantGender+ "<br>"
-                    + "Age Group" + "<br>" + d.ParticipantAgeGroup; });
-            svgM1.call(toolTip1);
-
             var circles1 = svgM1.selectAll("circle")
                 .data(newData);
 
@@ -99,8 +98,21 @@ function createVisualization(error, data) {
                     //console.log(d.Longitude.length)
 
                 })
-                .on('mouseover', toolTip1.show)
-                .on('mouseout', toolTip1.hide);
+                .on("mouseover", function(d) {
+                    div.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    div.text("Gender: "+ d.ParticipantGender + " , " +d.ParticipantAgeGroup)
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+                })
+
+                // fade out tooltip on mouse out
+                .on("mouseout", function(d) {
+                    div.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                });
 
                 circles1.exit().remove();
         })
@@ -119,13 +131,6 @@ function createVisualization(error, data) {
                     ParticipantAgeGroup: d.ParticipantAgeGroup,
                 }
             });
-
-            var toolTip2 = d3.tip()
-                .attr("class", "d3-tip")
-                .offset([-8, 0])
-                .html(function(d) { return "Name:"+ d.ParticipantName+ "<br>" + "Gender:" + d.ParticipantGender+ "<br>"
-                    + "Age Group" + "<br>" + d.ParticipantAgeGroup; });
-            svgM1.call(toolTip2);
 
             var circles2 = svgM1.selectAll("circle")
                 .data(newData2);
@@ -148,8 +153,21 @@ function createVisualization(error, data) {
                     //console.log(d.Longitude.length)
 
                 })
-                .on('mouseover', toolTip2.show)
-                .on('mouseout', toolTip2.hide);
+                .on("mouseover", function(d) {
+                    div.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    div.text("Gender: " + d.ParticipantGender +"\n" +d.ParticipantAgeGroup)
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+                })
+
+                // fade out tooltip on mouse out
+                .on("mouseout", function(d) {
+                    div.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                });
 
                 circles2.exit().remove();
         })

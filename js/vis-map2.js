@@ -3,6 +3,14 @@ var margin = {top: 30, right: 180, bottom: 30, left: 80},
     width = 1200 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
+var parseTime = d3.timeParse("%Y");
+
+// Append Div for tooltip to SVG
+var div2 = d3.select("#map1")
+    .append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
 var svgM2 = d3.select("#map2").append("svg")
     .attr("width", width)
     .attr("height", height);
@@ -14,17 +22,63 @@ var projection = d3.geoAlbersUsa()
 var path = d3.geoPath()
     .projection(projection);
 
+var data = d3.map();
+
 queue()
     .defer(d3.json, "data/us.topo.json")
-    //.defer(d3.json, "data/us-states.json")
+    .defer(d3.json, "data/us-states.json")
+   // .defer(d3.csv, "data/master.data.states.2019.01.18.csv")
     .await(createVisualization);
 
+
 function createVisualization(error, data) {
-    console.log(data);
-    var us = topojson.feature(data, data.objects.state).features;
-    svgM2.selectAll("map2")
-        .data(us)
-        .enter().append("path")
-        .attr("d", path)
-        .attr("fill", "indianred");
-    }
+
+    var selectedValue = d3.select("#data-value").property("value");
+
+    //load csv state names to topojson use data
+    d3.csv("data/us-state-names.csv", function (csv) {
+        var us = topojson.feature(data, data.objects.state).features;
+
+        csv.forEach(function (d, i) {
+            us.forEach(function (e, j) {
+                if (d.id === e.id) {
+                    e.name = d.name
+                }
+            })
+        });
+
+        svgM2.selectAll("map2")
+            .data(us)
+            .enter().append("path")
+            .attr("d", path)
+            .attr("fill", "lightgrey");
+    });
+
+    //if add more data, take the dots between the name of the column of the data you are using
+    d3.csv("data/master.data.states.2019.01.18.csv", function (error, csv) {
+        csv.forEach(function (d) {
+                // d.Year = parseTime(d.Year);
+                d.FirearmHomicides = +d.FirearmHomicides;
+                d.FirearmSuicides = +d.FirearmSuicides;
+                d.TotalHuntingLicensesTagsPermitsandStamps = +d.TotalHuntingLicensesTagsPermitsandStamps;
+                d.BackgroundCheckHandgun = +d.BackgroundCheckHandgun;
+                d.BackgroundCheckLongGun = +d.BackgroundCheckLongGun;
+                d.BackgroundCheckMultipleGunTypes = +d.BackgroundCheckMultipleGunTypes;
+                d.BackgroundCheckRentalsHandgun = +d.BackgroundCheckRentalsHandgun;
+                d.BackgroundCheckRentalsLongGun = +d.BackgroundCheckRentalsLongGun;
+                d.BackgroundCheckPrivateSaleHandgun = +d.BackgroundCheckPrivateSaleHandgun;
+                d.BackgroundCheckPrivateSaleLongGun = +d.BackgroundCheckPrivateSaleLongGun;
+                d.BackgroundCheckTotals = +d.BackgroundCheckTotals;
+                d.PersonsUnder5years = +d.PersonsUnder5years;
+                d.Persons5to9years = +d.Persons5to9years;
+                d.Persons10to14years = +d.Persons10to14years;
+                d.Persons15to19years = +d.Persons15to19years;
+                d.TotalChildPop = +d.TotalChildPop;
+                d.TotalFirearmDeaths = +d.TotalFirearmDeaths;
+
+            });
+        
+
+    });
+
+}
