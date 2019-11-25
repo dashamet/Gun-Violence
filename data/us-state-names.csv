@@ -1,11 +1,11 @@
 id,code,name
-1,AL,Alabama
-2,AK,Alaska
-4,AZ,Arizona
-5,AR,Arkansas
-6,CA,California
-8,CO,Colorado
-9,CT,Connecticut
+01,AL,Alabama
+02,AK,Alaska
+04,AZ,Arizona
+05,AR,Arkansas
+06,CA,California
+08,CO,Colorado
+09,CT,Connecticut
 10,DE,Delaware
 11,DC,District of Columbia
 12,FL,Florida

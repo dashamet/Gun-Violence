@@ -16,23 +16,38 @@ var path = d3.geoPath()
 
 queue()
     .defer(d3.json, "data/us.topo.json")
-    //.defer(d3.json, "data/us-states.json")
+    .defer(d3.csv, "data/us-state-names.csv")
+    .defer(d3.csv, "data/shootingInjuredEdit - shooting_injured.csv")
+        // injuredData.set(d.State, d.Latitude);
+        // //console.log(d.State);
     .await(createVisualization);
 
 function createVisualization(error, data) {
-    console.log(data);
+    //console.log(data);
+
+    // get load csv state names to topojson use data
+    d3.csv("data/us-state-names.csv", function(csv){
+        var us = topojson.feature(data, data.objects.state).features;
+
+        csv.forEach(function(d, i) {
+            us.forEach(function(e, j) {
+                if (d.id === e.id) {
+                    e.name = d.name
+                }
+            })
+        });
+
+        //console.log(us)
+
     var us = topojson.feature(data, data.objects.state).features;
+
     svgM1.selectAll("map1")
         .data(us)
         .enter().append("path")
         .attr("d", path)
-        .attr("fill", "indianred");
+        .attr("fill", "indianred")
+    });
 
-    d3.csv("us-state-names.csv", function(csv){
-        // extract just the names and Ids
-        var names = {};
-        csv.forEach(function(d,i){
-            names[d.id] = d.name;
-        })
-    })
 }
+
+
