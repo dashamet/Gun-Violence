@@ -30,7 +30,7 @@ d3.csv("data/allShootings.csv", function(data) {
 
     const nCol = 25;
     d3.selectAll('.customCircle.Killed')
-        .attr('fill', 'darkRed')
+        .attr('fill', 'red')
         .attr('cx', function(d,i){
             return width/2-i%nCol*dotSpacing-30
             //return width/50*(3.5+i%40)
@@ -41,7 +41,7 @@ d3.csv("data/allShootings.csv", function(data) {
         });
     d3.selectAll('.customCircle.Injured')
         .attr('r', dotR)
-        .attr('fill', 'darkBlue')
+        .attr('fill', 'black')
         .attr('cx', function(d,i){
             return i%nCol*dotSpacing + width/2 + 30
             //return width/50*(3.5+i%40)*3
@@ -86,7 +86,7 @@ d3.csv("data/allShootings.csv", function(data) {
             .transition()
             .duration(800)
             .attr('r', dotR)
-            //.attr('fill', 'blue')
+            //.attr('fill', 'black')
             .attr('cx', function(d,i){
                 return i%nCol*dotSpacing + width/2 + 30
             })
@@ -124,7 +124,7 @@ d3.csv("data/allShootings.csv", function(data) {
             .style("text-anchor", "middle");
         svgD.append("text")
             .attr("class", "dotLabel")
-            .text("unknown")
+            .text("Unknown")
             .attr("x", width/2)
             .attr("y", height)
             .style("text-anchor", "middle")
@@ -137,7 +137,7 @@ d3.csv("data/allShootings.csv", function(data) {
         d3.selectAll('.customCircle.Killed')
             .transition()
             .duration(800)
-            .attr('fill', 'darkRed')
+            .attr('fill', 'red')
             .attr('cx', function(d,i){
                 return width/2-i%nCol*dotSpacing-30
                 //return width/50*(3.5+i%40)
@@ -150,7 +150,7 @@ d3.csv("data/allShootings.csv", function(data) {
             .transition()
             .duration(800)
             .attr('r', dotR)
-            .attr('fill', 'darkBlue')
+            .attr('fill', 'black')
             .attr('cx', function(d,i){
                 return i%nCol*dotSpacing + width/2 + 30
                 //return width/50*(3.5+i%40)*3
@@ -218,14 +218,14 @@ d3.csv("data/allShootings.csv", function(data) {
         svgD
             .append("text")
             .attr("class", "dotLabel")
-            .text("Child")
+            .text("Children")
             .attr("x", (width/2+(-nCol*dotSpacing-30)/2))
             .attr("y", 0)
             .style("text-anchor", "middle")
         svgD
             .append("text")
             .attr("class", "dotLabel")
-            .text("Teen")
+            .text("Teens")
             .attr("x", (nCol*dotSpacing)/2 + width/2 + 30)
             .attr("y", 0)
             .style("text-anchor", "middle")
@@ -285,7 +285,7 @@ d3.csv("data/allShootings.csv", function(data) {
         svgD
             .append("text")
             .attr("class", "dotLabel")
-            .text("Child")
+            .text("Children")
             .attr("x", (width/2+(-nCol*dotSpacing-30)/2))
             .attr("y", 0)
             .style("text-anchor", "middle");

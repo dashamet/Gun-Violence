@@ -1,4 +1,4 @@
-Incident Date,State,Address,,Latitiude,Longitiude,Participant Gender,Participant Name,Participant Age Group
+IncidentDate,State,Address,,Latitude,Longitude,ParticipantGender,ParticipantName,ParticipantAgeGroup
 14-Nov-19,California,"21900 Centurion Way,Santa Clarita",,34.4420796,-118.5176074,female,Gracie Anne Muehlberger,Teen 12-17
 14-Nov-19,California,"21900 Centurion Way,Santa Clarita",,34.4420796,-118.5176074,male,N/A,Teen 12-17
 13-Nov-19,Maryland,"2800 block of W Lanvale St,Baltimore",,39.2973972,-76.6629577,male,N/A,Teen 12-17

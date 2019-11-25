@@ -21,10 +21,54 @@
         From 2001 to 2017, gun violence took the lives of <span class="value stat">49163</span> young people and injured <span class="value stat">262350</span>.
         <ul id="result"></ul>
     </div>
-    <div class="section sec3 center" id="line-graph"> <h3>Violence is the leading cause of firearm-related injuries and deaths, and it's on the rise.</h3></div>
-    <div class="section sec4 center" id="map1"> <h3 style> Children and teenagers across the country have been harmed and killed by guns. </h3></div>
+    <div class="section sec3 center" id="line-graph">
+        <h3>Violence is the leading cause of firearm-related injuries and deaths, and it's on the rise.</h3>
+        <h5>Hover over a line to isolate a cause. Hover over a point to see the totals for a specific year. </h5>
+
+    </div>
+    <div class="section sec4 center" id="map1">
+        <h3> Children and teenagers across the country have been injured and killed by guns. </h3>
+        <h5> Each point represents a victim. Hover over a point to show more detail.</h5>
+    <!--  dropdown  -->
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="ranking-type">Show data for: &nbsp</label>
+                <select class="form-control" id="ranking-type">
+                    <option value="injured">Injuries</option>
+                    <option value="deaths">Deaths</option>
+                </select>
+            </div>
+        </form>
+
+    </div>
     <div class="section sec5 center" id="memorial-viz"><h3> Male teens are the largest group of victims among youth.</h3></div>
-    <div class="section sec6 center" id="map2"><h3> Policy has power.</h3></div>
+    <div class="section sec6 center" id="map2"><h3> Policy has power.</h3>
+
+        <!--  dropdown  -->
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="data-value">States with: &nbsp</label>
+                <select class="form-control" id="data-value">
+                    <option value="handgun">Handgun background checks</option>
+                    <option value="longgun">Long Gun background checks</option>
+                    <option value="total">Total background checks </option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="section sec7"><h3 style="text-align:center;"> Behind the Scenes </h3>
+            <ul style="list-style-type:none;">
+                <li class="step"><h3><span class="num">1</span> Acquire Data</h3></li>
+                    <ul>
+                        <li><a href="https://www.cdc.gov/injury/wisqars/index.html">CDC WISQARS Data</a><span class="data-source">  - We used this data for the line graph breaking down causes of death and injuries over time. </span></li>
+                        <li><a href="https://www.gunviolencearchive.org/reports">Gun Violence Archive</a><span class="data-source"> - We obtained two datasets from this source: youth injured by firearms and youth killed by firearms. We used these datasets for the animated dot visualization and the map with points representing victims.</span></li>
+                        <li><a href="https://www.rand.org/pubs/tools/TL283-1.html">RAND State Firearm Law Database</a><span class="data-source"> - We relied on this extensive dataset of states' firearm policies for our choropleth map showing the correlation between policies and gun deaths.</span></li>
+                    </ul>
+                <li class="step"><h3><span class="num">2</span> Design, Code, and Repeat</h3></li>
+                <img src="css/img/process.jpg" alt="test" width="600" height="400">
+            </ul>
+    </div>
+        <div class="section sec8 center"><h3>About the authors</h3></div>
 
 </div>
 
