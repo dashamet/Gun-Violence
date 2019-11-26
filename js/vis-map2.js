@@ -24,12 +24,17 @@ var path = d3.geoPath()
 
 var data = d3.map();
 
-queue()
-    .defer(d3.json, "data/us.topo.json")
-    .defer(d3.json, "data/us-states.json")
-    .defer(d3.csv, "data/master.data.states.2019.01.18.csv")
-    .defer(d3.csv, "data/policyData.csv")
-    .await(createMap2);
+runMap2();
+
+function runMap2(){
+    svgM2.selectAll("map2").remove();
+    queue()
+        .defer(d3.json, "data/us.topo.json")
+        .defer(d3.json, "data/us-states.json")
+        .defer(d3.csv, "data/master.data.states.2019.01.18.csv")
+        .defer(d3.csv, "data/policyData.csv")
+        .await(createMap2);
+}
 
 
 function createMap2(error, data, unused, deathData, policyData) {
@@ -103,6 +108,8 @@ function createMap2(error, data, unused, deathData, policyData) {
         svgM2.selectAll("map2")
             .data(us)
             .enter().append("path")
+            .transition()
+            .duration(100)
             .attr("d", path)
             .attr("fill", function(d){
                 var stateName = d.name;
@@ -121,9 +128,8 @@ function createMap2(error, data, unused, deathData, policyData) {
                 }
             })
             .attr("opacity", function(d){
-                var alpha = 0.2;
+                var alpha = 0.1;
                 var stateName = d.name;
-                var index = 0;
                 for (i = 0; i < policyData.length; i++) {
                     if (policyData[i]['State'] === stateName) {
                         alpha = 1
