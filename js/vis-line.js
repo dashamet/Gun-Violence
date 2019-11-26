@@ -68,7 +68,6 @@ var svg = d3.select("#line-graph").append("svg")
 
 function onMouseOver(){
     var current_id = d3.select(this).attr("id")
-    var current_class = d3.select(this).attr("class")
     d3.selectAll("#" + current_id)
         .style("stroke-width","5px")
         .style("font-size", "20px")
@@ -89,12 +88,35 @@ function onMouseOver(){
         .style("opacity", function() {
             return (d3.select(this).attr('id') === current_id) ? 1.0 : 0.2;
         })
+    svg.append("text")
+        .attr("x", "10")
+        .attr("y", "10")
+        .attr("class", "percent")
+        .text(function(){
+                if(current_id === "line1"){
+                    return "+0.96% (2008-2017)"
+                }
+                else if(current_id === "line2"){
+                    return "+102% (2008-2017)"
+                }
+                else if(current_id === "line3"){
+                    return "-3% (2008-2017)"
+                }
+                else if(current_id === "line4"){
+                    return "-32% (2008-2017)"
+                }
+                else if(current_id === "line5"){
+                    return "+57% (2008-2017)"
+                }
+            }
+        )
+        .style("font-size", "20px")
+        .style("fill", "red")
+
 }
 
 function onMouseOut(){
     d3.selectAll(".line,.circle,.text")
-        .transition()
-        .duration(500)
         .style("stroke-width", "3px")
         .style("font-size", "16px")
         .style("opacity", 1.0)
@@ -111,6 +133,7 @@ function onMouseOut(){
                 return "black"
             }
         })
+    d3.select(".percent").remove()
 }
 
 
@@ -156,8 +179,6 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .style("fill","none")
         .attr("stroke-width", 2)
         .attr("d", valueline)
-        .on("mouseover", onMouseOver)
-        .on("mouseout", onMouseOut)
 
     // Add the valueline2 path.
     svg.append("path")
@@ -168,8 +189,6 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .style("fill","none")
         .attr("stroke-width", 1.5)
         .attr("d", valueline2)
-        .on("mouseover", onMouseOver)
-        .on("mouseout", onMouseOut)
 
     // Add the valueline3 path.
     svg.append("path")
@@ -180,8 +199,6 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .style("fill","none")
         .attr("stroke-width", 1.5)
         .attr("d", valueline3)
-        .on("mouseover", onMouseOver)
-        .on("mouseout", onMouseOut)
 
     // Add the valueline4 paths.
     svg.append("path")
@@ -192,8 +209,6 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .style("stroke-dasharray", ("2, 3"))
         .style("fill","none")
         .attr("d", valueline4)
-        .on("mouseover", onMouseOver)
-        .on("mouseout", onMouseOut)
 
     svg.append("path")
         .datum(data)
@@ -203,8 +218,6 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .style("fill","none")
         .attr("stroke-width", 1.5)
         .attr("d", valueline4)
-        .on("mouseover", onMouseOver)
-        .on("mouseout", onMouseOut)
 
     // Add the valueline5 paths.
     svg.append("path")
@@ -215,8 +228,6 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .style("stroke-dasharray", ("2, 3"))
         .style("fill","none")
         .attr("d", valueline5)
-        .on("mouseover", onMouseOver)
-        .on("mouseout", onMouseOut)
 
     svg.append("path")
         .datum(data)
@@ -226,8 +237,6 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .style("fill","none")
         .attr("stroke-width", 1.5)
         .attr("d", valueline5)
-        .on("mouseover", onMouseOver)
-        .on("mouseout", onMouseOut)
 
     var records = svg.selectAll(".records")
         .data(mod_data)
@@ -328,18 +337,22 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
-        .text("Homicides")
+        .text("Deaths from violence")
         .attr("class", "text")
-        .attr("id", "line1");
+        .attr("id", "line1")
+        .on("mouseover", onMouseOver)
+        .on("mouseout", onMouseOut)
 
     svg.append("text")
         .attr("transform", "translate("+(width+90)+","+y(data[0].intentional_suicides + 300)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
-        .text("Suicides")
+        .text("Deaths by suicide")
         .attr("class", "text")
-        .attr("id", "line2");
+        .attr("id", "line2")
+        .on("mouseover", onMouseOver)
+        .on("mouseout", onMouseOut)
 
     svg.append("text")
         .attr("transform", "translate("+(width + 90)+","+y(data[0].unintentional_deaths)+")")
@@ -348,7 +361,9 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .style("fill", "black")
         .text("Deaths from accidents")
         .attr("class", "text")
-        .attr("id", "line3");
+        .attr("id", "line3")
+        .on("mouseover", onMouseOver)
+        .on("mouseout", onMouseOut)
 
     svg.append("text")
         .attr("transform", "translate("+(width-90)+","+y(data[0].unintentional_injuries - 698)+")")
@@ -357,7 +372,9 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .style("fill", "black")
         .text("Injuries from accidents")
         .attr("class", "text")
-        .attr("id", "line4");
+        .attr("id", "line4")
+        .on("mouseover", onMouseOver)
+        .on("mouseout", onMouseOut)
 
     svg.append("text")
         .attr("transform", "translate("+(width)+","+y(data[0].intentional_injuries + 2400)+")")
@@ -366,6 +383,8 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .style("fill", "black")
         .text("Injuries from violence")
         .attr("class", "text")
-        .attr("id", "line5");
+        .attr("id", "line5")
+        .on("mouseover", onMouseOver)
+        .on("mouseout", onMouseOut)
 
 });

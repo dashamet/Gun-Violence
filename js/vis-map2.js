@@ -6,7 +6,7 @@ var margin = {top: 30, right: 180, bottom: 30, left: 80},
 var parseTime = d3.timeParse("%Y");
 
 // Append Div for tooltip to SVG
-var div2 = d3.select("#map1")
+var div2 = d3.select("#map2")
     .append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);

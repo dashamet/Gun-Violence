@@ -1,13 +1,14 @@
 $(document).ready(function() {
     $('#pagepiling').pagepiling({
-        sectionsColor: ['white', 'black', 'white', 'white', 'white', 'white', 'white']
+        sectionsColor: ['white', 'black', 'white', 'white', 'white', 'white', 'white'],
+        anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage', 'sixthPage', 'seventhPage', 'eighthPage']
     })
 
     // Number counter on slide 2
     $('.value').each(function () {
         var $this = $(this);
         jQuery({Counter: 0}).animate({Counter: $this.text()}, {
-            duration: 23000,
+            duration: 15000,
             easing: 'swing',
             step: function() {
                 var num = Math.ceil(this.Counter).toString();
@@ -23,7 +24,7 @@ $(document).ready(function() {
 
     // Make one line appear at a time on slide 2
     var lines = $('p').text().split("\n");
-    var counter = 26000
+    var counter = 18000
     var timer,
         displayLine = function(){
             var nextLine = lines.shift();
@@ -31,7 +32,7 @@ $(document).ready(function() {
                 var newLine = $('<li class="line">' + nextLine + '</li>');
                 $('#result').append(newLine);
                 newLine.animate({ 'margin-left':0 }, 300);
-                counter /= 8.5
+                counter /= 6
                 timer = setTimeout(displayLine,counter);
             }
         }
@@ -54,6 +55,7 @@ $(document).ready(function() {
 
         if (isTag) return type();
         setTimeout(type, 80);
+
     }());
 
 });

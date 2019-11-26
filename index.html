@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
 <div id="pagepiling">
     <div class="section sec1 center" id="typewriter"></div>
     <div class="section sec2 center">
@@ -22,14 +21,16 @@
         <ul id="result"></ul>
     </div>
     <div class="section sec3 center" id="line-graph">
-        <h3>Violence is the leading cause of firearm-related injuries and deaths, and it's on the rise.</h3>
-        <h5>Hover over a line to isolate a cause. Hover over a point to see the totals for a specific year. </h5>
 
+        <h3>Injuries caused by violence and deaths by suicide involving firearms are increasing.</h3>
+        <h5>Hover over a line's label to highlight a cause of injury or death.
+            Hover over a point to see the totals for a specific year.
+            Note that the dashed line represents missing data.</h5>
     </div>
     <div class="section sec4 center" id="map1">
         <h3> Children and teenagers across the country have been injured and killed by guns. </h3>
-        <h5> Each point represents a victim. Hover over a point to show more detail.</h5>
-    <!--  dropdown  -->
+        <h5> Each point represents a victim of gun violence in 2019. Hover over a point to show more detail.</h5>
+        <!--  dropdown  -->
         <form class="form-inline">
             <div class="form-group">
                 <label for="ranking-type">Show data for: &nbsp</label>
@@ -55,19 +56,19 @@
             </div>
         </form>
     </div>
-    <div class="section sec7"><h3 style="text-align:center;"> Behind the Scenes </h3>
-            <ul style="list-style-type:none;">
-                <li class="step"><h3><span class="num">1</span> Acquire Data</h3></li>
-                    <ul>
-                        <li><a href="https://www.cdc.gov/injury/wisqars/index.html">CDC WISQARS Data</a><span class="data-source">  - We used this data for the line graph breaking down causes of death and injuries over time. </span></li>
-                        <li><a href="https://www.gunviolencearchive.org/reports">Gun Violence Archive</a><span class="data-source"> - We obtained two datasets from this source: youth injured by firearms and youth killed by firearms. We used these datasets for the animated dot visualization and the map with points representing victims.</span></li>
-                        <li><a href="https://www.rand.org/pubs/tools/TL283-1.html">RAND State Firearm Law Database</a><span class="data-source"> - We relied on this extensive dataset of states' firearm policies for our choropleth map showing the correlation between policies and gun deaths.</span></li>
-                    </ul>
-                <li class="step"><h3><span class="num">2</span> Design, Code, and Repeat</h3></li>
-                <img src="css/img/process.jpg" alt="test" width="600" height="400">
+    <div class="section sec7"><h3 style="text-align:center;"> Behind the Scenes (we will style this better) </h3>
+        <ul style="list-style-type:none;">
+            <li class="step"><h3><span class="num">1</span> Acquire Data</h3></li>
+            <ul>
+                <li><a href="https://www.cdc.gov/injury/wisqars/index.html">CDC WISQARS Data</a><span class="data-source">  - We used this data for the line graph breaking down causes of death and injuries over time. </span></li>
+                <li><a href="https://www.gunviolencearchive.org/reports">Gun Violence Archive</a><span class="data-source"> - We obtained two datasets from this source: youth injured by firearms and youth killed by firearms. We used these datasets for the animated dot visualization and the map with points representing victims.</span></li>
+                <li><a href="https://www.rand.org/pubs/tools/TL283-1.html">RAND State Firearm Law Database</a><span class="data-source"> - We relied on this extensive dataset of states' firearm policies for our choropleth map showing the correlation between policies and gun deaths.</span></li>
             </ul>
+            <li class="step"><h3><span class="num">2</span> Design, Code, and Repeat</h3></li>
+            <img src="css/img/process.jpg" alt="test" width="600" height="400">
+        </ul>
     </div>
-        <div class="section sec8 center"><h3>About the authors</h3></div>
+    <div class="section sec8 center"><h3>About the authors (we will fill this in)</h3></div>
 
 </div>
 

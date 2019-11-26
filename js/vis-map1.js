@@ -137,6 +137,7 @@ function createVisualization(error, data) {
                     Latitude: +d.Latitude,
                     Longitude: +d.Longitude,
                     Address: d.Address,
+                    ParticipantName: d.ParticipantName,
                     ParticipantGender: d.ParticipantGender,
                     ParticipantAgeGroup: d.ParticipantAgeGroup,
                 }
@@ -168,14 +169,14 @@ function createVisualization(error, data) {
                         .duration(200)
                         .style("opacity", .9);
                     div.html(function () {
-                        if (d.ParticipantName === undefined){
+                        if (d.ParticipantName === "N/A"){
                             return "<strong> Incident location: </strong>" + d.Address
                         }
                         else{
                             return "<strong> Name: </strong>" + d.ParticipantName + " <br> "
                                 + "<strong> Incident location: </strong>" + d.Address
                         }
-                        })
+                    })
                         //.text(d.ParticipantGender.charAt(0).toUpperCase() + d.ParticipantGender.substring(1)+ ", " +d.ParticipantAgeGroup)
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
