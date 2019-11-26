@@ -2,6 +2,7 @@
 var margin = {top: 30, right: 180, bottom: 30, left: 80},
     width = 1200 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
+    active = d3.select(null);
 
 var parseTime = d3.timeParse("%Y");
 
@@ -12,8 +13,10 @@ var div2 = d3.select("#map2")
     .style("opacity", 0);
 
 var svgM2 = d3.select("#map2").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var projection = d3.geoAlbersUsa()
     .translate([width / 2, height / 2])
@@ -105,12 +108,14 @@ function createMap2(error, data, unused, deathData, policyData) {
             })
         });
 
-        svgM2.selectAll("map2")
+       svgM2.selectAll("map2")
             .data(us)
             .enter().append("path")
+            .attr("class", "state")
+            // .merge(map2)
+            .attr("d", path)
             .transition()
             .duration(100)
-            .attr("d", path)
             .attr("fill", function(d){
                 var stateName = d.name;
                 var index = 0;
@@ -138,7 +143,63 @@ function createMap2(error, data, unused, deathData, policyData) {
                 return alpha;
             })
             .attr("stroke", 'grey')
-            .attr("stroke-width", 0.1);
+            .attr("stroke-width", 0.1)
+            .on("click", clicked);
+
+        //zoom to state feature: https://bl.ocks.org/iamkevinv/0a24e9126cd2fa6b283c6f2d774b69a2
+        svgM2.on("click", stopped, true);
+
+        var zoom = d3.zoom()
+            .scaleExtent([1, 8])
+            .on("zoom", zoomed);
+
+        var rect = svgM2.append("rect")
+            .attr("class", "background")
+            .attr("width", width)
+            .attr("height", height)
+            .attr("opacity", .07);
+
+        rect.on("click", reset);
+
+        svgM2.call(zoom);
+
+        function clicked(d) {
+            if (active.node() === this) return reset();
+            active.classed("active", false);
+            active = d3.select(this).classed("active", true);
+
+            var bounds = path.bounds(d),
+                dx = bounds[1][0] - bounds[0][0],
+                dy = bounds[1][1] - bounds[0][1],
+                x = (bounds[0][0] + bounds[1][0]) / 2,
+                y = (bounds[0][1] + bounds[1][1]) / 2,
+                scale = 0.9 / Math.max(dx / width, dy / height),
+                translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+            svgM2.transition()
+                .duration(750)
+                .call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) );
+
+        }
+
+        function reset() {
+            active.classed("active", false);
+            active = d3.select(null);
+
+            svgM2.transition()
+                .duration(750)
+                .call( zoom.transform, d3.zoomIdentity );
+        }
+
+        function zoomed() {
+            svgM2.style("stroke-width", 1.5 / d3.event.transform.k + "px");
+            svgM2.attr("transform", d3.event.transform);
+        }
+
+        // can drag when zoomed
+        function stopped() {
+            if (d3.event.defaultPrevented) d3.event.stopPropagation();
+        }
     });
 
 }

@@ -70,11 +70,6 @@ h3{
     font-family: Georgia, cursive;
 }
 
-/*map hover*/
-path:hover {
-    fill-opacity: .7;
-}
-
 .form-group{
     margin-left: 165px;
 }
