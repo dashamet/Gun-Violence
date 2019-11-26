@@ -32,11 +32,11 @@ d3.csv("data/allShootings.csv", function(data) {
     d3.selectAll('.customCircle.Killed')
         .attr('fill', 'red')
         .attr('cx', function(d,i){
-            return width/2-i%nCol*dotSpacing-30
+            return i%nCol*dotSpacing + 60
             //return width/50*(3.5+i%40)
         })
         .attr('cy', function(d,i){
-            const rowNum = (i-i%nCol)/nCol
+            const rowNum = (i-i%nCol)/nCol;
             return dotSpacing*(rowNum+1)
         });
     d3.selectAll('.customCircle.Injured')
@@ -75,7 +75,7 @@ d3.csv("data/allShootings.csv", function(data) {
             //.attr('fill', 'red')
             .attr('r', dotR)
             .attr('cx', function(d,i){
-                return width/2-i%nCol*dotSpacing-30
+                return i%nCol*dotSpacing + 60
             })
             .attr('cy', function(d,i){
                 const rowNum = (i-i%nCol)/nCol;
@@ -139,7 +139,7 @@ d3.csv("data/allShootings.csv", function(data) {
             .duration(800)
             .attr('fill', 'red')
             .attr('cx', function(d,i){
-                return width/2-i%nCol*dotSpacing-30
+                return i%nCol*dotSpacing + 60
                 //return width/50*(3.5+i%40)
             })
             .attr('cy', function(d,i){
@@ -194,7 +194,7 @@ d3.csv("data/allShootings.csv", function(data) {
             //.attr('fill', 'pink')
             .attr('r', dotR)
             .attr('cx', function(d,i){
-                return  width/2-i%nCol*dotSpacing-30
+                return  i%nCol*dotSpacing + 60
                 //return width/50*(3.5+i%40)
             })
             .attr('cy', function(d,i){
