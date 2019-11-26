@@ -1,4 +1,4 @@
-var animateAge, animateGender, animateDeathInjury, playAnimation, animateAgeInj;
+var animateAge, animateGender, animateDeathInjury, playAnimation, animateAgeInj, stopAnimation;
 
 
 var margin = {top: 30, right: 80, bottom: 50, left: 80},
@@ -331,8 +331,7 @@ d3.csv("data/allShootings.csv", function(data) {
         interval = setInterval (animateCircles, 10000);
 
         function animateCircles(){
-            //animateAge();
-            setTimeout(function() {animateGender()}, 0);
+            animateGender();
             setTimeout(function() {animateAge()}, 2500);
             setTimeout(function() {animateAgeInj()}, 5000)
             setTimeout(function() {animateDeathInjury()}, 7500);
