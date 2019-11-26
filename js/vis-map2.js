@@ -28,34 +28,35 @@ queue()
     .defer(d3.json, "data/us.topo.json")
     .defer(d3.json, "data/us-states.json")
     .defer(d3.csv, "data/master.data.states.2019.01.18.csv")
-    .await(createVisualization);
+    .defer(d3.csv, "data/policyData.csv")
+    .await(createMap2);
 
 
-function createVisualization(error, data, unused, deathData) {
+function createMap2(error, data, unused, deathData, policyData) {
 
-    //if add more data, take the dots between the name of the column of the data you are using
-    d3.csv("data/master.data.states.2019.01.18.csv", function (error, csv) {
-        csv.forEach(function (d) {
-                // d.Year = parseTime(d.Year);
-                d.FirearmHomicides = +d.FirearmHomicides;
-                d.FirearmSuicides = +d.FirearmSuicides;
-                d.TotalHuntingLicensesTagsPermitsandStamps = +d.TotalHuntingLicensesTagsPermitsandStamps;
-                d.BackgroundCheckHandgun = +d.BackgroundCheckHandgun;
-                d.BackgroundCheckLongGun = +d.BackgroundCheckLongGun;
-                d.BackgroundCheckMultipleGunTypes = +d.BackgroundCheckMultipleGunTypes;
-                d.BackgroundCheckRentalsHandgun = +d.BackgroundCheckRentalsHandgun;
-                d.BackgroundCheckRentalsLongGun = +d.BackgroundCheckRentalsLongGun;
-                d.BackgroundCheckPrivateSaleHandgun = +d.BackgroundCheckPrivateSaleHandgun;
-                d.BackgroundCheckPrivateSaleLongGun = +d.BackgroundCheckPrivateSaleLongGun;
-                d.BackgroundCheckTotals = +d.BackgroundCheckTotals;
-                d.PersonsUnder5years = +d.PersonsUnder5years;
-                d.Persons5to9years = +d.Persons5to9years;
-                d.Persons10to14years = +d.Persons10to14years;
-                d.Persons15to19years = +d.Persons15to19years;
-                d.TotalChildPop = +d.TotalChildPop;
-                d.TotalFirearmDeaths = +d.TotalFirearmDeaths;
-            });
-    });
+    // //if add more data, take the dots between the name of the column of the data you are using
+    // d3.csv("data/master.data.states.2019.01.18.csv", function (error, csv) {
+    //     csv.forEach(function (d) {
+    //             // d.Year = parseTime(d.Year);
+    //             d.FirearmHomicides = +d.FirearmHomicides;
+    //             d.FirearmSuicides = +d.FirearmSuicides;
+    //             d.TotalHuntingLicensesTagsPermitsandStamps = +d.TotalHuntingLicensesTagsPermitsandStamps;
+    //             d.BackgroundCheckHandgun = +d.BackgroundCheckHandgun;
+    //             d.BackgroundCheckLongGun = +d.BackgroundCheckLongGun;
+    //             d.BackgroundCheckMultipleGunTypes = +d.BackgroundCheckMultipleGunTypes;
+    //             d.BackgroundCheckRentalsHandgun = +d.BackgroundCheckRentalsHandgun;
+    //             d.BackgroundCheckRentalsLongGun = +d.BackgroundCheckRentalsLongGun;
+    //             d.BackgroundCheckPrivateSaleHandgun = +d.BackgroundCheckPrivateSaleHandgun;
+    //             d.BackgroundCheckPrivateSaleLongGun = +d.BackgroundCheckPrivateSaleLongGun;
+    //             d.BackgroundCheckTotals = +d.BackgroundCheckTotals;
+    //             d.PersonsUnder5years = +d.PersonsUnder5years;
+    //             d.Persons5to9years = +d.Persons5to9years;
+    //             d.Persons10to14years = +d.Persons10to14years;
+    //             d.Persons15to19years = +d.Persons15to19years;
+    //             d.TotalChildPop = +d.TotalChildPop;
+    //             d.TotalFirearmDeaths = +d.TotalFirearmDeaths;
+    //         });
+    // });
 
     var deathData2016 = deathData.filter(function(data){
         return data.Year === "2016";
@@ -74,6 +75,18 @@ function createVisualization(error, data, unused, deathData) {
 
 
     var selectedValue = d3.select("#data-value").property("value");
+
+    policyData.forEach(function(d){
+        d.Implemented = +d.Implemented;
+        d.Repealed = +d.Repealed;
+        d.Extant = +d.Extant;
+    });
+
+    policyData = policyData.filter(function(data){
+        return data.Law === selectedValue && data.Extant === 1;
+    });
+
+    console.log(policyData);
 
     //load csv state names to topojson use data
     d3.csv("data/us-state-names.csv", function (csv) {
@@ -106,6 +119,17 @@ function createVisualization(error, data, unused, deathData) {
                 else {
                     return colorScale(val);
                 }
+            })
+            .attr("opacity", function(d){
+                var alpha = 0.2;
+                var stateName = d.name;
+                var index = 0;
+                for (i = 0; i < policyData.length; i++) {
+                    if (policyData[i]['State'] === stateName) {
+                        alpha = 1
+                    }
+                }
+                return alpha;
             })
             .attr("stroke", 'grey')
             .attr("stroke-width", 0.1);
