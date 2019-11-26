@@ -1,3 +1,6 @@
+var animateAge, animateGender, animateDeathInjury, playAnimation, animateAgeInj;
+
+
 var margin = {top: 30, right: 80, bottom: 50, left: 80},
     width = 900 - margin.left - margin.right,
     height = 550 - margin.top - margin.bottom;
@@ -66,7 +69,7 @@ d3.csv("data/allShootings.csv", function(data) {
         .attr("y", 0)
         .style("text-anchor", "middle");
 
-    function animateGender(){
+    animateGender = function(){
         d3.selectAll(".dotLabel").remove();
         const nCol = 25;
         d3.selectAll('.customCircle.male')
@@ -130,7 +133,7 @@ d3.csv("data/allShootings.csv", function(data) {
             .style("text-anchor", "middle")
     }
 
-    function animateDeathInjury(){
+    animateDeathInjury = function(){
         svgD.selectAll(".dotLabel").remove();
         const nCol = 25;
 
@@ -176,7 +179,7 @@ d3.csv("data/allShootings.csv", function(data) {
             .style("text-anchor", "middle");
     }
 
-    function animateAge(){
+    animateAge = function(){
         d3.selectAll(".dotLabel").remove()
         // var force = d3.layout.force()
         //     .nodes(nodes)
@@ -231,7 +234,7 @@ d3.csv("data/allShootings.csv", function(data) {
             .style("text-anchor", "middle")
     }
 
-    function animateAgeInj(){
+    animateAgeInj = function(){
         svgD.selectAll("text.dotLabel").remove()
         const barWidth = 11;
         d3.selectAll('.customCircle.child.Killed')
@@ -322,16 +325,21 @@ d3.csv("data/allShootings.csv", function(data) {
             .style("text-anchor", "middle")
     }
 
-
-
+    let interval;
     // animation
-    setInterval (animateCircles, 12500);
+    playAnimation = function(){
+        interval = setInterval (animateCircles, 10000);
 
-    function animateCircles(){
-        //animateAge();
-        setTimeout(function() {animateGender()}, 2500);
-        setTimeout(function() {animateAge()}, 5000);
-        setTimeout(function() {animateAgeInj()}, 7500);
-        setTimeout(function() {animateDeathInjury()}, 10000);
+        function animateCircles(){
+            //animateAge();
+            setTimeout(function() {animateGender()}, 0);
+            setTimeout(function() {animateAge()}, 2500);
+            setTimeout(function() {animateAgeInj()}, 5000)
+            setTimeout(function() {animateDeathInjury()}, 7500);
+        }
+    }
+
+    stopAnimation = function(){
+        clearInterval(interval);
     }
 });

@@ -110,3 +110,8 @@ a:hover{
 .step{
     margin-top: 10px;
 }
+
+.btn{
+    background: black;
+    color: white;
+}
