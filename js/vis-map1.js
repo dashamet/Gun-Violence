@@ -25,9 +25,9 @@ d3.select("#ranking-type").on("change", createVisualization);
 
 queue()
     .defer(d3.json, "data/us.topo.json")
-    .defer(d3.csv, "data/us-state-names.csv")
-    .defer(d3.csv, "data/shootingInjuredEdit - shooting_injured.csv")
-    .defer(d3.csv, "data/shootingKilledEdit - shooting_killed.csv")
+    //.defer(d3.csv, "data/us-state-names.csv")
+    //.defer(d3.csv, "data/shootingInjuredEdit - shooting_injured.csv")
+    //.defer(d3.csv, "data/shootingKilledEdit - shooting_killed.csv")
     .await(createVisualization);
 
 
@@ -104,9 +104,14 @@ function createVisualization(error, data) {
                         .duration(200)
                         .style("opacity", .9);
                     div.html(function () {
-                            return "<strong>" + "Name: " + "</strong>" + d.ParticipantName + " <br> "
-                                + "<strong>" + "Incident location: " + "</strong>" + d.Address
-                        })
+                        if (d.ParticipantName === "N/A"){
+                            return "<strong> Incident location: </strong>" + d.Address
+                        }
+                        else{
+                            return "<strong> Name: </strong>" + d.ParticipantName + " <br> "
+                                + "<strong> Incident location: </strong>" + d.Address
+                        }
+                    })
                         //.text(d.ParticipantGender.charAt(0).toUpperCase() + d.ParticipantGender.substring(1)+ ", " +d.ParticipantAgeGroup)
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
@@ -163,11 +168,15 @@ function createVisualization(error, data) {
                         .duration(200)
                         .style("opacity", .9);
                     div.html(function () {
-                        return "<strong>" + "Name: " + "</strong>" + d.ParticipantName + " <br> "
-                            + "<strong>" + "Incident location: " + "</strong>" + d.Address
-                    })
+                        if (d.ParticipantName === undefined){
+                            return "<strong> Incident location: </strong>" + d.Address
+                        }
+                        else{
+                            return "<strong> Name: </strong>" + d.ParticipantName + " <br> "
+                                + "<strong> Incident location: </strong>" + d.Address
+                        }
+                        })
                         //.text(d.ParticipantGender.charAt(0).toUpperCase() + d.ParticipantGender.substring(1)+ ", " +d.ParticipantAgeGroup)
-                        .text("Name: " + d.ParticipantName + ", Incident location: " + d.Address)
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                 })
