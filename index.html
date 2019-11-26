@@ -48,10 +48,9 @@
         <form class="form-inline">
             <div class="form-group">
                 <label for="data-value">States with: &nbsp</label>
-                <select class="form-control" id="data-value">
-                    <option value="handgun">Handgun background checks</option>
-                    <option value="longgun">Long Gun background checks</option>
-                    <option value="total">Total background checks </option>
+                <select class="form-control" id="data-value" onchange = "createMap2()">
+                    <option value="min_age_possession">Minimum Age for Firearm Possession</option>
+                    <option value="min_age_purchase_sale">Minimum Age for Firearm Purchase/Sale</option>
                 </select>
             </div>
         </form>
