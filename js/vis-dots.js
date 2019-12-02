@@ -327,18 +327,27 @@ d3.csv("data/allShootings.csv", function(data) {
 
     let interval;
     // animation
-    playAnimation = function(){
-        interval = setInterval (animateCircles, 10000);
 
-        function animateCircles(){
-            animateGender();
-            setTimeout(function() {animateAge()}, 2500);
-            setTimeout(function() {animateAgeInj()}, 5000)
-            setTimeout(function() {animateDeathInjury()}, 7500);
+    var running = 0;
+
+    playAnimation = function(){
+        if (running === 0){
+            running = 1;
+            interval = setInterval (animateCircles, 10000);
+
+            function animateCircles(){
+                animateGender();
+                setTimeout(function() {animateAge()}, 2500);
+                setTimeout(function() {animateAgeInj()}, 5000)
+                setTimeout(function() {animateDeathInjury()}, 7500);
+            }
         }
     }
 
     stopAnimation = function(){
-        clearInterval(interval);
+        if (running === 1){
+            running = 0;
+            clearInterval(interval);
+        }
     }
 });
