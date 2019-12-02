@@ -44,12 +44,13 @@
     </div>
     <div class="section sec5 center"><h3> Males and teens are the largest group of victims among youth.</h3>
         <h5> Each circle represents a recent victim of firearm violence. </h5>
-        <button type="button" class = "btn" onclick = "animateDeathInjury()">Killed/Injured</button>
-        <button type="button" class = "btn" onclick = "animateAge()"> Child/Teen</button>
-        <button type="button" class = "btn" onclick = "animateGender()">Boys/Girls</button>
-        <button type="button" class = "btn" onclick = "animateAgeInj()">Child/Teen Killed/Injured</button>
-        <button type="button" class = "btn" onclick = "playAnimation()">Play Animation</button>
-        <button type="button" class = "btn" onclick = "stopAnimation()">Stop Animation</button>
+        <div>
+            <button type="button" class = "btn btn-main" onclick = "playAnimation()">Play</button>
+            <button type="button" class = "btn btn-main" onclick = "stopAnimation()">Stop</button>
+            <button type="button" class = "btn btn-small center " onclick = "animateAge()"> Children/Teens</button>
+            <button type="button" class = "btn btn-small center" onclick = "animateGender()">Boys/Girls</button>
+            <button type="button" class = "btn btn-small center" onclick = "animateAgeInj()">Killed/Injured</button>
+        </div>
         <div id="memorial-viz"></div>
     </div>
     <div class="section sec6 center" id="map2"><h3> Policy has power.</h3>
@@ -66,18 +67,17 @@
         </form>
     </div>
     <div class="section sec7 center" id="map2-line"><h3> Map Zoom Feature </h3>
-    <p> We will add in a line graph for each state's total firearm death over time</p>
     </div>
-    <div class="section sec8"><h3 style="text-align:center;"> Behind the Scenes (we will style this better) </h3>
+    <div class="section sec8">
         <ul style="list-style-type:none;">
-            <li class="step"><h3><span class="num">1</span> Acquire Data</h3></li>
+            <li class="step"><h3>Data</h3></li>
             <ul>
                 <li><a href="https://www.cdc.gov/injury/wisqars/index.html">CDC WISQARS Data</a><span class="data-source">  - We used this data for the line graph breaking down causes of death and injuries over time. </span></li>
                 <li><a href="https://www.gunviolencearchive.org/reports">Gun Violence Archive</a><span class="data-source"> - We obtained two datasets from this source: youth injured by firearms and youth killed by firearms. We used these datasets for the animated dot visualization and the map with points representing victims.</span></li>
                 <li><a href="https://www.rand.org/pubs/tools/TL283-1.html">RAND State Firearm Law Database</a><span class="data-source"> - We relied on this extensive dataset of states' firearm policies for our choropleth map showing the correlation between policies and gun deaths.</span></li>
             </ul>
-            <li class="step"><h3><span class="num">2</span> Design, Code, and Repeat</h3></li>
-            <img src="css/img/process.jpg" alt="test" width="600" height="400">
+            <li class="step"><h3>Process</h3></li>
+            <img src="css/img/process-dark.jpg" alt="test" width="600" height="400">
         </ul>
     </div>
     <div class="section sec9 center"><h3>About the authors (we will fill this in)</h3></div>
@@ -94,7 +94,7 @@
 <script src="js/topojson.v1.min.js"></script>
 <script src="js/jquery.pagepiling.js"></script>
 <script src="js/my.js"></script>
-
+<script src="js/main.js"></script>
 
 <script src="js/vis-line.js"></script>
 <script src="js/vis-map1.js"></script>
