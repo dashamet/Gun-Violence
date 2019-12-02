@@ -56,7 +56,6 @@ IncidentDate,State,Address,,Latitude,Longitude,ParticipantGender,ParticipantName
 6-Nov-19,Ohio,"100 block of S Burgess Ave,Columbus",,39.9530716,-83.0688866,male,N/A,Teen 12-17
 6-Nov-19,Pennsylvania,"3900 block of N Franklin St,Philadelphia",,40.01114,-75.1405714,male,N/A,Teen 12-17
 5-Nov-19,South Carolina,"Kendrick St,Gaffney",,35.0838117,-81.6465859,female,N/A,Child 0-11
-5-Nov-19,Utah,"N/A,Logan",,,,male,N/A,Teen 12-17
 5-Nov-19,California,"Rowell Ave and Hedges Ave,Fresno",,36.7595356,-119.7522162,male,N/A,Teen 12-17
 5-Nov-19,California,"Morro Dr and La Jolla Dr,Antioch",,37.9776695,-121.7697693,male,N/A,Teen 12-17
 5-Nov-19,Louisiana,"3700 block of Clear Ct,Baton Rouge",,41.6032207,-73.087749,N/A,N/A,Teen 12-17
@@ -347,7 +346,6 @@ IncidentDate,State,Address,,Latitude,Longitude,ParticipantGender,ParticipantName
 14-Sep-19,Texas,"5701 Shelton St,Fort Worth",,32.7480228,-97.232757,female,N/A,Teen 12-17
 14-Sep-19,Illinois,"4200 block of Auburn St,Rockford",,42.2882322,-89.1240855,female,N/A,Teen 12-17
 14-Sep-19,California,"2nd St,Los Banos",,37.0660292,-120.8518754,male,N/A,Teen 12-17
-14-Sep-19,Georgia,"2400 block of Hampshire Cove,Covington",,,,female,N/A,Child 0-11
 14-Sep-19,Pennsylvania,"E 12th St and Wallace St,Erie",,42.1275487,-80.0703624,male,N/A,Teen 12-17
 14-Sep-19,Illinois,"8200 block of S Marquette Ave,Chicago",,41.746237,-87.559201,male,N/A,Teen 12-17
 14-Sep-19,Kentucky,"Cecil Ave and Herman St,Louisville",,38.260802,-85.8185528,male,N/A,Teen 12-17
