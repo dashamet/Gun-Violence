@@ -42,17 +42,34 @@
         </form>
 
     </div>
-    <div class="section sec5 center"><h3> Males and teens are the largest group of victims among youth.</h3>
-        <h5> Each circle represents a recent victim of firearm violence. </h5>
-        <div>
-            <button type="button" class = "btn btn-main" onclick = "playAnimation()">Play</button>
-            <button type="button" class = "btn btn-main" onclick = "stopAnimation()">Stop</button>
-            <button type="button" class = "btn btn-small center " onclick = "animateAge()"> Children/Teens</button>
-            <button type="button" class = "btn btn-small center" onclick = "animateGender()">Boys/Girls</button>
-            <button type="button" class = "btn btn-small center" onclick = "animateAgeInj()">Killed/Injured</button>
+    <div class="section sec5 center">
+        <div class="container-fluid" style="height: 100vh">
+            <div class="row justify-content-center" style="height: 10vh">
+                <div class="align-self-center">
+                    <h3> Males and teens are the largest group of victims among youth.</h3>
+                </div>
+            </div>
+            <div class="row justify-content-center" style="height: 5vh">
+                <div class="align-self-center">
+                    <h5> Each circle represents a recent victim of firearm violence. </h5>
+                </div>
+            </div>
+            <div class="row justify-content-center" style="height: 5vh">
+                <div class="align-self-center">
+                    <button type="button" class = "btn btn-main" onclick = "myDotVis.playAnimation()">Play</button>
+                    <button type="button" class = "btn btn-main" onclick = "myDotVis.stopAnimation()">Stop</button>
+                    <button type="button" class = "btn btn-small center " onclick = "myDotVis.animateAge()"> Children/Teens</button>
+                    <button type="button" class = "btn btn-small center " onclick = "myDotVis.animateAgeInj()"> Children/Teens Breakdown</button>
+                    <button type="button" class = "btn btn-small center" onclick = "myDotVis.animateGender()">Boys/Girls</button>
+                    <button type="button" class = "btn btn-small center" onclick = "myDotVis.animateDeathInjury()">Killed/Injured</button>
+                </div>
+            </div>
+            <div class="row" id="memorial-viz" style = "height: 80vh; width: 100vw"></div>
         </div>
-        <div id="memorial-viz"></div>
     </div>
+
+
+
     <div class="section sec6 center" id="map2"><h3> Policy has power.</h3>
 
         <!--  dropdown  -->
@@ -77,7 +94,7 @@
                 <li><a href="https://www.rand.org/pubs/tools/TL283-1.html">RAND State Firearm Law Database</a><span class="data-source"> - We relied on this extensive dataset of states' firearm policies for our choropleth map showing the correlation between policies and gun deaths.</span></li>
             </ul>
             <li class="step"><h3>Process</h3></li>
-            <img src="css/img/process-dark.jpg" alt="test" width="600" height="400">
+            <!-- <img src="css/img/process-dark.jpg" alt="test" width="600" height="400"> -->
         </ul>
     </div>
     <div class="section sec9 center"><h3>About the authors (we will fill this in)</h3></div>
@@ -94,13 +111,13 @@
 <script src="js/topojson.v1.min.js"></script>
 <script src="js/jquery.pagepiling.js"></script>
 <script src="js/my.js"></script>
-<script src="js/main.js"></script>
 
 <script src="js/vis-line.js"></script>
 <script src="js/vis-map1.js"></script>
 <script src="js/vis-map2.js"></script>
 <script src="js/vis-dots.js"></script>
 <script src="js/vis-map2line.js"> </script>
+<script src="js/main.js"></script>
 
 </body>
 </html>
