@@ -20,24 +20,29 @@ var projection = d3.geoAlbersUsa()
 var path = d3.geoPath()
     .projection(projection);
 
+loadData();
+
 // create sort when clicked on drop down menu
 d3.select("#ranking-type").on("change", createVisualization);
 
 queue()
     .defer(d3.json, "data/us.topo.json")
-    //.defer(d3.csv, "data/us-state-names.csv")
-    //.defer(d3.csv, "data/shootingInjuredEdit - shooting_injured.csv")
-    //.defer(d3.csv, "data/shootingKilledEdit - shooting_killed.csv")
     .await(createVisualization);
 
-
-function createVisualization(error, data) {
+function loadData(){
 
     // load csv state names to topojson use data
     // http://bl.ocks.org/phil-pedruco/10447085
+    d3.csv("data/allShootings.csv", function (error, csv) {
+       csv.forEach(function (d) {
+                d.Latitude = +d.Latitude;
+                d.Longitude = +d.Longitude;
+            });
+            mapData = csv;
+        });
+}
 
-    //change options with dropdown
-    var selectedValue = d3.select("#ranking-type").property("value");
+function createVisualization(error, data) {
 
     d3.csv("data/us-state-names.csv", function (csv) {
         var us = topojson.feature(data, data.objects.state).features;
@@ -58,140 +63,70 @@ function createVisualization(error, data) {
             .style("stroke", "#fff")
     });
 
+    //change options with dropdown
+    var selectedValue = d3.select("#ranking-type").property("value");
 
-    // map data
-    if (selectedValue === "injured") {
 
-        d3.csv("data/shootingInjuredEdit - shooting_injured.csv", function (error, csv) {
-            var newData = csv.map(function (d) {
-                return {
-                    Latitude: +d.Latitude,
-                    Longitude: +d.Longitude,
-                    Address: d.Address,
-                    ParticipantName: d.ParticipantName,
-                    ParticipantGender: d.ParticipantGender,
-                    ParticipantAgeGroup: d.ParticipantAgeGroup,
-                }
+    //initVis append to groups (map group and dot group)
+    // filter data based on dropdown and type, injured or killed
+    var filteredData = mapData;
 
-            });
-
-            // 500
-            console.log(newData.length);
-
-            var circles1 = svgM1.selectAll("circle")
-                .data(newData);
-
-            circles1.enter().append("circle")
-                .attr("class", "injured")
-                .merge(circles1)
-                .attr("cx", function (d) {
-                    return d.x;
-                })
-                .attr("cy", function (d) {
-                    return d.y;
-                })
-                .attr("r", 4)
-                .attr("fill", "red")
-                .attr("transform", function (d) {
-                    return "translate(" + projection([+d.Longitude, +d.Latitude]) + ")"
-
-                    // 450 - where did the 50 go?
-                    //console.log(d.Longitude.length)
-
-                })
-                .on("mouseover", function(d) {
-                    div.transition()
-                        .duration(200)
-                        .style("opacity", .9);
-                    div.html(function () {
-                        if (d.ParticipantName === "N/A"){
-                            return "<strong> Incident location: </strong>" + d.Address
-                        }
-                        else{
-                            return "<strong> Name: </strong>" + d.ParticipantName + " <br> "
-                                + "<strong> Incident location: </strong>" + d.Address
-                        }
-                    })
-                        //.text(d.ParticipantGender.charAt(0).toUpperCase() + d.ParticipantGender.substring(1)+ ", " +d.ParticipantAgeGroup)
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 28) + "px");
-                })
-
-                // fade out tooltip on mouse out
-                .on("mouseout", function(d) {
-                    div.transition()
-                        .duration(500)
-                        .style("opacity", 0);
-                });
-
-                circles1.exit().remove();
-        })
-
-    }
-
-    if (selectedValue === "deaths") {
-
-        d3.csv("data/shootingKilledEdit - shooting_killed.csv", function (error, csv) {
-            var newData2 = csv.map(function (d) {
-                return {
-                    Latitude: +d.Latitude,
-                    Longitude: +d.Longitude,
-                    Address: d.Address,
-                    ParticipantName: d.ParticipantName,
-                    ParticipantGender: d.ParticipantGender,
-                    ParticipantAgeGroup: d.ParticipantAgeGroup,
-                }
-            });
-
-            var circles2 = svgM1.selectAll("circle")
-                .data(newData2);
-
-            circles2.enter().append("circle")
-                .attr("class", "deaths")
-                .merge(circles2)
-                .attr("cx", function (d) {
-                    return d.x;
-                })
-                .attr("cy", function (d) {
-                    return d.y;
-                })
-                .attr("r", 4)
-                .attr("fill", "red")
-                .attr("transform", function (d) {
-                    return "translate(" + projection([+d.Longitude, +d.Latitude]) + ")"
-
-                    // 450 - where did the 50 go?
-                    //console.log(d.Longitude.length)
-
-                })
-                .on("mouseover", function(d) {
-                    div.transition()
-                        .duration(200)
-                        .style("opacity", .9);
-                    div.html(function () {
-                        if (d.ParticipantName === "N/A"){
-                            return "<strong> Incident location: </strong>" + d.Address
-                        }
-                        else{
-                            return "<strong> Name: </strong>" + d.ParticipantName + " <br> "
-                                + "<strong> Incident location: </strong>" + d.Address
-                        }
-                    })
-                        //.text(d.ParticipantGender.charAt(0).toUpperCase() + d.ParticipantGender.substring(1)+ ", " +d.ParticipantAgeGroup)
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 28) + "px");
-                })
-
-                // fade out tooltip on mouse out
-                .on("mouseout", function(d) {
-                    div.transition()
-                        .duration(500)
-                        .style("opacity", 0);
-                });
-
-                circles2.exit().remove();
+    if(selectedValue === "injured") {
+        filteredData = mapData.filter(function (d) {
+            return d.Type === "Injured";
         })
     }
+    else{
+        filteredData = mapData.filter(function(d){
+            return d.Type === "Killed";
+    })
+}
+    console.log(selectedValue);
+    console.log(filteredData);
+
+    var circles = svgM1.selectAll("circle")
+        .data(filteredData);
+
+    circles.enter().append("circle")
+        .attr("class", "map1")
+        .merge(circles)
+        .attr("cx", function (d) {
+            return d.x;
+        })
+        .attr("cy", function (d) {
+            return d.y;
+        })
+        .attr("r", 4)
+        .attr("fill", "red")
+        .attr("transform", function (d) {
+                return "translate(" + projection([+d.Longitude, +d.Latitude]) + ")"
+        })
+        .on("mouseover", function(d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            div.html(function () {
+                if (d.name === "N/A"){
+                    return "<strong> Incident location: </strong>" + d.Address
+                }
+                else{
+                    return "<strong> Name: </strong>" + d.name + " <br> "
+                        + "<strong> Incident location: </strong>" + d.Address
+                }
+            })
+                //.text(d.ParticipantGender.charAt(0).toUpperCase() + d.ParticipantGender.substring(1)+ ", " +d.ParticipantAgeGroup)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+        })
+
+        // fade out tooltip on mouse out
+        .on("mouseout", function(d) {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+        });
+
+        circles.exit().remove();
 }
 
 
