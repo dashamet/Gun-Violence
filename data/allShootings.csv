@@ -1,4 +1,4 @@
-date,State,Address,,Latitude,Longitude,gender,name,Age Group,age,Type
+date,State,Address,,Latitude,Longitude,gender,name,AgeGroup,age,Type
 14-Nov-19,Illinois,"4700 block of N Monticello Ave,Chicago",,41.9666834,-87.7196452,male,N/A,Teen 12-17,teen,Injured
 14-Nov-19,Ohio,"1711 Penworth Dr,Columbus",,40.0734455,-82.9720043,female,N/A,Teen 12-17,teen,Injured
 14-Nov-19,California,"21900 Centurion Way,Santa Clarita",,34.4420796,-118.5176074,male,N/A,Teen 12-17,teen,Injured
@@ -56,7 +56,6 @@ date,State,Address,,Latitude,Longitude,gender,name,Age Group,age,Type
 6-Nov-19,Ohio,"100 block of S Burgess Ave,Columbus",,39.9530716,-83.0688866,male,N/A,Teen 12-17,teen,Injured
 6-Nov-19,Pennsylvania,"3900 block of N Franklin St,Philadelphia",,40.01114,-75.1405714,male,N/A,Teen 12-17,teen,Injured
 5-Nov-19,South Carolina,"Kendrick St,Gaffney",,35.0838117,-81.6465859,female,N/A,Child 0-11,child,Injured
-5-Nov-19,Utah,"N/A,Logan",,,,male,N/A,Teen 12-17,teen,Injured
 5-Nov-19,California,"Rowell Ave and Hedges Ave,Fresno",,36.7595356,-119.7522162,male,N/A,Teen 12-17,teen,Injured
 5-Nov-19,California,"Morro Dr and La Jolla Dr,Antioch",,37.9776695,-121.7697693,male,N/A,Teen 12-17,teen,Injured
 5-Nov-19,Louisiana,"3700 block of Clear Ct,Baton Rouge",,41.6032207,-73.087749,unknown,N/A,Teen 12-17,teen,Injured
@@ -347,7 +346,6 @@ date,State,Address,,Latitude,Longitude,gender,name,Age Group,age,Type
 14-Sep-19,Texas,"5701 Shelton St,Fort Worth",,32.7480228,-97.232757,female,N/A,Teen 12-17,teen,Injured
 14-Sep-19,Illinois,"4200 block of Auburn St,Rockford",,42.2882322,-89.1240855,female,N/A,Teen 12-17,teen,Injured
 14-Sep-19,California,"2nd St,Los Banos",,37.0660292,-120.8518754,male,N/A,Teen 12-17,teen,Injured
-14-Sep-19,Georgia,"2400 block of Hampshire Cove,Covington",,,,female,N/A,Child 0-11,child,Injured
 14-Sep-19,Pennsylvania,"E 12th St and Wallace St,Erie",,42.1275487,-80.0703624,male,N/A,Teen 12-17,teen,Injured
 14-Sep-19,Illinois,"8200 block of S Marquette Ave,Chicago",,41.746237,-87.559201,male,N/A,Teen 12-17,teen,Injured
 14-Sep-19,Kentucky,"Cecil Ave and Herman St,Louisville",,38.260802,-85.8185528,male,N/A,Teen 12-17,teen,Injured
@@ -586,7 +584,6 @@ date,State,Address,,Latitude,Longitude,gender,name,Age Group,age,Type
 7-Oct-19,Massachusetts,"135 Centre Ave,Abington",,42.1066731,-70.9385302,male,Nathaniel Zaccardi,Child 0-11,child,Killed
 7-Oct-19,Massachusetts,"135 Centre Ave,Abington",,42.1066731,-70.9385302,female,Kathryn Zaccardi,Child 0-11,child,Killed
 6-Oct-19,New Jersey,"133 Harrison St,Paterson",,40.9232594,-74.163035,male,K’Zure “Kay Kay” Credle,Teen 12-17,teen,Killed
-5-Oct-19,Alabama,"N/A,Friendship",,,,male,Chad Clark,Child 0-11,child,Killed
 5-Oct-19,Virginia,"80 block of Courthouse Rd,Petersburg",,37.2371406,-77.3723572,male,Londre Claiborne,Teen 12-17,teen,Killed
 5-Oct-19,South Carolina,"5800 block of Robinson St,Hanahan",,32.9026274,-80.0051192,female,Cabriya Lucas,Child 0-11,child,Killed
 5-Oct-19,Ohio,"1388 E 171st St,Cleveland",,41.5652042,-81.5608531,female,Lyric Melodi Lawson,Child 0-11,child,Killed
@@ -612,7 +609,6 @@ date,State,Address,,Latitude,Longitude,gender,name,Age Group,age,Type
 24-Sep-19,Illinois,"2000 block of South Hoyne Ave,Chicago",,41.854902,-87.678334,male,Gino Abasta,Teen 12-17,teen,Killed
 23-Sep-19,California,"16200 block of Sultana St,Hesperia",,34.4157718,-117.3093751,male,David Becerra,Teen 12-17,teen,Killed
 23-Sep-19,Illinois,"Paulina St and W 158th St,Harvey",,41.6026455,-87.6583377,female,Kentavia Blackful,Child 0-11,child,Killed
-22-Sep-19,Tennessee,"N/A,Manchester",,,,male,Channing Smith,Teen 12-17,teen,Killed
 22-Sep-19,District of Columbia,"1300 block of Morris Rd SE,Washington",,38.8624786,-76.9902393,male,Jamel Kirkland,Teen 12-17,teen,Killed
 21-Sep-19,Colorado,"18801 E 45th Ave,Denver",,39.7781477,-104.7681505,male,Diego Marquez,Teen 12-17,teen,Killed
 21-Sep-19,Pennsylvania,"102 Aster Ct,Pittston (Exeter)",,41.3356346,-75.8196261,female,Emily Winburn,Teen 12-17,teen,Killed
@@ -770,7 +766,6 @@ date,State,Address,,Latitude,Longitude,gender,name,Age Group,age,Type
 28-Jul-19,Texas,"14100 block of Landfair St,Houston",,29.9039801,-95.3882715,male,N/A,Teen 12-17,teen,Killed
 28-Jul-19,Illinois,"9600 block of S Escanaba Ave,Chicago",,41.7208902,-87.5538108,male,Mikah Davis,Child 0-11,child,Killed
 28-Jul-19,New Jersey,"300 block of Walnut Ave,Trenton",,40.22313,-74.744441,male,Quamire Darnell Wright-Housley,Teen 12-17,teen,Killed
-27-Jul-19,Alaska,"N/A,Saint Marys",,,,male,N/A,Teen 12-17,teen,Killed
 27-Jul-19,Virginia,"3300 block of High St,Portsmouth",,36.8346985,-76.3415696,female,N/A,Teen 12-17,teen,Killed
 26-Jul-19,Ohio,"800 block of Weldon Ave,Columbus",,40.0284962,-82.9920744,male,Xavier Quinn,Teen 12-17,teen,Killed
 26-Jul-19,Texas,"1100 block of Co Rd 356,Jasper",,30.8746556,-94.0265596,male,Nick McBride,Teen 12-17,teen,Killed
@@ -910,7 +905,6 @@ date,State,Address,,Latitude,Longitude,gender,name,Age Group,age,Type
 12-Jun-19,Mississippi,"2457 Grant Rd,Brookhaven",,31.6206283,-90.4309893,male,Quantivious Allen Jr,Child 0-11,child,Killed
 12-Jun-19,Missouri,"4400 block of Lexington Ave,Saint Louis",,38.6687228,-90.2374429,female,Myiesha Cannon,Teen 12-17,teen,Killed
 12-Jun-19,Indiana,"51st and Maryland St,Gary",,41.5258037,-87.3300732,male,Johnny Peluyera,Teen 12-17,teen,Killed
-12-Jun-19,Georgia,"N/A,Gray",,,,male,Kadir Renfroe,Child 0-11,child,Killed
 11-Jun-19,Pennsylvania,"3355 McNeil Pl,Pittsburgh",,40.4544761,-79.9641033,female,Alexus N. Chester,Teen 12-17,teen,Killed
 11-Jun-19,Pennsylvania,"3355 McNeil Pl,Pittsburgh",,40.4544761,-79.9641033,male,N/A,Teen 12-17,teen,Killed
 11-Jun-19,Kentucky,"N/A,Rocky Hill",,41.6572525,-72.6655757,male,N/A,Teen 12-17,teen,Killed
