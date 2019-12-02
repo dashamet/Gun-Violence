@@ -11,7 +11,7 @@ dotVis.prototype.initVis = function() {
 
     vis.margin = {top: 30, right: 80, bottom: 50, left: 80};
     vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right;
-    vis.height = 550 - margin.top - margin.bottom;
+    vis.height = $('#' + vis.parentElement).height() - margin.top - margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -29,7 +29,6 @@ dotVis.prototype.initVis = function() {
 
 dotVis.prototype.updateVis = function(){
     let vis = this;
-    console.log("Shooting Data Dot Vis", vis.data);
     //let vis.animateAge, vis.animateGender, vis.animateDeathInjury, vis.playAnimation, vis.animateAgeInj, vis.stopAnimation;
 
     // Set constants
