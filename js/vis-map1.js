@@ -60,28 +60,83 @@ function createVisualization(error, data) {
             .enter().append("path")
             .attr("d", path)
             .attr("fill", "black")
+            .attr("opacity", .7)
             .style("stroke", "#fff")
     });
 
     //change options with dropdown
     var selectedValue = d3.select("#ranking-type").property("value");
-
+    var selectedValue2 = d3.select("#gender").property("value");
+   // var selectedValue3 = d3.select("#age").property("value");
 
     //initVis append to groups (map group and dot group)
-    // filter data based on dropdown and type, injured or killed
+    // filter data based on dropdown and type on 3 dropdown options
     var filteredData = mapData;
 
-    if(selectedValue === "injured") {
+    //all boths selected
+    if(selectedValue === "both1" && selectedValue2==="both2" && selectedValue3==="both3") {
+        filteredData = mapData;
+    }
+    //injured selected
+    else if(selectedValue === "injured" && selectedValue2==="male") {
+        filteredData = mapData.filter(function (d) {
+            return d.Type === "Injured" && d.gender === "male";
+        })
+    }
+    else if(selectedValue === "injured" && selectedValue2==="female") {
+        filteredData = mapData.filter(function (d) {
+            return d.Type === "Injured" && d.gender === "female";
+        })
+    }
+    else if(selectedValue === "injured" && selectedValue2==="both2") {
         filteredData = mapData.filter(function (d) {
             return d.Type === "Injured";
         })
     }
-    else{
-        filteredData = mapData.filter(function(d){
+
+    //deaths selected
+    else if(selectedValue === "deaths" && selectedValue2==="male"){
+        filteredData = mapData.filter(function (d) {
+            return d.Type === "Killed" && d.gender === "male";
+        })
+    }
+    else if(selectedValue === "deaths" && selectedValue2==="female"){
+        filteredData = mapData.filter(function (d) {
+            return d.Type === "Killed" && d.gender === "female";
+        })
+    }
+    else if(selectedValue === "deaths" && selectedValue2==="both2"){
+        filteredData = mapData.filter(function (d) {
             return d.Type === "Killed";
-    })
-}
+        })
+    }
+
+    // 1st both
+    else if(selectedValue === "both1" && selectedValue2==="male") {
+        filteredData = mapData.filter(function (d) {
+            return d.gender === "male";
+        });
+    }
+    else if(selectedValue === "both1" && selectedValue2==="female") {
+        filteredData = mapData.filter(function (d) {
+            return d.gender === "female";
+        });
+    }
+    else if(selectedValue === "both1" && selectedValue2==="both2") {
+        filteredData = mapData;
+    }
+
+    //all boths selected
+    else {
+        console.log('yee');
+    }
+
+
+
     console.log(selectedValue);
+    console.log(selectedValue2);
+    //console.log(selectedValue3);
+    console.log(filteredData.length);
     console.log(filteredData);
 
     var circles = svgM1.selectAll("circle")
