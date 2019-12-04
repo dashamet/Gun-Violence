@@ -10,13 +10,13 @@ lineVis.prototype.initVis = function() {
     let vis = this;
 
     // Creating variables for the SVG dimensions
-    vis.margin = {top: 10, right: 220, bottom: 20, left: 60};
+    vis.margin = {top: 10, right: 200, bottom: 80, left: 100};
     vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = $('#' + vis.parentElement).height() - margin.top - margin.bottom;
 
     // Setting the ranges
-    vis.x = d3.scaleTime().range([0, width]);
-    vis.y = d3.scaleLinear().range([height, 0]);
+    vis.x = d3.scaleTime().range([0, vis.width]);
+    vis.y = d3.scaleLinear().range([vis.height, 0]);
 
     // Setting up a function that will covert a year string to a date
     vis.parseTime = d3.timeParse("%Y");
@@ -73,7 +73,7 @@ lineVis.prototype.initVis = function() {
         .y(d => vis.y(d.intentional_injuries))
 
     vis.onMouseOver = function(){
-        vis.current_id = d3.select(this).attr("id")
+        vis.current_id = d3.select(this).attr("id");
         d3.selectAll("#" + vis.current_id)
             .style("stroke-width","5px")
             .style("font-size", "20px")
@@ -118,28 +118,6 @@ lineVis.prototype.initVis = function() {
             )
             .style("font-size", "20px")
             .style("fill", "red")
-
-        // // Add the X Axis
-        // vis.svg.append("g")
-        //     .attr("transform", "translate(0," + vis.height + ")")
-        //     .attr("class", "axis")
-        //     .call(d3.axisBottom(vis.x));
-        //
-        // // Add the Y Axis
-        // vis.svg.append("g")
-        //     .attr("class", "axis")
-        //     .call(d3.axisLeft(vis.y));
-        //
-        // // Add the Y Axis label
-        // vis.svg.append("text")
-        //     .attr("transform", "rotate(-90)")
-        //     .attr("y", 0 - vis.margin.left + 16)
-        //     .attr("x",0 - (vis.height / 2))
-        //     .attr("dy", "1em")
-        //     .style("font-size", "14px")
-        //     .style("text-anchor", "middle")
-        //     .style("fill", "grey")
-        //     .text("Number of victims");
     };
 
     vis.onMouseOut = function(){
@@ -160,7 +138,7 @@ lineVis.prototype.initVis = function() {
                     return "black"
                 }
             });
-        d3.select(".percent").remove()
+        d3.select(".percent").remove();
     };
 
     vis.wrangleData();
@@ -335,13 +313,13 @@ lineVis.prototype.updateVis = function() {
             d3.select(this).transition()
                 .duration(50)
                 .attr('r', 4);
-            div.transition()
+            vis.div.transition()
                 .duration('50')
                 .style("opacity", 0);
         });
 
     vis.svg.append("text")
-        .attr("transform", "translate("+(vis.width+90)+","+vis.y(vis.data[0].intentional_homicides)+")")
+        .attr("transform", "translate("+(vis.width + 5)+","+vis.y(vis.data[0].intentional_homicides)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
@@ -352,7 +330,7 @@ lineVis.prototype.updateVis = function() {
         .on("mouseout", vis.onMouseOut);
 
     vis.svg.append("text")
-        .attr("transform", "translate("+(vis.width+90)+","+vis.y(vis.data[0].intentional_suicides + 300)+")")
+        .attr("transform", "translate("+(vis.width + 5)+","+vis.y(vis.data[0].intentional_suicides + 300)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
@@ -363,7 +341,7 @@ lineVis.prototype.updateVis = function() {
         .on("mouseout", vis.onMouseOut);
 
     vis.svg.append("text")
-        .attr("transform", "translate("+(vis.width + 90)+","+vis.y(vis.data[0].unintentional_deaths)+")")
+        .attr("transform", "translate("+(vis.width + 5)+","+vis.y(vis.data[0].unintentional_deaths)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
@@ -374,7 +352,7 @@ lineVis.prototype.updateVis = function() {
         .on("mouseout", vis.onMouseOut);
 
     vis.svg.append("text")
-        .attr("transform", "translate("+(vis.width-90)+","+vis.y(vis.data[0].unintentional_injuries - 698)+")")
+        .attr("transform", "translate("+(vis.x(vis.parseTime(2015)) + 5)+","+vis.y(vis.data[0].unintentional_injuries - 698)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
@@ -386,7 +364,7 @@ lineVis.prototype.updateVis = function() {
 
     console.log(vis.height-97)
     vis.svg.append("text")
-        .attr("transform", "translate("+(vis.width)+","+vis.y(vis.data[0].intentional_injuries + 2400)+")")
+        .attr("transform", "translate("+(vis.x(vis.parseTime(2016)) + 5)+","+vis.y(vis.data[0].intentional_injuries + 2400)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
@@ -397,9 +375,8 @@ lineVis.prototype.updateVis = function() {
         .on("mouseout", vis.onMouseOut);
 
     // Add the X Axis
-    // 440 is a magic number here, not sure why that's where it's zeroed.
     vis.svg.append("g")
-        .attr("transform", "translate(0," + 440 + ")")
+        .attr("transform", "translate(0," + vis.height + ")")
         .attr("class", "axis x-axis")
         .call(d3.axisBottom(vis.x));
 
@@ -411,7 +388,7 @@ lineVis.prototype.updateVis = function() {
     // Add the Y Axis label
     vis.svg.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 0 - vis.margin.left)// + 16)
+        .attr("y", 0 - vis.margin.left + 16)
         .attr("x",0 - (vis.height / 2))
         .attr("dy", "1em")
         .style("font-size", "14px")
