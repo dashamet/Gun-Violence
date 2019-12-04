@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('#pagepiling').pagepiling({
-        sectionsColor: ['white', 'black', 'white', 'white', 'white', 'white', 'white'],
-        anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage', 'sixthPage', 'seventhPage', 'eighthPage']
+        sectionsColor: ['white', 'black', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
+        anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage', 'sixthPage', 'seventhPage', 'eighthPage', 'ninthPage']
     })
 
     // Number counter on slide 2
@@ -24,7 +24,7 @@ $(document).ready(function() {
 
     // Make one line appear at a time on slide 2
     var lines = $('p').text().split("\n");
-    var counter = 18000
+    var counter = 15500
     var timer,
         displayLine = function(){
             var nextLine = lines.shift();
@@ -39,7 +39,7 @@ $(document).ready(function() {
     timer = setTimeout(displayLine,counter);
 
     //Typewriter effect for title
-    var str = "<p>Underage and Under Fire:<p style='color:white; font-size: 80px;'>The growing toll of guns on America's youth</p></p>",
+    var str = "<p>Underage and Under Fire:<p style='color:white; font-size: 80px;'>The growing toll of guns on America's youth <br/> <span id = 'arrow'>↓</span></p></p>",
         i = 0,
         isTag,
         text;
@@ -54,7 +54,7 @@ $(document).ready(function() {
         if( char === '>' ) isTag = false;
 
         if (isTag) return type();
-        setTimeout(type, 80);
+        setTimeout(type, 60);
 
     }());
 

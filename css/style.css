@@ -30,20 +30,23 @@ body {
     font-family: Georgia, cursive;
     text-align: center;
     color: white;
-    font-size: 7em;
+    font-size: 6.75em;
 }
 
 .sec1{
-    background: url(img/collage-dark.jpg);
+    background: url(img/collage-super-dark.jpg);
     background-size: cover;
 }
 
 .sec2{
-    color: white;
+    color: white;}
+
+.sec3{
+    margin-left: 10px;
 }
 
 p{
-    margin: 50px;
+    margin: 30px;
 }
 
 .stat{
@@ -95,18 +98,57 @@ h5{
 
 a{
     color: black;
-    font-size: 14pt;
+    font-weight: bold;
 }
 
 a:hover{
-    color: red;
+    color: black;
 }
 
 .step{
     margin-top: 10px;
 }
 
-.btn{
+.btn-main{
     background: black;
     color: white;
+}
+
+.btn-small{
+    background: white;
+    color: black;
+    border: 2px solid black;
+    font-size: 12px;
+}
+
+.btn.focus, .btn:focus {
+    outline: none;
+    box-shadow: none!important;
+    border: 2px solid red;
+}
+
+img{
+    opacity: 0.9;
+}
+
+.col-sm-6{
+    margin-top: 200px;
+    margin-left: 80px;
+    text-align: justify;
+}
+
+ol{
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+#arrow{
+    font-size: 45px;
+}
+.description{
+    text-align: center
+}
+
+.initial{
+    fill: grey;
 }
