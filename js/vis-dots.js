@@ -47,7 +47,7 @@ dotVis.prototype.updateVis = function(){
 
     // Create default view
     vis.nCol = 25;
-    vis.space = 30
+    vis.space = 30;
 
     d3.selectAll('.customCircle.Killed')
         .attr('fill', 'red')
@@ -70,7 +70,6 @@ dotVis.prototype.updateVis = function(){
         .attr('cy', function(d,i){
             vis.rowNum = (i-i%vis.nCol)/vis.nCol;
             return vis.dotSpacing*(vis.rowNum+1)
-            //return (Math.trunc(i / 40)) * height/50 + marginTop;
         });
 
     // Append labels for default view
@@ -78,7 +77,7 @@ dotVis.prototype.updateVis = function(){
         .append("text")
         .attr("class", "dotLabel")
         .text("Killed")
-        .attr("x", (vis.width/2 - vis.nCol*vis.dotSpacing - vis.space))//(vis.width/2+(-vis.nCol*vis.dotSpacing-30)/2))
+        .attr("x", (vis.width/2 - vis.nCol*vis.dotSpacing - vis.space) + vis.nCol*vis.dotSpacing/2)//(vis.width/2 - vis.nCol*vis.dotSpacing - vis.space))//(vis.width/2+(-vis.nCol*vis.dotSpacing-30)/2))
         .attr("y", 0)
         .style("text-anchor", "middle");
     vis.svg
@@ -120,14 +119,14 @@ dotVis.prototype.updateVis = function(){
             .duration(800)
             .attr('r', vis.dotR)
             .attr('cx', function(d,i){
-                return i%100*vis.dotSpacing+40
+                return i%100*vis.dotSpacing+(vis.width/2 - vis.nCol*vis.dotSpacing - vis.space)
             })
             .attr('cy', function(d,i){
                 if (i<100){
-                    return vis.height - 20
+                    return vis.height - 125
                 }
                 else{
-                    return vis.height - 20 - vis.dotSpacing
+                    return vis.height - 125 - vis.dotSpacing
                 }
             });
         vis.svg.append("text")
@@ -146,7 +145,7 @@ dotVis.prototype.updateVis = function(){
             .attr("class", "dotLabel")
             .text("Unknown")
             .attr("x", vis.width/2)
-            .attr("y", vis.height)
+            .attr("y", vis.height - 105)
             .style("text-anchor", "middle")
     };
 
@@ -195,7 +194,7 @@ dotVis.prototype.updateVis = function(){
             .attr("x", (vis.nCol*vis.dotSpacing)/2 + vis.width/2 + vis.space)
             .attr("y", 0)
             .style("text-anchor", "middle");
-    }
+    };
 
 
     vis.animateAge = function(){
@@ -212,7 +211,7 @@ dotVis.prototype.updateVis = function(){
                 //return width/50*(3.5+i%40)
             })
             .attr('cy', function(d,i){
-                vis.rowNum = (i-i%vis.nCol)/vis.nCol
+                vis.rowNum = (i-i%vis.nCol)/vis.nCol;
                 return vis.dotSpacing*(vis.rowNum+1)
             });
         d3.selectAll('.customCircle.teen')
@@ -232,7 +231,7 @@ dotVis.prototype.updateVis = function(){
             .append("text")
             .attr("class", "dotLabel")
             .text("Children")
-            .attr("x", (vis.width/2+(-vis.nCol*vis.dotSpacing-vis.space)/2))
+            .attr("x", (vis.width/2 - vis.nCol*vis.dotSpacing - vis.space) + vis.nCol*vis.dotSpacing/2)//(vis.width/2+(-vis.nCol*vis.dotSpacing-vis.space)/2))
             .attr("y", 0)
             .style("text-anchor", "middle");
         vis.svg

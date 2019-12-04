@@ -1,15 +1,6 @@
 let myDotVis;
 let myMap2;
 let myLineVis;
-let myScatterVis;
-let myBrushVis;
-
-// init globalDataSets
-// let dataSet;
-
-
-// key
-// 0 = all shooting data
 
 // load data
 queue()
