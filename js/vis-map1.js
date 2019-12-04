@@ -67,7 +67,7 @@ function createVisualization(error, data) {
     //change options with dropdown
     var selectedValue = d3.select("#ranking-type").property("value");
     var selectedValue2 = d3.select("#gender").property("value");
-   // var selectedValue3 = d3.select("#age").property("value");
+    var selectedValue3 = d3.select("#age").property("value");
 
     //initVis append to groups (map group and dot group)
     // filter data based on dropdown and type on 3 dropdown options
