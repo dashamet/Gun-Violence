@@ -40,31 +40,40 @@
         <h5> Each point represents a victim of gun violence in 2019. Hover over a point to show more detail.</h5>
         </div>
         <div class="row justify-content-center" style="height: 10vh">
-        <!--  dropdown  -->
-        <form class="form-inline">
-            <div class="form-group">
-                <label for="ranking-type">Show data for: &nbsp</label>
-                <select class="form-control" id="ranking-type">
-                    <option value="both1">Both</option>
-                    <option value="injured">Injuries</option>
-                    <option value="deaths">Deaths</option>
-                </select>
-                <select class="form-control" id="gender">
-                    <option value="both2">Both</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-                <select class="form-control" id="age">
-                    <option value="both3">Both</option>
-                    <option value="children">Children</option>
-                    <option value="teens">Teens</option>
-                </select>
-            </div>
-        </form>
-        </div>
-        <div class="row justify-content-center" style="height: 70vh" id="map1">
-        </div>
+            <!-- dropdown -->
+            <div class="row justify-content-center" style="height: 5vh">
+                <div class="align-self-center">
+                    <!--  dropdown  -->
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <select class="form-control" id="ranking-type" onchange="myMapOne.updateVis()">
+                                <option value="">Both</option>
+                                <option value=".Injured">Injuries</option>
+                                <option value=".Killed">Deaths</option>
+                            </select>
+                            <select class="form-control" id="gender" onchange="myMapOne.updateVis()">
+                                <option value="">Both</option>
+                                <option value=".male">Male</option>
+                                <option value=".female">Female</option>
+                            </select>
+                            <select class="form-control" id="age" onchange="myMapOne.updateVis()">
+                                <option value="">Both</option>
+                                <option value=".child">Children</option>
+                                <option value=".teen">Teens</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
 
+            </div>
+            <!-- map -->
+
+            <div class="row" style="height: 75vh;">
+                <div class="col-8 offset-2">
+                    <div class="row" id="map1" style="height: 75vh;"></div>
+                </div>
+            </div>
+        </div>
 
 
         </div>
@@ -102,16 +111,16 @@
         <form class="form-inline">
             <div class="form-group">
                 <label for="data-value">States with: &nbsp</label>
-                <select class="form-control" id="data-value" onchange = "runMap2()">
+                <select class="form-control" id="data-value" onchange = "myMap2.updateVis()">
                     <option value="min_age_possession">Minimum Age for Firearm Possession</option>
                     <option value="min_age_purchase_sale">Minimum Age for Firearm Purchase/Sale</option>
                 </select>
             </div>
         </form>
     </div>
-    <div class="section sec7 center container-fluid" id="map2-line" style="height: 100vh"><h3> Map Zoom Feature </h3>
-    </div>
-    <div class="section sec8 container-fluid" style="height: 100vh">
+<!--    <div class="section sec7 center container-fluid" id="map2-line" style="height: 100vh"><h3> Map Zoom Feature </h3>-->
+<!--    </div>-->
+    <div class="section sec7 container-fluid" style="height: 100vh">
         <ul style="list-style-type:none;">
             <li class="step"><h3>Data</h3></li>
             <ul>
@@ -123,7 +132,7 @@
             <!-- <img src="css/img/process-dark.jpg" alt="test" width="600" height="400"> -->
         </ul>
     </div>
-    <div class="section sec9 center container-fluid" style="height: 100vh"><h3>About the authors (we will fill this in)</h3></div>
+    <div class="section sec8 center container-fluid" style="height: 100vh"><h3>About the authors (we will fill this in)</h3></div>
 
 </div>
 

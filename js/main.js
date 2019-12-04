@@ -1,7 +1,7 @@
 let myDotVis;
 let myMap2;
 let myLineVis;
-let myMap1;
+let myMapOne;
 
 // load data
 queue()
@@ -17,8 +17,8 @@ queue()
 function initMainPage(error, shootingData, usMapData, stateNameData, deathData, policyData, deathInjData) {
     console.log(shootingData);
     myDotVis = new dotVis('memorial-viz', shootingData);
+    myMapOne = new mapOneVis('map1', shootingData, usMapData);
     myMap2 = new map2Vis('map2', usMapData, stateNameData, deathData, policyData);
     myLineVis = new lineVis('line-graph', deathInjData)
-    myMap1 = new map1Vis('map1', shootingData, usMapData, stateNameData)
 
 }
