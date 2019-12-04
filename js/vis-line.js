@@ -10,7 +10,7 @@ lineVis.prototype.initVis = function() {
     let vis = this;
 
     // Creating variables for the SVG dimensions
-    vis.margin = {top: 10, right: 200, bottom: 80, left: 100};
+    vis.margin = {top: 60, right: 220, bottom: 30, left: 60};
     vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = $('#' + vis.parentElement).height() - margin.top - margin.bottom;
 
@@ -95,8 +95,9 @@ lineVis.prototype.initVis = function() {
                 return (d3.select(this).attr('id') === vis.current_id) ? 1.0 : 0.2;
             });
         vis.svg.append("text")
-            .attr("x", "10")
-            .attr("y", "10")
+            .attr("x", (width / 2) + 60)
+            .attr("y", "7")
+            .attr("text-anchor", "middle")
             .attr("class", "percent")
             .text(function(){
                     if(vis.current_id === "line1"){
@@ -118,6 +119,31 @@ lineVis.prototype.initVis = function() {
             )
             .style("font-size", "20px")
             .style("fill", "red")
+        d3.select(".initial").remove()
+        vis.svg.append("text")
+            .attr("x", (width / 2) + 60)
+            .attr("y", 0 - (margin.top / 2) - 30)
+            .attr("text-anchor", "middle")
+            .attr("class", "description")
+            .text(function(){
+                    if(vis.current_id === "line1"){
+                        return "Gun violence, as opposed to suicides or accidents, remains the largest firearm-related cause of death among youth."
+                    }
+                    else if(vis.current_id === "line2"){
+                        return "The rate of suicides committed by firearms doubled from 2008 to 2017."
+                    }
+                    else if(vis.current_id === "line3"){
+                        return "Accidents are responsible for the smallest proportion of youth deaths by firearms, and they have remained relatively stagnant."
+                    }
+                    else if(vis.current_id === "line4"){
+                        return "Injuries caused by accidents with firearms have sharply declined since 2008."
+                    }
+                    else if(vis.current_id === "line5"){
+                        return "The number of young people injured by gun violence has consistently been increasing."
+                    }
+                }
+            )
+            .style("font-size", "20px")
     };
 
     vis.onMouseOut = function(){
@@ -138,7 +164,14 @@ lineVis.prototype.initVis = function() {
                     return "black"
                 }
             });
-        d3.select(".percent").remove();
+        d3.select(".percent").remove()
+        d3.select(".description").remove()
+        vis.svg.append("text")
+            .attr("x", (width / 2) + 60)
+            .attr("y", 0 - (margin.top / 2) - 30)
+            .attr("text-anchor", "middle")
+            .attr("class", "initial")
+            .text("Hover over a line's label to highlight a cause of injury or death. Hover over a point to see the totals for a specific year.")
     };
 
     vis.wrangleData();
@@ -318,6 +351,28 @@ lineVis.prototype.updateVis = function() {
                 .style("opacity", 0);
         });
 
+    // Add the X Axis
+    vis.svg.append("g")
+        .attr("transform", "translate(0," + vis.height + ")")
+        .attr("class", "axis x-axis")
+        .call(d3.axisBottom(vis.x));
+
+    // Add the Y Axis
+    vis.svg.append("g")
+        .attr("class", "axis")
+        .call(d3.axisLeft(vis.y));
+
+    // Add the Y Axis label
+    vis.svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left + 16)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1em")
+        .style("font-size", "14px")
+        .style("text-anchor", "middle")
+        .style("fill", "#969695")
+        .text("Number of youth victims");
+
     vis.svg.append("text")
         .attr("transform", "translate("+(vis.width + 5)+","+vis.y(vis.data[0].intentional_homicides)+")")
         .attr("dy", ".35em")
@@ -374,27 +429,21 @@ lineVis.prototype.updateVis = function() {
         .on("mouseover", vis.onMouseOver)
         .on("mouseout", vis.onMouseOut);
 
-    // Add the X Axis
-    vis.svg.append("g")
-        .attr("transform", "translate(0," + vis.height + ")")
-        .attr("class", "axis x-axis")
-        .call(d3.axisBottom(vis.x));
-
-    // Add the Y Axis
-    vis.svg.append("g")
-        .attr("class", "axis")
-        .call(d3.axisLeft(vis.y));
-
-    // Add the Y Axis label
     vis.svg.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 0 - vis.margin.left + 16)
-        .attr("x",0 - (vis.height / 2))
-        .attr("dy", "1em")
+        .attr("x", "5")
+        .attr("y", height + 56)
+        .attr("class", "caption")
         .style("font-size", "14px")
-        .style("text-anchor", "middle")
-        .style("fill", "grey")
-        .text("Number of victims");
+        .text("Note: The dashed line represents missing data")
+
+    vis.svg.append("text")
+        .attr("x", (width / 2) + 60)
+        .attr("y", 0 - (margin.top / 2) - 30)
+        .attr("text-anchor", "middle")
+        .attr("class", "initial")
+        .text("Hover over a line's label to highlight a cause of injury or death.\n" +
+            "Hover over a point to see the totals for a specific year.")
+
 };
 
 

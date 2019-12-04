@@ -22,12 +22,9 @@
     </div>
     <div class="section sec3 center container-fluid" style="height: 100vh">
         <div class="row justify-content-center" style="height: 10vh">
-            <h3>Injuries caused by violence and deaths by suicide involving firearms are increasing.</h3>
         </div>
         <div class="row justify-content-center" style="height: 10vh">
-            <h5>Hover over a line's label to highlight a cause of injury or death.
-                Hover over a point to see the totals for a specific year.
-                Note that the dashed line represents missing data.</h5>
+            <h5>Hover over a line's label to highlight a cause of injury or death. Hover over a point to see the totals for a specific year. </h5>
         </div>
         <div class="row justify-content-center" id="line-graph" style="height: 70vh">
         </div>
@@ -53,8 +50,8 @@
                             </select>
                             <select class="form-control" id="gender" onchange="myMapOne.updateVis()">
                                 <option value="">Both</option>
-                                <option value=".male">Male</option>
-                                <option value=".female">Female</option>
+                                <option value=".male">Males</option>
+                                <option value=".female">Females</option>
                             </select>
                             <select class="form-control" id="age" onchange="myMapOne.updateVis()">
                                 <option value="">Both</option>
@@ -79,31 +76,18 @@
         </div>
     <div class="section sec5 center container-fluid" style="height: 100vh">
         <!--<div class="container-fluid" style="height: 100vh">-->
-            <div class="row justify-content-center" style="height: 10vh">
-                <div class="align-self-center">
-                    <h3> Males and teens are the largest group of victims among youth.</h3>
-                </div>
-            </div>
+        <div class="row" id="memorial-viz" style = "height: 80vh; width: 100vw"></div>
             <div class="row justify-content-center" style="height: 5vh">
-                <div class="align-self-center">
-                    <h5> Each circle represents a recent victim of firearm violence. </h5>
-                </div>
-            </div>
-            <div class="row justify-content-center" style="height: 5vh">
-                <div class="align-self-center">
+                <div>
                     <button type="button" class = "btn btn-main" onclick = "myDotVis.playAnimation()">Play</button>
                     <button type="button" class = "btn btn-main" onclick = "myDotVis.stopAnimation()">Stop</button>
                     <button type="button" class = "btn btn-small center " onclick = "myDotVis.animateAge()"> Children/Teens</button>
-                    <button type="button" class = "btn btn-small center " onclick = "myDotVis.animateAgeInj()"> Children/Teens Breakdown</button>
                     <button type="button" class = "btn btn-small center" onclick = "myDotVis.animateGender()">Boys/Girls</button>
-                    <button type="button" class = "btn btn-small center" onclick = "myDotVis.animateDeathInjury()">Killed/Injured</button>
+                    <button type="button" class = "btn btn-small center " onclick = "myDotVis.animateAgeInj()"> Killed/Injured</button>
                 </div>
             </div>
-            <div class="row" id="memorial-viz" style = "height: 80vh; width: 100vw"></div>
         </div>
     <!--</div>-->
-
-
 
     <div class="section sec6 center container-fluid" id="map2" style="height: 100vh"><h3> Policy has power.</h3>
 
@@ -120,19 +104,40 @@
     </div>
 <!--    <div class="section sec7 center container-fluid" id="map2-line" style="height: 100vh"><h3> Map Zoom Feature </h3>-->
 <!--    </div>-->
-    <div class="section sec7 container-fluid" style="height: 100vh">
-        <ul style="list-style-type:none;">
-            <li class="step"><h3>Data</h3></li>
-            <ul>
-                <li><a href="https://www.cdc.gov/injury/wisqars/index.html">CDC WISQARS Data</a><span class="data-source">  - We used this data for the line graph breaking down causes of death and injuries over time. </span></li>
-                <li><a href="https://www.gunviolencearchive.org/reports">Gun Violence Archive</a><span class="data-source"> - We obtained two datasets from this source: youth injured by firearms and youth killed by firearms. We used these datasets for the animated dot visualization and the map with points representing victims.</span></li>
-                <li><a href="https://www.rand.org/pubs/tools/TL283-1.html">RAND State Firearm Law Database</a><span class="data-source"> - We relied on this extensive dataset of states' firearm policies for our choropleth map showing the correlation between policies and gun deaths.</span></li>
-            </ul>
-            <li class="step"><h3>Process</h3></li>
-            <!-- <img src="css/img/process-dark.jpg" alt="test" width="600" height="400"> -->
-        </ul>
+    <div class="section sec8">
+        <div class="row">
+            <div class="col-sm-4"><img src="css/img/UPDATED-PROCESS2.jpg" height="100%" alt="test"></div>
+            <div> </div>
+            <div class="col-sm-6">
+                We used three data sources to create the visualizations featured on this website:
+                <ol>
+                    <li ><a href="https://www.cdc.gov/injury/wisqars/index.html">CDC WISQARS Data</a><span class="data-source">  - We used this data for the line graph breaking down causes of death and injuries over time. </span></li>
+                    <li><a href="https://www.gunviolencearchive.org/reports">Gun Violence Archive</a><span class="data-source"> - We obtained two datasets from this source: youth injured by firearms and youth killed by firearms, both in 2019. We used these datasets to create the animated dot visualization and the map with points representing victims.</span></li>
+                    <li><a href="https://www.rand.org/pubs/tools/TL283-1.html">RAND State Firearm Law Database</a><span class="data-source"> - We relied on this extensive dataset of states' firearm policies for our choropleth map showing the correlation between policies and gun deaths.</span></li>
+                </ol>
+                Explore our <a href="https://docs.google.com/document/d/1cwD3-cQMEhZHYYeOAjc17EDM-yCXPW24efqupfw35rI/edit?usp=sharing">process book</a> to learn more about how we created this website.
+            </div>
+        </div>
+
     </div>
-    <div class="section sec8 center container-fluid" style="height: 100vh"><h3>About the authors (we will fill this in)</h3></div>
+    <div class="section sec9 center">
+        <div class="row">
+            <div class="col-sm">
+                <img src="css/img/dasha.jpg" width="392.3px" height = "308.1px" alt="dasha-headshot">
+                <span class="bio">Dasha Metropolitansky</span> ('22) studies Statistics (the data science track) and Computer Science at Harvard University.
+                <div>
+                    <a href = "https://www.linkedin.com/in/dasha-metropolitansky/"> <img src="css/img/linkedin.png" width="34.1px" height = "34.1px" alt="dasha-linkedin"> </a>
+                    <a href = "https://github.com/dashamet"> <img src="css/img/github.png" width="28px" height = "28px" alt="dasha-git"> </a>
+                </div>
+            </div>
+            <div class="col-sm">
+                One of three columns
+            </div>
+            <div class="col-sm">
+                One of three columns
+            </div>
+        </div>
+    </div>
 
 </div>
 
