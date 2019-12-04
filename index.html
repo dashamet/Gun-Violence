@@ -20,17 +20,10 @@
         From 2001 to 2017, gun violence took the lives of <span class="value stat">49163</span> young people and injured <span class="value stat">262350</span>.
         <ul id="result"></ul>
     </div>
-    <div class="section sec3 center" id="line-graph">
-
-        <h3>Injuries caused by violence and deaths by suicide involving firearms are increasing.</h3>
-        <h5>Hover over a line's label to highlight a cause of injury or death.
-            Hover over a point to see the totals for a specific year.
-            Note that the dashed line represents missing data.</h5>
-    </div>
+    <div class="section sec3 center" id="line-graph"></div>
     <div class="section sec4 center" id="map1">
-        <h3> Children and teenagers across the country have been injured and killed by guns. </h3>
+        <h3> Children and teenagers across the country have been hurt or killed by guns. </h3>
         <h5> Each point represents a victim of gun violence in 2019. Hover over a point to show more detail.</h5>
-        <!--  dropdown  -->
         <form class="form-inline">
             <div class="form-group">
                 <label for="ranking-type">Show data for: &nbsp</label>
@@ -50,25 +43,17 @@
                 </div>
             </div>
             <div class="row justify-content-center" style="height: 5vh">
-                <div class="align-self-center">
-                    <h5> Each circle represents a recent victim of firearm violence. </h5>
-                </div>
-            </div>
-            <div class="row justify-content-center" style="height: 5vh">
-                <div class="align-self-center">
+                <div>
                     <button type="button" class = "btn btn-main" onclick = "myDotVis.playAnimation()">Play</button>
                     <button type="button" class = "btn btn-main" onclick = "myDotVis.stopAnimation()">Stop</button>
                     <button type="button" class = "btn btn-small center " onclick = "myDotVis.animateAge()"> Children/Teens</button>
-                    <button type="button" class = "btn btn-small center " onclick = "myDotVis.animateAgeInj()"> Children/Teens Breakdown</button>
                     <button type="button" class = "btn btn-small center" onclick = "myDotVis.animateGender()">Boys/Girls</button>
-                    <button type="button" class = "btn btn-small center" onclick = "myDotVis.animateDeathInjury()">Killed/Injured</button>
+                    <button type="button" class = "btn btn-small center " onclick = "myDotVis.animateAgeInj()"> Killed/Injured</button>
                 </div>
             </div>
             <div class="row" id="memorial-viz" style = "height: 80vh; width: 100vw"></div>
         </div>
     </div>
-
-
 
     <div class="section sec6 center" id="map2"><h3> Policy has power.</h3>
 
@@ -86,38 +71,53 @@
     <div class="section sec7 center" id="map2-line"><h3> Map Zoom Feature </h3>
     </div>
     <div class="section sec8">
-        <ul style="list-style-type:none;">
-            <li class="step"><h3>Data</h3></li>
-            <ul>
-                <li><a href="https://www.cdc.gov/injury/wisqars/index.html">CDC WISQARS Data</a><span class="data-source">  - We used this data for the line graph breaking down causes of death and injuries over time. </span></li>
-                <li><a href="https://www.gunviolencearchive.org/reports">Gun Violence Archive</a><span class="data-source"> - We obtained two datasets from this source: youth injured by firearms and youth killed by firearms. We used these datasets for the animated dot visualization and the map with points representing victims.</span></li>
-                <li><a href="https://www.rand.org/pubs/tools/TL283-1.html">RAND State Firearm Law Database</a><span class="data-source"> - We relied on this extensive dataset of states' firearm policies for our choropleth map showing the correlation between policies and gun deaths.</span></li>
-            </ul>
-            <li class="step"><h3>Process</h3></li>
-            <!-- <img src="css/img/process-dark.jpg" alt="test" width="600" height="400"> -->
-        </ul>
+        <div class="row">
+            <div class="col-sm-4"><img src="css/img/UPDATED-PROCESS2.jpg" height="100%" alt="test"></div>
+            <div> </div>
+            <div class="col-sm-6">
+                We used three data sources to create the visualizations featured on this website:
+                <ol>
+                    <li ><a href="https://www.cdc.gov/injury/wisqars/index.html">CDC WISQARS Data</a><span class="data-source">  - We used this data for the line graph breaking down causes of death and injuries over time. </span></li>
+                    <li><a href="https://www.gunviolencearchive.org/reports">Gun Violence Archive</a><span class="data-source"> - We obtained two datasets from this source: youth injured by firearms and youth killed by firearms, both in 2019. We used these datasets to create the animated dot visualization and the map with points representing victims.</span></li>
+                    <li><a href="https://www.rand.org/pubs/tools/TL283-1.html">RAND State Firearm Law Database</a><span class="data-source"> - We relied on this extensive dataset of states' firearm policies for our choropleth map showing the correlation between policies and gun deaths.</span></li>
+                </ol>
+                Explore our <a href="https://docs.google.com/document/d/1cwD3-cQMEhZHYYeOAjc17EDM-yCXPW24efqupfw35rI/edit?usp=sharing">process book</a> to learn more about how we created this website.
+            </div>
+        </div>
+
     </div>
-    <div class="section sec9 center"><h3>About the authors (we will fill this in)</h3></div>
+    <div class="section sec9 center">
+        <div class="row">
+            <div class="col-sm">
+                One of three columns
+            </div>
+            <div class="col-sm">
+                One of three columns
+            </div>
+            <div class="col-sm">
+                One of three columns
+            </div>
+        </div>
 
-</div>
+    </div>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/queue.min.js"></script>
-<script src="js/d3.min.js"></script>
-<script src="js/d3-tip.js"></script>
-<script src="js/colorbrewer.js"></script>
-<script src="js/topojson.v1.min.js"></script>
-<script src="js/jquery.pagepiling.js"></script>
-<script src="js/my.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/queue.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/d3-tip.js"></script>
+    <script src="js/colorbrewer.js"></script>
+    <script src="js/topojson.v1.min.js"></script>
+    <script src="js/jquery.pagepiling.js"></script>
+    <script src="js/my.js"></script>
+    <script src="js/main.js"></script>
 
-<script src="js/vis-line.js"></script>
-<script src="js/vis-map1.js"></script>
-<script src="js/vis-map2.js"></script>
-<script src="js/vis-dots.js"></script>
-<script src="js/vis-map2line.js"> </script>
-<script src="js/main.js"></script>
+    <script src="js/vis-line.js"></script>
+    <script src="js/vis-map1.js"></script>
+    <script src="js/vis-map2.js"></script>
+    <script src="js/vis-dots.js"></script>
+    <script src="js/vis-map2line.js"> </script>
 
 </body>
 </html>

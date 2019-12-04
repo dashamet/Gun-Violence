@@ -28,9 +28,9 @@ var x = d3.scaleTime()
 var y = d3.scaleLinear()
     .range([height, 0]);
 
-var valueline = d3.line()
-    .x(function(d) { return x(d.Year); })
-    .y(function(d) { return y(d.TotalFirearmDeaths); });
+//var valueline = d3.line()
+    //.x(function(d) { return x(d.Year); })
+    //.y(function(d) { return y(d.TotalFirearmDeaths); });
 
 queue()
     .defer(d3.json, "data/us.topo.json")

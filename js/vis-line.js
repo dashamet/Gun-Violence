@@ -1,7 +1,7 @@
 // Creating variables for the SVG dimensions
-var margin = {top: 10, right: 220, bottom: 20, left: 60},
-    width = 1100 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+var margin = {top: 60, right: 220, bottom: 30, left: 60},
+    width = 1200 - margin.left - margin.right,
+    height = 580 - margin.top - margin.bottom;
 
 // Setting the ranges
 var x = d3.scaleTime().range([0, width]);
@@ -86,11 +86,12 @@ function onMouseOver(){
         })
     d3.selectAll(".line,.circle,.text")
         .style("opacity", function() {
-            return (d3.select(this).attr('id') === current_id) ? 1.0 : 0.2;
+            return (d3.select(this).attr('id') === current_id) ? 1.0 : 0.1;
         })
     svg.append("text")
-        .attr("x", "10")
-        .attr("y", "10")
+        .attr("x", (width / 2) + 60)
+        .attr("y", "7")
+        .attr("text-anchor", "middle")
         .attr("class", "percent")
         .text(function(){
                 if(current_id === "line1"){
@@ -112,7 +113,31 @@ function onMouseOver(){
         )
         .style("font-size", "20px")
         .style("fill", "red")
-
+    svg.append("text")
+        .attr("x", (width / 2) + 60)
+        .attr("y", 0 - (margin.top / 2) - 30)
+        .attr("text-anchor", "middle")
+        .attr("class", "description")
+        .text(function(){
+                if(current_id === "line1"){
+                    return "Gun violence, as opposed to suicides or accidents, remains the largest firearm-related cause of death among youth."
+                }
+                else if(current_id === "line2"){
+                    return "The rate of suicides committed by firearms doubled from 2008 to 2017."
+                }
+                else if(current_id === "line3"){
+                    return "Accidents are responsible for the smallest proportion of youth deaths by firearms, and they have remained relatively stagnant."
+                }
+                else if(current_id === "line4"){
+                    return "Injuries caused by accidents with firearms have sharply declined since 2008."
+                }
+                else if(current_id === "line5"){
+                    return "The number of young people injured by gun violence has consistently been increasing."
+                }
+            }
+        )
+        .style("font-size", "20px")
+    d3.select(".initial").remove()
 }
 
 function onMouseOut(){
@@ -134,6 +159,13 @@ function onMouseOut(){
             }
         })
     d3.select(".percent").remove()
+    d3.select(".description").remove()
+    svg.append("text")
+        .attr("x", (width / 2) + 60)
+        .attr("y", 0 - (margin.top / 2) - 30)
+        .attr("text-anchor", "middle")
+        .attr("class", "initial")
+        .text("Hover over a line's label to highlight a cause of injury or death. Hover over a point to see the totals for a specific year.")
 }
 
 
@@ -169,6 +201,17 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
     y.domain([0, d3.max(data, function(d) {
         return Math.max(d.intentional_homicides, d.intentional_suicides, d.unintentional_deaths, d.unintentional_injuries,
             d.intentional_injuries); })+1000]);
+
+    // Add the X Axis
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "axis")
+        .call(d3.axisBottom(x));
+
+    // Add the Y Axis
+    svg.append("g")
+        .attr("class", "axis")
+        .call(d3.axisLeft(y));
 
     // Add the valueline path.
     svg.append("path")
@@ -299,19 +342,8 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
                 .attr('r', 4);
             div.transition()
                 .duration('50')
-                .style("opacity", 0);
+                .style("opacity", 0)
         })
-
-    // Add the X Axis
-    svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .attr("class", "axis")
-        .call(d3.axisBottom(x));
-
-    // Add the Y Axis
-    svg.append("g")
-        .attr("class", "axis")
-        .call(d3.axisLeft(y));
 
     // Add the Y Axis label
     svg.append("text")
@@ -322,7 +354,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .style("font-size", "14px")
         .style("text-anchor", "middle")
         .style("fill", "grey")
-        .text("Number of victims");
+        .text("Number of youth victims");
 
     // Add a title
     //svg.append("text")
@@ -333,7 +365,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
     //.text("Firearm Deaths and Injuries Broken Down by Cause");
 
     svg.append("text")
-        .attr("transform", "translate("+(width+90)+","+y(data[0].intentional_homicides)+")")
+        .attr("transform", "translate("+(width + 13)+","+y(data[0].intentional_homicides)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
@@ -344,7 +376,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .on("mouseout", onMouseOut)
 
     svg.append("text")
-        .attr("transform", "translate("+(width+90)+","+y(data[0].intentional_suicides + 300)+")")
+        .attr("transform", "translate("+(width + 13)+","+y(data[0].intentional_suicides + 300)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
@@ -355,7 +387,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .on("mouseout", onMouseOut)
 
     svg.append("text")
-        .attr("transform", "translate("+(width + 90)+","+y(data[0].unintentional_deaths)+")")
+        .attr("transform", "translate("+(width + 13)+","+y(data[0].unintentional_deaths)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
@@ -366,7 +398,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .on("mouseout", onMouseOut)
 
     svg.append("text")
-        .attr("transform", "translate("+(width-90)+","+y(data[0].unintentional_injuries - 698)+")")
+        .attr("transform", "translate("+(width-195)+","+y(data[0].unintentional_injuries - 698)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
@@ -377,7 +409,7 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .on("mouseout", onMouseOut)
 
     svg.append("text")
-        .attr("transform", "translate("+(width)+","+y(data[0].intentional_injuries + 2400)+")")
+        .attr("transform", "translate("+(width - 90)+","+y(data[0].intentional_injuries + 2400)+")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "black")
@@ -386,5 +418,22 @@ d3.csv("data/aggregated-deaths-injuries.csv", function(data) {
         .attr("id", "line5")
         .on("mouseover", onMouseOver)
         .on("mouseout", onMouseOut)
+
+    svg.append("text")
+        .attr("x", "5")
+        .attr("y", height + 56)
+        .attr("class", "caption")
+        .style("font-size", "14px")
+        .style("fill", "grey")
+        .text("Note: The dashed line represents missing data")
+
+    svg.append("text")
+        .attr("x", (width / 2) + 60)
+        .attr("y", 0 - (margin.top / 2) - 30)
+        .attr("text-anchor", "middle")
+        .attr("class", "initial")
+        .text("Hover over a line's label to highlight a cause of injury or death.\n" +
+            "Hover over a point to see the totals for a specific year.")
+
 
 });
