@@ -5,6 +5,8 @@ map2Vis = function(_parentElement, _mapData, _stateNameData, _deathData, _policy
     this.deathData = _deathData;
     this.policyData = _policyData;
 
+    this.selectedRegion = [];
+
     this.deathRates = [];
 
     // call method initVis
@@ -51,43 +53,111 @@ map2Vis.prototype.initVis = function() {
         .attr("class", "state")
         .attr("d", vis.path)
         .attr("fill", 'transparent')
-        //.transition()
-        //.duration(100)
-        //.attr("fill", function(d){
-        // vis.stateName = d.name;
-        // var index = 0;
-        // for (i = 0; i < deathData2016.length; i++) {
-        //     if (deathData2016[i]['State'] === stateName) {
-        //         index = i;
-        //     }
-        // }
-        // var val = deathData2016[index]['death_crude_rate'];
-        // if (isNaN(val)) {
-        //     return "Grey"
-        // }
-        // else {
-        //     return colorScale(val);
-        // }
-        //})
-        // .attr("opacity", function(d){
-        //     var alpha = 0.1;
-        //     var stateName = d.name;
-        //     for (i = 0; i < policyData.length; i++) {
-        //         if (policyData[i]['State'] === stateName) {
-        //             alpha = 1
-        //         }
-        //     }
-        //     return alpha;
-        // })
         .attr("stroke", 'grey')
-        .attr("stroke-width", 0.1);
-    //.on("click", clicked);
+        .attr("stroke-width", 0.1)
+        .on('mouseover', function(d){
 
-    vis.wrangleData();
+            // set selectedState
+            selectedState = d.properties.name;
+            myBrushVis.wrangleData();
+
+            d3.select(this)
+                .attr('stroke','lightgrey')
+                .attr('stroke-width', 2)
+                .attr('fill', 'rgb(105,105,105)')
+                .style('opacity', 1)
+        })
+        .on('mouseout', function(d){
+
+            // reset selectedState
+            selectedState = '';
+            myBrushVis.wrangleData();
+
+            // return state back to original color (code in updateVis)
+            d3.select(this)
+            vis.stateName = d.name;
+            vis.index = 0;
+            for (i = 0; i < vis.deathData2016.length; i++) {
+                if (vis.deathData2016[i]['State'] === vis.stateName) {
+                    vis.index = i;
+                }
+            }
+            vis.val = vis.deathData2016[vis.index]['death_crude_rate'];
+            if (isNaN(vis.val)) {
+                return "Grey"
+            }
+            else {
+                return vis.colorScale(vis.val);
+            }
+        })
+        .attr("opacity", function(d) {
+            vis.alpha = 0.5;
+            vis.stateName = d.name;
+            for (i = 0; i < vis.policyData.length; i++) {
+                if (vis.policyData[i]['State'] === vis.stateName) {
+                    vis.alpha = 1
+                }
+            }
+            return vis.alpha;
+        })
+
+        //state border from grey back to black
+        .attr('stroke', 'rgb(0,0,0)')
+        .attr('stroke-width', 1)
+        .style('opacity', 1)
+
+
+        .on('click', function(d){
+            console.log(d3.event.pageX);
+        });
+
+    this.wrangleData();
 };
 
 map2Vis.prototype.wrangleData = function() {
     let vis = this;
+
+    // filter according to selectedRegion, init empty array
+    let filteredData = [];
+
+    // if there is a region selected
+    if (vis.selectedRegion.length !== 0){
+        // iterate over all rows
+        vis.deathData.forEach( row => {
+            // and push rows with proper dates into filteredData
+            if (vis.selectedRegion[0].getTime() <= row.date.getTime() && row.date.getTime() <= vis.selectedRegion[1].getTime() ){
+                filteredData.push(row);
+            }
+        });
+    } else {
+        filteredData = vis.deathData;
+    }
+
+    // do not think this section applies to our viz
+
+    // sort by state - nest data(filteredData) by state
+    // let dataByState = d3.nest()
+    //     .key(function(d) { return d.State; })
+    //     .entries(filteredData);
+    //
+
+    vis.displayData = [];
+
+    // do not think this section applies to our viz
+
+    // // iterate over each year
+    // dataByState.forEach( State => {
+    //     let tmpSum = 0;
+    //     // how much of each state data there is
+    //     let tmpLength = State.values.length;
+    //     let tmpState = State.values[0].state;
+    //     State.values.forEach( value => {
+    //         tmpSum += +value.average;
+    //     });
+    //     vis.displayData.push (
+    //         {state: tmpState, average: tmpSum/tmpLength}
+    //     )
+    // });
 
     vis.deathData2016 = vis.deathData.filter(function(d){
         return d.Year === "2016";
@@ -107,7 +177,7 @@ map2Vis.prototype.wrangleData = function() {
     });
 
 
-    vis.updateVis()
+    this.updateVis()
 };
 
 map2Vis.prototype.updateVis = function(){
@@ -151,7 +221,8 @@ map2Vis.prototype.updateVis = function(){
             }
             return vis.alpha;
         });
-}
+};
+
 
 
 //var parseTime = d3.timeParse("%Y");

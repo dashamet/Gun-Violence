@@ -34,7 +34,7 @@
             <h3> Children and teenagers across the country have been injured and killed by guns. </h3>
         </div>
         <div class="row justify-content-center" style="height: 10vh">
-        <h5> Each point represents a victim of gun violence in 2019. Hover over a point to show more detail.</h5>
+            <h5> Each point represents a victim of gun violence in 2019. Hover over a point to show more detail.</h5>
         </div>
         <div class="row justify-content-center" style="height: 10vh">
             <!-- dropdown -->
@@ -73,20 +73,20 @@
         </div>
 
 
-        </div>
+    </div>
     <div class="section sec5 center container-fluid" style="height: 100vh">
         <!--<div class="container-fluid" style="height: 100vh">-->
         <div class="row" id="memorial-viz" style = "height: 80vh; width: 100vw"></div>
-            <div class="row justify-content-center" style="height: 5vh">
-                <div>
-                    <button type="button" class = "btn btn-main" onclick = "myDotVis.playAnimation()">Play</button>
-                    <button type="button" class = "btn btn-main" onclick = "myDotVis.stopAnimation()">Stop</button>
-                    <button type="button" class = "btn btn-small center " onclick = "myDotVis.animateAge()"> Children/Teens</button>
-                    <button type="button" class = "btn btn-small center" onclick = "myDotVis.animateGender()">Boys/Girls</button>
-                    <button type="button" class = "btn btn-small center " onclick = "myDotVis.animateAgeInj()"> Killed/Injured</button>
-                </div>
+        <div class="row justify-content-center" style="height: 5vh">
+            <div>
+                <button type="button" class = "btn btn-main" onclick = "myDotVis.playAnimation()">Play</button>
+                <button type="button" class = "btn btn-main" onclick = "myDotVis.stopAnimation()">Stop</button>
+                <button type="button" class = "btn btn-small center " onclick = "myDotVis.animateAge()"> Children/Teens</button>
+                <button type="button" class = "btn btn-small center" onclick = "myDotVis.animateGender()">Boys/Girls</button>
+                <button type="button" class = "btn btn-small center " onclick = "myDotVis.animateAgeInj()"> Killed/Injured</button>
             </div>
         </div>
+    </div>
     <!--</div>-->
 
     <div class="section sec6 center container-fluid" id="map2" style="height: 100vh"><h3> Policy has power.</h3>
@@ -101,9 +101,16 @@
                 </select>
             </div>
         </form>
+
+<!--        <div class="col-md-12">-->
+<!--            <div id="map2"></div>-->
+<!--            <div id="brushDiv"></div>-->
+<!--        </div>-->
+
     </div>
-<!--    <div class="section sec7 center container-fluid" id="map2-line" style="height: 100vh"><h3> Map Zoom Feature </h3>-->
-<!--    </div>-->
+
+    <!--    <div class="section sec7 center container-fluid" id="map2-line" style="height: 100vh"><h3> Map Zoom Feature </h3>-->
+    <!--    </div>-->
     <div class="section sec8">
         <div class="row">
             <div class="col-sm-4"><img src="css/img/UPDATED-PROCESS2.jpg" height="100%" alt="test"></div>
@@ -131,7 +138,12 @@
                 </div>
             </div>
             <div class="col-sm">
-                One of three columns
+                <img src="css/img/kelli.jpg" width="330px" height = "308px" alt="kelli-headshot">
+                <span class="bio">Kelli Aquino</span> ('22) concentrates in Anthropology (the Archaeology track) with a Computer Science secondary at Harvard University.
+                <div>
+                    <a href = "https://www.linkedin.com/in/kelli-m-aquino/"> <img src="css/img/linkedin.png" width="34.1px" height = "34.1px" alt="kelli-linkedin"> </a>
+                    <a href = "https://github.com/kellimarie906"> <img src="css/img/github.png" width="28px" height = "28px" alt="kelli-git"> </a>
+                </div>
             </div>
             <div class="col-sm">
                 One of three columns
@@ -156,6 +168,7 @@
 <script src="js/vis-map1.js"></script>
 <script src="js/vis-map2.js"></script>
 <script src="js/vis-dots.js"></script>
+<script src="js/brushVis.js"></script>
 <script src="js/vis-map2line.js"> </script>
 <script src="js/main.js"></script>
 
