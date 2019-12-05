@@ -61,6 +61,7 @@ brushVis.prototype.initVis = function() {
     vis.area = d3.area()
         .curve(d3.curveMonotoneX)
         .x(function(d) {
+            console.log(d)
 
             console.log(d.Year);
           //  return vis.x(d.Year);

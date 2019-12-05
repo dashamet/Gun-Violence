@@ -34,7 +34,7 @@ map2Vis.prototype.initVis = function() {
 
     vis.projection = d3.geoAlbersUsa()
         .translate([vis.width / 2, vis.height / 2])
-        .scale([vis.width*9]);
+        .scale([vis.width]);
 
     //console.log("etest");
     vis.path = d3.geoPath()

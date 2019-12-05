@@ -1,8 +1,12 @@
-mapOneVis = function(_parentElement, _dataShootings, _topoData) {
+mapOneVis = function(_parentElement, _mapData, _stateNameData, _deathData, _shootingData) {
     this.parentElement = _parentElement;
-    this.data = _dataShootings;
-    this.topoData = _topoData;
+    this.mapData = topojson.feature(_mapData, _mapData.objects.state).features;
+    this.stateNameData = _stateNameData;
+    this.deathData = _deathData;
+    this.shootingData = _shootingData;
+    //this.topoData = _topoData;
 
+    console.log("4:52")
     // call method initVis
     this.initVis();
 };
@@ -16,7 +20,7 @@ mapOneVis.prototype.initVis = function() {
     vis.height = $('#' + vis.parentElement).height() -vis.margin.top - vis.margin.bottom;
 
     vis.projection = d3.geoAlbersUsa()
-        .translate([vis.width / 2, vis.height / 2])
+        //.translate([vis.width / 2, vis.height / 2])
         .scale([vis.width * 0.9]);
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -31,6 +35,27 @@ mapOneVis.prototype.initVis = function() {
         .attr("class", "tooltip")
         .style("opacity", 0);
 
+
+    vis.path = d3.geoPath()
+        .projection(vis.projection);
+
+    vis.stateNameData.forEach(function (d) {
+        vis.mapData.forEach(function (e) {
+            if (d.id === e.id) {
+                e.name = d.name
+            }
+        })
+    });
+
+    vis.svg.selectAll("map1")
+        .data(vis.mapData)
+        .enter().append("path")
+        .attr("class", "state")
+        .attr("d", vis.path)
+        .attr("fill", 'black')
+        .attr("stroke", 'grey')
+        .attr("stroke-width", 0.1)
+
     // initialize map
     vis.initMap();
 };
@@ -41,26 +66,27 @@ mapOneVis.prototype.initMap = function() {
     let vis = this;
 
     // we will use some basic math & transformations rather than a projection here;
-    vis.viewpoint = {'width': 975, 'height': 610};
-    vis.zoom = vis.width/vis.viewpoint.width;
+    // vis.viewpoint = {'width': 975, 'height': 610};
+    // vis.zoom = vis.width/vis.viewpoint.width;
+    //
+    // console.log(vis.zoom);
+    //
+    // // adjust map position
+    // vis.map = vis.svg.append("g")
+    //     .attr("class", "states")
+    //     .attr('transform', `scale(${vis.zoom} ${vis.zoom})`);
 
-    console.log(vis.zoom);
+    //vis.path = d3.geoPath();
 
-    // adjust map position
-    vis.map = vis.svg.append("g")
-        .attr("class", "states")
-        .attr('transform', `scale(${vis.zoom} ${vis.zoom})`);
+    //vis.us = topojson.feature(vis.topoData, vis.topoData.objects.state).features;
 
-    vis.path = d3.geoPath();
-
-    vis.us = topojson.feature(vis.topoData, vis.topoData.objects.state).features;
-
-    vis.map.selectAll("map1")
-        .data(vis.us)
-        .enter().append("path")
-        .attr("d", vis.path)
-        .attr("fill", "black")
-        .style("stroke", "#fff");
+    //
+    // vis.map.selectAll("map1")
+    //     .data(vis.us)
+    //     .enter().append("path")
+    //     .attr("d", vis.path)
+    //     .attr("fill", "black")
+    //     .style("stroke", "#fff");
 
     vis.initCircles()
 };
@@ -70,13 +96,13 @@ mapOneVis.prototype.initCircles = function() {
     let vis = this;
 
     // after the map has been draw, draw all the circles for the initial view;
-    vis.data.forEach(d=>{
+    vis.shootingData.forEach(d=>{
         d.Latitude = +d.Latitude;
         d.Longitude = +d.Longitude;
     });
 
-    vis.circles = vis.map.selectAll(".mapOneCircle")
-        .data(vis.data);
+    vis.circles = vis.svg.selectAll(".mapOneCircle")
+        .data(vis.shootingData);
 
     // draw all the circles
     vis.circles.enter().append("circle")
@@ -86,7 +112,8 @@ mapOneVis.prototype.initCircles = function() {
         .attr("r", 4)
         .attr("fill", "red")
         .attr("transform", function (d) {
-            return "translate(" + vis.projection([+d.Longitude, +d.Latitude]) + ")"
+            console.log(vis.projection([+d.Longitude, +d.Latitude]))
+             return "translate(" + vis.projection([+d.Longitude, +d.Latitude]) + ")"
         })
         .on("mouseover", function(d) {
             vis.div.transition()
