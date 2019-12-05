@@ -10,9 +10,9 @@ lineVis.prototype.initVis = function() {
     let vis = this;
 
     // Creating variables for the SVG dimensions
-    vis.margin = {top: 60, right: 220, bottom: 30, left: 60};
+    vis.margin = {top: 100, right: 220, bottom: 30, left: 80};
     vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right;
-    vis.height = $('#' + vis.parentElement).height() - margin.top - margin.bottom;
+    vis.height = $('#' + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
 
     // Setting the ranges
     vis.x = d3.scaleTime().range([0, vis.width]);
@@ -25,7 +25,7 @@ lineVis.prototype.initVis = function() {
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
     // Setting up a colour scale
     vis.color = d3.scaleOrdinal()
@@ -95,34 +95,16 @@ lineVis.prototype.initVis = function() {
                 return (d3.select(this).attr('id') === vis.current_id) ? 1.0 : 0.2;
             });
         vis.svg.append("text")
-            .attr("x", (width / 2) + 60)
+            .attr("x", vis.width / 2)
             .attr("y", "7")
             .attr("text-anchor", "middle")
             .attr("class", "percent")
-            .text(function(){
-                    if(vis.current_id === "line1"){
-                        return "+0.96% (2008-2017)"
-                    }
-                    else if(vis.current_id === "line2"){
-                        return "+102% (2008-2017)"
-                    }
-                    else if(vis.current_id === "line3"){
-                        return "-3% (2008-2017)"
-                    }
-                    else if(vis.current_id === "line4"){
-                        return "-32% (2008-2017)"
-                    }
-                    else if(vis.current_id === "line5"){
-                        return "+57% (2008-2017)"
-                    }
-                }
-            )
             .style("font-size", "20px")
             .style("fill", "red")
         d3.select(".initial").remove()
         vis.svg.append("text")
-            .attr("x", (width / 2) + 60)
-            .attr("y", 0 - (margin.top / 2) - 30)
+            .attr("x", (vis.width / 2) + 60)
+            .attr("y", -0.75*vis.margin.top)
             .attr("text-anchor", "middle")
             .attr("class", "description")
             .text(function(){
@@ -143,7 +125,31 @@ lineVis.prototype.initVis = function() {
                     }
                 }
             )
+            .style("font-size", "20px");
+            vis.svg.append("text")
+                .attr("x", vis.width/2)
+                .attr("y", "10")
+                .attr("class", "percent")
+                .text(function(){
+                    if(vis.current_id === "line1"){
+                        return "+0.96% (2008-2017)"
+                    }
+                    else if(vis.current_id === "line2"){
+                        return "+102% (2008-2017)"
+                    }
+                    else if(vis.current_id === "line3"){
+                        return "-3% (2008-2017)"
+                    }
+                    else if(vis.current_id === "line4"){
+                        return "-32% (2008-2017)"
+                    }
+                    else if(vis.current_id === "line5"){
+                        return "+57% (2008-2017)"
+                    }
+                }
+            )
             .style("font-size", "20px")
+            .style("fill", "red")
     };
 
     vis.onMouseOut = function(){
@@ -164,11 +170,11 @@ lineVis.prototype.initVis = function() {
                     return "black"
                 }
             });
-        d3.select(".percent").remove()
-        d3.select(".description").remove()
+        vis.svg.selectAll(".percent").remove();
+        vis.svg.selectAll(".description").remove();
         vis.svg.append("text")
-            .attr("x", (width / 2) + 60)
-            .attr("y", 0 - (margin.top / 2) - 30)
+            .attr("x", (vis.width / 2) + 60)
+            .attr("y", -0.75*vis.margin.top)
             .attr("text-anchor", "middle")
             .attr("class", "initial")
             .text("Hover over a line's label to highlight a cause of injury or death. Hover over a point to see the totals for a specific year.")
@@ -183,7 +189,7 @@ lineVis.prototype.wrangleData = function() {
     vis.color.domain(d3.keys(vis.data[0]).filter(function(key) { return key !== "year"; }));
 
     vis.data.forEach(function(d) {
-        d.year = parseTime(d.year);
+        d.year = vis.parseTime(d.year);
         d.intentional_homicides = +d.intentional_homicides;
         d.intentional_suicides = +d.intentional_suicides;
         d.unintentional_deaths = +d.unintentional_deaths;
@@ -365,8 +371,8 @@ lineVis.prototype.updateVis = function() {
     // Add the Y Axis label
     vis.svg.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 0 - margin.left + 16)
-        .attr("x",0 - (height / 2))
+        .attr("y", 0 - vis.margin.left + 16)
+        .attr("x",0 - (vis.height / 2))
         .attr("dy", "1em")
         .style("font-size", "14px")
         .style("text-anchor", "middle")
@@ -431,14 +437,14 @@ lineVis.prototype.updateVis = function() {
 
     vis.svg.append("text")
         .attr("x", "5")
-        .attr("y", height + 56)
+        .attr("y", vis.height + 56)
         .attr("class", "caption")
         .style("font-size", "14px")
         .text("Note: The dashed line represents missing data")
 
     vis.svg.append("text")
-        .attr("x", (width / 2) + 60)
-        .attr("y", 0 - (margin.top / 2) - 30)
+        .attr("x", (vis.width / 2) + 60)
+        .attr("y", -0.75*vis.margin.top)
         .attr("text-anchor", "middle")
         .attr("class", "initial")
         .text("Hover over a line's label to highlight a cause of injury or death.\n" +

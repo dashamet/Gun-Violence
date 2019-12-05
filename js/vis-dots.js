@@ -11,13 +11,14 @@ dotVis.prototype.initVis = function() {
 
     vis.margin = {top: 30, right: 80, bottom: 50, left: 80};
     vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right;
-    vis.height = $('#' + vis.parentElement).height() - margin.top - margin.bottom;
+    console.log("excuse me")
+    vis.height = $('#' + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
     vis.updateVis();
 };

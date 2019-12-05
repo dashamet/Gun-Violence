@@ -18,13 +18,13 @@ map2Vis.prototype.initVis = function() {
 
     vis.margin = {top: 30, right: 80, bottom: 50, left: 80};
     vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right;
-    vis.height = $('#' + vis.parentElement).height() - margin.top - margin.bottom;
+    vis.height = $('#' + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
     vis.div2 = d3.select("#" + vis.parentElement)
         .append("div")
@@ -33,9 +33,10 @@ map2Vis.prototype.initVis = function() {
     vis.updateVis();
 
     vis.projection = d3.geoAlbersUsa()
-        .translate([width / 2, height / 2])
-        .scale([width * 0.9]);
+        .translate([vis.width / 2, vis.height / 2])
+        .scale([vis.width*9]);
 
+    //console.log("etest");
     vis.path = d3.geoPath()
         .projection(vis.projection);
 

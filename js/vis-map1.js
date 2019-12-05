@@ -13,7 +13,11 @@ mapOneVis.prototype.initVis = function() {
 
     vis.margin = {top: 0, right: 0, bottom: 0, left: 0};
     vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right;
-    vis.height = $('#' + vis.parentElement).height() - margin.top - margin.bottom;
+    vis.height = $('#' + vis.parentElement).height() -vis.margin.top - vis.margin.bottom;
+
+    vis.projection = d3.geoAlbersUsa()
+        .translate([vis.width / 2, vis.height / 2])
+        .scale([vis.width * 0.9]);
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -54,7 +58,7 @@ mapOneVis.prototype.initMap = function() {
     vis.map.selectAll("map1")
         .data(vis.us)
         .enter().append("path")
-        .attr("d", path)
+        .attr("d", vis.path)
         .attr("fill", "black")
         .style("stroke", "#fff");
 
@@ -82,7 +86,7 @@ mapOneVis.prototype.initCircles = function() {
         .attr("r", 4)
         .attr("fill", "red")
         .attr("transform", function (d) {
-            return "translate(" + projection([+d.Longitude, +d.Latitude]) + ")"
+            return "translate(" + vis.projection([+d.Longitude, +d.Latitude]) + ")"
         })
         .on("mouseover", function(d) {
             vis.div.transition()
