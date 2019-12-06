@@ -54,17 +54,13 @@ map2Vis.prototype.initVis = function() {
         .attr("class", "state")
         .attr("d", vis.path)
         .attr("fill", 'transparent')
-        .attr("stroke", 'grey')
-        .attr("stroke-width", 0.1)
         .on('mouseover', function(d){
 
             // set selectedState
             selectedState = d.properties.name;
-            myBrushVis.wrangleData();
+            //myBrushVis.wrangleData();
 
             d3.select(this)
-                .attr('stroke','lightgrey')
-                .attr('stroke-width', 2)
                 .attr('fill', 'rgb(105,105,105)')
                 .style('opacity', 1)
         })
@@ -72,24 +68,42 @@ map2Vis.prototype.initVis = function() {
 
             // reset selectedState
             selectedState = '';
-            myBrushVis.wrangleData();
+            //myBrushVis.wrangleData();
 
             // return state back to original color (code in updateVis)
             d3.select(this)
-            vis.stateName = d.name;
-            vis.index = 0;
-            for (i = 0; i < vis.deathData2016.length; i++) {
-                if (vis.deathData2016[i]['State'] === vis.stateName) {
-                    vis.index = i;
-                }
-            }
-            vis.val = vis.deathData2016[vis.index]['death_crude_rate'];
-            if (isNaN(vis.val)) {
-                return "Grey"
-            }
-            else {
-                return vis.colorScale(vis.val);
-            }
+                .attr("fill", function(d) {
+                    vis.stateName = d.name;
+                    vis.index = 0;
+                    for (i = 0; i < vis.deathData2016.length; i++) {
+                        if (vis.deathData2016[i]['State'] === vis.stateName) {
+                            vis.index = i;
+                        }
+                    }
+                    vis.val = vis.deathData2016[vis.index]['death_crude_rate'];
+                    if (isNaN(vis.val)) {
+                        return "Grey"
+                    }
+                    else {
+                        return vis.colorScale(vis.val);
+                    }
+                })
+            //     })
+            // vis.stateName = d.name;
+            // vis.index = 0;
+            //
+            // for (i = 0; i < vis.deathData2016.length; i++) {
+            //     if (vis.deathData2016[i]['State'] === vis.stateName) {
+            //         vis.index = i;
+            //     }
+            // }
+            // vis.val = vis.deathData2016[vis.index]['death_crude_rate'];
+            // if (isNaN(vis.val)) {
+            //     return "Grey"
+            // }
+            // else {
+            //     return vis.colorScale(vis.val);
+            // }
         })
         .attr("opacity", function(d) {
             vis.alpha = 0.5;
@@ -103,13 +117,13 @@ map2Vis.prototype.initVis = function() {
         })
 
         //state border from grey back to black
-        .attr('stroke', 'rgb(0,0,0)')
-        .attr('stroke-width', 1)
+        .attr('stroke', 'grey')
+        .attr('stroke-width', 0)
         .style('opacity', 1)
 
 
         .on('click', function(d){
-            console.log(d3.event.pageX);
+            console.log(d);
         });
 
     this.wrangleData();

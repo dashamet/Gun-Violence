@@ -76,19 +76,6 @@ brushVis.prototype.initVis = function() {
 
         });
 
-    // init brushGroup:
-    vis.brushGroup = vis.svg.append("g")
-        .attr("class", "brush");
-
-    // init brush
-    vis.brush = d3.brushX()
-        .extent([[0, 0], [vis.width, vis.height]])
-        .on("brush end", function(){
-            let currentBrushRegion = d3.event.selection;
-            myMap2.selectedRegion = [vis.x.invert(currentBrushRegion[0]), vis.x.invert(currentBrushRegion[1])];
-            myMap2.wrangleData();
-        });
-
     // call method initVis
     this.initDataWrangling();
 };
@@ -188,6 +175,4 @@ brushVis.prototype.updateVis = function() {
             .attr("d", vis.area);
     }
 
-    vis.brushGroup
-        .call(vis.brush);
 };
