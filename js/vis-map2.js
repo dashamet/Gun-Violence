@@ -153,13 +153,13 @@ map2Vis.prototype.updateVis = function(){
         vis.svg.append('rect')
             .attr('width', vis.lsW)
             .attr('height', vis.lsH)
-            .attr('x', vis.width)
+            .attr('x', vis.width-12)
             .attr('y', 5*vis.height/8+i*vis.lsH + 20)
             .attr('fill', function(){
                 return vis.colorScale(d3.min(vis.deathRates)+i*vis.drInt)
             });
         vis.svg.append('text')
-            .attr('x', vis.width + vis.lsH + 5)
+            .attr('x', vis.width + vis.lsH - 10)
             .attr('y', 5*vis.height/8+i*vis.lsH + 3*vis.lsH/4 + 20)
             .attr('text-anchor', 'beginning')
             .text(function(){
@@ -168,7 +168,7 @@ map2Vis.prototype.updateVis = function(){
                 console.log(vis.startNum, vis.endNum);
                 return vis.startNum + ' - ' + vis.endNum;
             })
-            .attr('font-size', 3*vis.lsH/4 + 'px');
+            .attr('font-size', 3*vis.lsH/4 - 3 + 'px');
     }
     vis.svg.append('text')
         .attr('x', vis.width + vis.lsH + 5)

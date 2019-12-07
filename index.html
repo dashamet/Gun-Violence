@@ -23,10 +23,7 @@
     </div>
 
     <div class="section sec3 center container-fluid" style="height: 100vh">
-        <div class="row justify-content-center" style="height: 10vh">
-            <h3> Youth injuries from gun violence has risen in recent years</h3>
-        </div>
-        <div class="row justify-content-center" id="line-graph" style="height: 70vh">
+        <div class="row justify-content-center" id="line-graph" style="height: 80vh">
         </div>
     </div>
 
@@ -41,28 +38,28 @@
         <div class="row justify-content-center align-self-center" style="height: 5vh">
             <!-- dropdown -->
             <!--<div class="row justify-content-center" style="height: 5vh">-->
-                <!--<div class="align-self-center">-->
-                    <!--  dropdown  -->
-                    <form class="form-inline">
-                        <!--<div class="form-group">-->
-                            <select class="form-control" id="ranking-type" onchange="myMapOne.updateVis()">
-                                <option value="">Both</option>
-                                <option value=".Injured">Injuries</option>
-                                <option value=".Killed">Deaths</option>
-                            </select>
-                            <select class="form-control" id="gender" onchange="myMapOne.updateVis()">
-                                <option value="">Both</option>
-                                <option value=".male">Males</option>
-                                <option value=".female">Females</option>
-                            </select>
-                            <select class="form-control" id="age" onchange="myMapOne.updateVis()">
-                                <option value="">Both</option>
-                                <option value=".child">Children</option>
-                                <option value=".teen">Teens</option>
-                            </select>
-                        <!--</div>-->
-                    </form>
+            <!--<div class="align-self-center">-->
+            <!--  dropdown  -->
+            <form class="form-inline">
+                <!--<div class="form-group">-->
+                <select class="form-control" id="ranking-type" onchange="myMapOne.updateVis()">
+                    <option value="">Both</option>
+                    <option value=".Injured">Injuries</option>
+                    <option value=".Killed">Deaths</option>
+                </select>
+                <select class="form-control" id="gender" onchange="myMapOne.updateVis()">
+                    <option value="">Both</option>
+                    <option value=".male">Males</option>
+                    <option value=".female">Females</option>
+                </select>
+                <select class="form-control" id="age" onchange="myMapOne.updateVis()">
+                    <option value="">Both</option>
+                    <option value=".child">Children</option>
+                    <option value=".teen">Teens</option>
+                </select>
                 <!--</div>-->
+            </form>
+            <!--</div>-->
         </div>
         <div class="row justify-content-center" id="map1" style="height: 75vh;"></div>
     </div>
@@ -94,22 +91,22 @@
         </div>
         <div class="row justify-content-center" style="height: 10vh">
             <h5>Select a policy to see its correlation with its 2016 firearm death rates (defined as number of firearm deaths / population).
-            <br><br>
-            Hover over a state to view the number of firearm deaths over time. The black lines indicate when a law was implimented. Hover over them to view more details.</h5>
+                <br><br>
+                Hover over a state to view the number of firearm deaths over time. The black lines indicate when a law was implimented. Hover over them to view more details.</h5>
         </div>
         <!--  dropdown  -->
         <div class="row justify-content-center" style="height: 10vh">
 
             <form class="form-inline">
-            <div class="form-group">
-                <label for="data-value">States without: &nbsp</label>
-                <select class="form-control" id="data-value" onchange = "myMap2.updateVis()">
-                    <option value="all">Show All</option>
-                    <option value="min_age_possession">Minimum Age for Firearm Possession</option>
-                    <option value="min_age_purchase_sale">Minimum Age for Firearm Purchase/Sale</option>
-                </select>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label for="data-value">States without: &nbsp</label>
+                    <select class="form-control" id="data-value" onchange = "myMap2.updateVis()">
+                        <option value="all">Show All</option>
+                        <option value="min_age_possession">Minimum Age for Firearm Possession</option>
+                        <option value="min_age_purchase_sale">Minimum Age for Firearm Purchase/Sale</option>
+                    </select>
+                </div>
+            </form>
         </div>
         <div class = "row" style = "height: 60vh">
             <div class="col-md-7 justify-content-center" id="map2" style="width: 90vw"></div>

@@ -152,3 +152,7 @@ ol{
 .initial{
     fill: grey;
 }
+
+.title{
+    font-size: 20pt;
+}
