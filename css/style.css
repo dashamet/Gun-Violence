@@ -45,6 +45,19 @@ body {
     margin-left: 10px;
 }
 
+#punchline{
+    background-color: black;
+    color: darkRed;
+}
+
+#punchline a{
+    color: red;
+}
+
+#punchline-text{
+    vertical-align: center;
+}
+
 p{
     margin: 30px;
 }

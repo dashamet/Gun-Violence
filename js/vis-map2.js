@@ -146,7 +146,7 @@ map2Vis.prototype.updateVis = function(){
 
     // Make legend
     vis.lsW = vis.width/25;
-    vis.lsH = vis.width/20;
+    vis.lsH = vis.width/25;
     console.log('?')
     vis.drInt = (d3.max(vis.deathRates)-d3.min(vis.deathRates))/6
     for(i = 0; i < 6; i++){
@@ -154,13 +154,13 @@ map2Vis.prototype.updateVis = function(){
             .attr('width', vis.lsW)
             .attr('height', vis.lsH)
             .attr('x', vis.width-12)
-            .attr('y', 5*vis.height/8+i*vis.lsH + 20)
+            .attr('y', vis.height-i*vis.lsH)
             .attr('fill', function(){
                 return vis.colorScale(d3.min(vis.deathRates)+i*vis.drInt)
             });
         vis.svg.append('text')
             .attr('x', vis.width + vis.lsH - 10)
-            .attr('y', 5*vis.height/8+i*vis.lsH + 3*vis.lsH/4 + 20)
+            .attr('y', vis.height-i*vis.lsH+vis.lsH/2)
             .attr('text-anchor', 'beginning')
             .text(function(){
                 vis.startNum = d3.format(",.2r")(d3.min(vis.deathRates)+i*vis.drInt*1000)
@@ -172,14 +172,14 @@ map2Vis.prototype.updateVis = function(){
     }
     vis.svg.append('text')
         .attr('x', vis.width + vis.lsH + 5)
-        .attr('y', 5*vis.height/8 + 5)
+        .attr('y', 5*vis.height/8)
         .attr('text-anchor', 'middle')
         .text('Death Rate*')
         .attr('font-size', 3*vis.lsH/4 + 'px');
 
     vis.svg.append('text')
         .attr('x', vis.width + vis.lsH + 1)
-        .attr('y', 5*vis.height/8 + 190)
+        .attr('y', vis.height + vis.margin.bottom)
         .attr('text-anchor', 'middle')
         .text('* # of firearm deaths/population * 1000')
         .attr('font-size', 3*vis.lsH/4 - 5 + 'px')
