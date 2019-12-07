@@ -90,11 +90,12 @@
     <!--</div>-->
 
     <div class="section sec6 center container-fluid" style="height: 100vh">
-        <div class="row justify-content-center" style="height: 10vh">
+        <div class="row justify-content-center" style="height: 5vh"></div>
+        <div class="row justify-content-center" style="height: 5vh">
             <h3> Policy has power.</h3>
         </div>
         <div class="row justify-content-center" style="height: 5vh">
-            <h5>Select a policy to see its correlation with firearm death rates.</h5>
+            <h5>Select a policy to see its correlation with its 2016 firearm death rates (defined as number of firearm deaths / population).</h5>
         </div>
         <!--  dropdown  -->
         <div class="row justify-content-center" style="height: 5vh">
@@ -103,6 +104,7 @@
             <div class="form-group">
                 <label for="data-value">States without: &nbsp</label>
                 <select class="form-control" id="data-value" onchange = "myMap2.updateVis()">
+                    <option value="all">Show All</option>
                     <option value="min_age_possession">Minimum Age for Firearm Possession</option>
                     <option value="min_age_purchase_sale">Minimum Age for Firearm Purchase/Sale</option>
                 </select>
