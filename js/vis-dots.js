@@ -11,7 +11,6 @@ dotVis.prototype.initVis = function() {
 
     vis.margin = {top: 30, right: 80, bottom: 50, left: 80};
     vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right;
-    console.log("excuse me")
     vis.height = $('#' + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -133,13 +132,13 @@ dotVis.prototype.updateVis = function(){
         vis.svg.append("text")
             .attr("class", "dotLabel")
             .text("Boys")
-            .attr("x", vis.width/2+(-vis.nCol*vis.dotSpacing-30)/2)
+            .attr("x", vis.width/2-vis.nCol*vis.dotSpacing/2 - vis.space)
             .attr("y", 0)
             .style("text-anchor", "middle");
         vis.svg.append("text")
             .attr("class", "dotLabel")
             .text("Girls")
-            .attr("x", vis.nCol*vis.dotSpacing/2 + vis.width/2 + 30)
+            .attr("x", 30*vis.dotSpacing/2 + vis.width/2 + vis.space)
             .attr("y", 0)
             .style("text-anchor", "middle");
         vis.svg.append("text")
