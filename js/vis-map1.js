@@ -20,8 +20,8 @@ mapOneVis.prototype.initVis = function() {
     vis.height = $('#' + vis.parentElement).height() -vis.margin.top - vis.margin.bottom;
 
     vis.projection = d3.geoAlbersUsa()
-        //.translate([vis.width / 2, vis.height / 2])
-        .scale([vis.width * 0.9]);
+        .translate([vis.width / 2, vis.height / 2])
+        .scale([vis.width * 0.7]);
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -46,6 +46,14 @@ mapOneVis.prototype.initVis = function() {
             }
         })
     });
+
+    // find center
+    // vis.svg.append('rect')
+    //     .attr('height', vis.height)
+    //     .attr('width', 5)
+    //     .attr('fill', 'lavender')
+    //     .attr('x', vis.width/2)
+    //     .attr('y', 10)
 
     vis.svg.selectAll("map1")
         .data(vis.mapData)

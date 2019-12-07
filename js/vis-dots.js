@@ -185,7 +185,8 @@ dotVis.prototype.updateVis = function(){
             .append("text")
             .attr("class", "dotLabel")
             .text("Killed")
-            .attr("x", (vis.width/2+(-vis.nCol*vis.dotSpacing-vis.space)/2))
+            //.attr("x", (vis.width/2+(-vis.nCol*vis.dotSpacing-vis.space)/2))
+            .attr("x", (vis.width/2 - vis.nCol*vis.dotSpacing - vis.space) + vis.nCol*vis.dotSpacing/2)
             .attr("y", 0)
             .style("text-anchor", "middle");
         vis.svg
@@ -290,45 +291,50 @@ dotVis.prototype.updateVis = function(){
         d3.selectAll(".dotLabel").remove();
         //svgD.selectAll("text.dotLabel").remove()
         vis.barWidth = 11;
+        vis.bottomPadding = 50;
         d3.selectAll('.customCircle.child.Killed')
             .transition()
             .duration(800)
             .attr('cx', function(d,i){
-                return i%vis.barWidth*vis.dotSpacing
+                return (3*vis.width/8 - vis.barWidth*vis.dotSpacing) + (i%vis.barWidth)*vis.dotSpacing;
+                //return i%vis.barWidth*vis.dotSpacing,
             })
             .attr('cy', function(d,i){
                 vis.rowNum = (i-i%vis.barWidth)/vis.barWidth;
-                return vis.height - vis.dotSpacing*(vis.rowNum+1)
+                return vis.height - vis.dotSpacing*(vis.rowNum+1) - vis.bottomPadding;
             });
         d3.selectAll('.customCircle.child.Injured')
             .transition()
             .duration(800)
             .attr('cx', function(d,i){
-                return i%vis.barWidth*vis.dotSpacing + 1/5*vis.width
+                return (vis.width/2 - vis.barWidth*vis.dotSpacing) + (i%vis.barWidth)*vis.dotSpacing
+                //return i%vis.barWidth*vis.dotSpacing + 1/5*vis.width
             })
             .attr('cy', function(d,i){
                 vis.rowNum = (i-i%vis.barWidth)/vis.barWidth;
-                return vis.height - vis.dotSpacing*(vis.rowNum+1)
+                return vis.height - vis.dotSpacing*(vis.rowNum+1) - vis.bottomPadding;
             });
         d3.selectAll('.customCircle.teen.Killed')
             .transition()
             .duration(800)
             .attr('cx', function(d,i){
-                return i%vis.barWidth*vis.dotSpacing + vis.width/2
+                return (5*vis.width/8 - vis.barWidth*vis.dotSpacing) + (i%vis.barWidth)*vis.dotSpacing
+                //return i%vis.barWidth*vis.dotSpacing + vis.width/2
             })
             .attr('cy', function(d,i){
                 vis.rowNum = (i-i%vis.barWidth)/vis.barWidth;
-                return vis.height - vis.dotSpacing*(vis.rowNum+1)
+                return vis.height - vis.dotSpacing*(vis.rowNum+1) - vis.bottomPadding;
             });
         d3.selectAll('.customCircle.teen.Injured')
             .transition()
             .duration(800)
             .attr('cx', function(d,i){
-                return i%vis.barWidth*vis.dotSpacing + 7*vis.width/10
+                return (6*vis.width/8 - vis.barWidth*vis.dotSpacing) + (i%vis.barWidth)*vis.dotSpacing
+                //return i%vis.barWidth*vis.dotSpacing + 7*vis.width/10
             })
             .attr('cy', function(d,i){
                 vis.rowNum = (i-i%vis.barWidth)/vis.barWidth;
-                return vis.height - vis.dotSpacing*(vis.rowNum+1)
+                return vis.height - vis.dotSpacing*(vis.rowNum+1) - vis.bottomPadding
             });
         vis.svg
             .append("text")
@@ -340,35 +346,35 @@ dotVis.prototype.updateVis = function(){
         vis.svg
             .append("text")
             .attr("class", "dotLabel")
-            .text("Teen")
-            .attr("x", (vis.nCol*vis.dotSpacing)/2 + vis.width/2 + 30)
+            .text("Teens")
+            .attr("x", 5*vis.width/8)
             .attr("y", 0)
             .style("text-anchor", "middle");
         vis.svg.append("text")
             .attr("class", "dotLabel")
             .text("Killed")
-            .attr("x", vis.barWidth/2*vis.dotSpacing)
-            .attr("y", vis.height+10)
+            .attr("x", 3*vis.width/8-vis.barWidth*vis.dotSpacing/2)
+            .attr("y", vis.height-vis.bottomPadding+10)
             .style("text-anchor", "middle");
         vis.svg.append("text")
             .attr("class", "dotLabel")
             .text("Injured")
-            .attr("x", vis.barWidth/2*vis.dotSpacing + 1/5*vis.width)
-            .attr("y", vis.height+10)
+            .attr("x", vis.width/2-vis.barWidth*vis.dotSpacing/2)
+            .attr("y", vis.height-vis.bottomPadding+10)
             .style("text-anchor", "middle")
         vis.svg.append("text")
             .attr("class", "dotLabel")
             .text("Killed")
-            .attr("x", vis.barWidth/2*vis.dotSpacing + vis.width/2)
-            .attr("y", vis.height+10)
+            .attr("x", 5*vis.width/8-vis.barWidth*vis.dotSpacing/2)
+            .attr("y", vis.height-vis.bottomPadding+10)
             .style("text-anchor", "middle")
         vis.svg.append("text")
             .attr("class", "dotLabel")
             .text("Injured")
-            .attr("x", vis.barWidth/2*vis.dotSpacing + 7/10*vis.width)
-            .attr("y", vis.height+10)
+            .attr("x", 6*vis.width/8-vis.barWidth*vis.dotSpacing/2)
+            .attr("y", vis.height-vis.bottomPadding+10)
             .style("text-anchor", "middle")
-    }
+    };
 
     vis.interval;
     // animation

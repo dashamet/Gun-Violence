@@ -27,20 +27,22 @@
         <div class="row justify-content-center" id="line-graph" style="height: 70vh">
         </div>
     </div>
+
     <div class="section sec4 center container-fluid" style="height: 100vh">
-        <div class="row justify-content-center" style="height: 10vh">
+        <div class = "row justify-content-center" style = "height: 2vh"> </div>
+        <div class="row justify-content-center" style="height: 5vh">
             <h3> Children and teenagers across the country have been injured and killed by guns. </h3>
         </div>
-        <div class="row justify-content-center" style="height: 10vh">
-            <h5> Each point represents a victim of gun violence in 2019. Hover over a point to show more detail.</h5>
+        <div class="row justify-content-center" style="height: 5vh">
+            <h5> Each point represents a victim of gun violence in 2019. Hover over a point to show more detail and select filters using the dropdowns below.</h5>
         </div>
-        <div class="row justify-content-center align-self-center" style="height: 10vh">
+        <div class="row justify-content-center align-self-center" style="height: 5vh">
             <!-- dropdown -->
             <!--<div class="row justify-content-center" style="height: 5vh">-->
                 <!--<div class="align-self-center">-->
                     <!--  dropdown  -->
                     <form class="form-inline">
-                        <div class="form-group">
+                        <!--<div class="form-group">-->
                             <select class="form-control" id="ranking-type" onchange="myMapOne.updateVis()">
                                 <option value="">Both</option>
                                 <option value=".Injured">Injuries</option>
@@ -56,27 +58,34 @@
                                 <option value=".child">Children</option>
                                 <option value=".teen">Teens</option>
                             </select>
-                        </div>
+                        <!--</div>-->
                     </form>
                 <!--</div>-->
         </div>
-        <div class="row justify-content-center" id="map1" style="height: 70vh;"></div>
+        <div class="row justify-content-center" id="map1" style="height: 75vh;"></div>
         </div>
 
 
     </div>
     <div class="section sec5 center container-fluid" style="height: 100vh">
         <!--<div class="container-fluid" style="height: 100vh">-->
-        <div class="row" id="memorial-viz" style = "height: 80vh; width: 100vw"></div>
+        <div class="row justify-content-center" style="height: 8vh"></div>
+        <div class="row justify-content-center" style="height: 7vh">
+            <h3>In Memoriam</h3>
+        </div>
+        <div class="row justify-content-center" style="height: 5vh">
+            <h5>Each red circle represents one of the last 500 youth firearm deaths. Each black circle represents one of the last 500 youth firearm injuries. </h5>
+        </div>
         <div class="row justify-content-center" style="height: 5vh">
             <div>
-                <button type="button" class = "btn btn-main" onclick = "myDotVis.playAnimation()">Play</button>
-                <button type="button" class = "btn btn-main" onclick = "myDotVis.stopAnimation()">Stop</button>
+                <button type="button" class = "btn btn-main" onclick = "myDotVis.playAnimation()">Play Once</button>
+                <!--<button type="button" class = "btn btn-main" onclick = "myDotVis.stopAnimation()">Stop</button>-->
                 <button type="button" class = "btn btn-small center " onclick = "myDotVis.animateAge()"> Children/Teens</button>
                 <button type="button" class = "btn btn-small center" onclick = "myDotVis.animateGender()">Boys/Girls</button>
                 <button type="button" class = "btn btn-small center " onclick = "myDotVis.animateAgeInj()"> Killed/Injured</button>
             </div>
         </div>
+        <div class="row justify-content-center" id="memorial-viz" style = "height: 80vh; width: 100vw"></div>
     </div>
     <!--</div>-->
 
