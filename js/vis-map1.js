@@ -112,7 +112,7 @@ mapOneVis.prototype.initCircles = function() {
         .attr("r", 4)
         .attr("fill", "red")
         .attr("transform", function (d) {
-            console.log(vis.projection([+d.Longitude, +d.Latitude]))
+            //console.log(vis.projection([+d.Longitude, +d.Latitude]))
              return "translate(" + vis.projection([+d.Longitude, +d.Latitude]) + ")"
         })
         .on("mouseover", function(d) {

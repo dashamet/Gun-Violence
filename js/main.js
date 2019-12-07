@@ -2,11 +2,11 @@ let myDotVis;
 let myMap2;
 let myLineVis;
 let myMapOne;
-let myBrushVis;
 let myMap2LineVis;
 
 console.log("test");
-// init global switches
+
+// init global switch
 let selectedState = '';
 
 // load data
@@ -24,7 +24,6 @@ function initMainPage(error, shootingData, usMapData, stateNameData, deathData, 
     myDotVis = new dotVis('memorial-viz', shootingData);
     myMapOne = new mapOneVis('map1',  usMapData, stateNameData, deathData, shootingData);
     myMap2 = new map2Vis('map2', usMapData, stateNameData, deathData, policyData);
-    //myBrushVis = new brushVis('brushDiv', deathData);
     myLineVis = new lineVis('line-graph', deathInjData);
-    myMap2LineVis = new map2LineVis('kmap2', usMapData, stateNameData, deathData)
+    myMap2LineVis = new map2LineVis('kmap2', usMapData, stateNameData, deathData, policyData)
 };
