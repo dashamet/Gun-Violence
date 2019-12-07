@@ -231,20 +231,38 @@ map2LineVis.prototype.updateVis = function(){
         .enter().append("line")
         .merge(vis.policyGroup)
         //filter out data that extends before line graph data (aka 1978)
-        .filter(function(d){
-            return d.Implemented > 1978
-        })
+        // .filter(function(d){
+        //     return d.Implemented > 1978
+        // })
         .attr("stroke-width", 2)
         .attr("stroke", "black")
+        .attr("opacity", function(d){
+            if(d.Implemented < 1978){
+                return .4;
+            }
+            else{
+                return .9;
+            }
+        })
         //how far down
         .attr("y1", 0)
         //length
         .attr("y2", vis.height)
         .attr("x1", function(d){
-            return(vis.x(vis.parseTime(d.Implemented)));
+            if(d.Implemented < 1978){
+                return 10
+            }
+            else {
+                return (vis.x(vis.parseTime(d.Implemented)));
+            }
         })
         .attr("x2", function(d){
-           return(vis.x(vis.parseTime(d.Implemented)));
+            if(d.Implemented < 1978){
+                return 10
+            }
+            else {
+                return (vis.x(vis.parseTime(d.Implemented)));
+            }
         })
         //on hover, show law and the year law was implemented
         .on("mouseover", function(d) {
@@ -266,8 +284,8 @@ map2LineVis.prototype.updateVis = function(){
                     }
                 }
             })
-                .style("left", (270) + "px")
-                .style("top", (500) + "px");
+                .style("left", (170) + "px")
+                .style("top", (300) + "px");
         })
 
         //fade out tooltip on mouse out
