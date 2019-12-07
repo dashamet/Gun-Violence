@@ -24,11 +24,6 @@ map2Vis.prototype.initVis = function() {
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-    vis.div2 = d3.select("#" + vis.parentElement)
-        .append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 1);
-
     vis.projection = d3.geoAlbersUsa()
         .translate([vis.width / 2, vis.height / 2])
         .scale([vis.width*1.5]);
