@@ -266,11 +266,11 @@ map2LineVis.prototype.updateVis = function(){
                 //turn name of Law into an understandable string
                 else{
                     if(d.Law === "min_age_possession"){
-                        return "<strong> Type of Law: </strong>" + "Minimum Age for Firearm Possession" + " <br> "+
+                        return "<strong> Type of Law: </strong>" + "<br>" + "Minimum Age for Firearm Possession" + " <br> "+
                             "<strong> Implemented: </strong>" + d.Implemented + " <br> "
                     }
                     else{
-                        return "<strong> Type of Law: </strong>" + "Minimum Age For Purchasing Firearms" + " <br> "+
+                        return "<strong> Type of Law: </strong>" + "<br>" + "Minimum Age For Purchasing Firearms" + " <br> "+
                             "<strong> Implemented: </strong>" + d.Implemented + " <br> "
                     }
                 }
