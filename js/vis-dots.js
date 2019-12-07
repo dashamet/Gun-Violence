@@ -1,4 +1,5 @@
 dotVis = function(_parentElement, _dataShootings) {
+    // Initialize data
     this.parentElement = _parentElement;
     this.data = _dataShootings;
 
@@ -9,27 +10,25 @@ dotVis = function(_parentElement, _dataShootings) {
 dotVis.prototype.initVis = function() {
     let vis = this;
 
+    // set constants
     vis.margin = {top: 30, right: 80, bottom: 50, left: 80};
     vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = $('#' + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
 
+    // create drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
+    // no need to wrangle data
     vis.updateVis();
 };
 
-// dotVis.prototype.wrangleData = function(){
-//     let vis = this;
-//     vis.updateVis()
-// };
 
 dotVis.prototype.updateVis = function(){
     let vis = this;
-    //let vis.animateAge, vis.animateGender, vis.animateDeathInjury, vis.playAnimation, vis.animateAgeInj, vis.stopAnimation;
 
     // Set constants
     vis.dotR = 4.5;
@@ -43,12 +42,10 @@ dotVis.prototype.updateVis = function(){
             return  `customCircle ${d.age} ${d.Type} ${d.gender}`
         })
         .attr('r', vis.dotR);
-
-
-    // Create default view
     vis.nCol = 25;
     vis.space = 30;
 
+    // Create default view
     d3.selectAll('.customCircle.Killed')
         .attr('fill', 'red')
         .attr('cx', function(d,i){
