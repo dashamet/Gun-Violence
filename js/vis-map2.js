@@ -14,7 +14,7 @@ map2Vis = function(_parentElement, _mapData, _stateNameData, _deathData, _policy
 map2Vis.prototype.initVis = function() {
     let vis = this;
 
-    vis.margin = {top: 30, right: 150, bottom: 50, left: 80};
+    vis.margin = {top: 30, right: 150, bottom: 60, left: 80};
     vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = $('#' + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
 
@@ -168,14 +168,22 @@ map2Vis.prototype.updateVis = function(){
                 console.log(vis.startNum, vis.endNum);
                 return vis.startNum + ' - ' + vis.endNum;
             })
-            .attr('font-size', 3*vis.lsH/4 - 3 + 'px');
+            .attr('font-size', 3*vis.lsH/4 - 4 + 'px');
     }
     vis.svg.append('text')
         .attr('x', vis.width + vis.lsH + 5)
         .attr('y', 5*vis.height/8 + 5)
         .attr('text-anchor', 'middle')
-        .text('Death Rate')
+        .text('Death Rate*')
         .attr('font-size', 3*vis.lsH/4 + 'px');
+
+    vis.svg.append('text')
+        .attr('x', vis.width + vis.lsH + 1)
+        .attr('y', 5*vis.height/8 + 190)
+        .attr('text-anchor', 'middle')
+        .text('* # of firearm deaths/population * 1000')
+        .attr('font-size', 3*vis.lsH/4 - 5 + 'px')
+        .attr("fill", "grey")
 
     vis.svg.selectAll(".state")
         .on('mouseover', function(d){

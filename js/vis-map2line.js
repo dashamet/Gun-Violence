@@ -222,7 +222,7 @@ map2LineVis.prototype.updateVis = function(){
         .data(vis.policyDisplayData)
         .enter().append("line")
         .merge(vis.policyGroup)
-        .attr("stroke-width", 2)
+        .attr("stroke-width", 3)
         .attr("stroke", "black")
         //make policy lines  prior to 1978 opaque
         .attr("opacity", function(d){
