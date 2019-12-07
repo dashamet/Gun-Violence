@@ -14,7 +14,7 @@ map2Vis = function(_parentElement, _mapData, _stateNameData, _deathData, _policy
 map2Vis.prototype.initVis = function() {
     let vis = this;
 
-    vis.margin = {top: 30, right: 80, bottom: 50, left: 80};
+    vis.margin = {top: 30, right: 150, bottom: 50, left: 80};
     vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = $('#' + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
 
@@ -28,13 +28,11 @@ map2Vis.prototype.initVis = function() {
         .append("div")
         .attr("class", "tooltip")
         .style("opacity", 1);
-    vis.updateVis();
 
     vis.projection = d3.geoAlbersUsa()
         .translate([vis.width / 2, vis.height / 2])
         .scale([vis.width*1.5]);
 
-    //console.log("etest");
     vis.path = d3.geoPath()
         .projection(vis.projection);
 
@@ -49,6 +47,7 @@ map2Vis.prototype.initVis = function() {
     vis.svg.selectAll(".state")
         .data(vis.mapData)
         .enter().append("path")
+        .attr("data-legend", function(d) { return d.name})
         .attr("class", "state")
         .attr("d", vis.path)
         .attr("fill", 'transparent')
@@ -86,8 +85,8 @@ map2Vis.prototype.initVis = function() {
         //         })
         // })
         //state border from grey back to black
-        .attr('stroke', 'grey')
-        .attr('stroke-width', 0)
+        .attr('stroke', 'white')
+        .attr('stroke-width', 1)
 
 
         .on('click', function(d){
@@ -133,12 +132,50 @@ map2Vis.prototype.updateVis = function(){
 
 
     vis.filteredPolicyData = vis.policyData.filter(function(d){
-        return d.Law === vis.selectedValue && d.Extant === 1;
+        if (vis.selectedValue === 'all'){
+            return vis.policyData
+        }
+        else{
+            return d.Law === vis.selectedValue && d.Extant === 1;
+        }
     });
     console.log(vis.filteredPolicyData.length)
     vis.colorScale = d3.scaleQuantize()
         .domain(d3.extent(vis.deathRates))
         .range(["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#de2d26", "#a50f15"]);
+
+    // Make legend
+    vis.lsW = vis.width/25;
+    vis.lsH = vis.width/20;
+    console.log('?')
+    vis.drInt = (d3.max(vis.deathRates)-d3.min(vis.deathRates))/6
+    for(i = 0; i < 6; i++){
+        vis.svg.append('rect')
+            .attr('width', vis.lsW)
+            .attr('height', vis.lsH)
+            .attr('x', vis.width)
+            .attr('y', 5*vis.height/8+i*vis.lsH + 20)
+            .attr('fill', function(){
+                return vis.colorScale(d3.min(vis.deathRates)+i*vis.drInt)
+            });
+        vis.svg.append('text')
+            .attr('x', vis.width + vis.lsH + 5)
+            .attr('y', 5*vis.height/8+i*vis.lsH + 3*vis.lsH/4 + 20)
+            .attr('text-anchor', 'beginning')
+            .text(function(){
+                console.log(d3.min(vis.deathRates));
+                //return d3.min(vis.deathRates)+i*vis.drInt
+                return d3.format(".1e")(d3.min(vis.deathRates)+i*vis.drInt*1000)
+                //return d3.format(".0000%")(d3.min(vis.deathRates)+i*vis.drInt*1000)
+            })
+            .attr('font-size', 3*vis.lsH/4 + 'px');
+    }
+    vis.svg.append('text')
+        .attr('x', vis.width + vis.lsH + 5)
+        .attr('y', 5*vis.height/8 + 5)
+        .attr('text-anchor', 'middle')
+        .text('Death Rate')
+        .attr('font-size', 3*vis.lsH/4 + 'px');
 
     vis.svg.selectAll(".state")
         .on('mouseover', function(d){
@@ -174,12 +211,17 @@ map2Vis.prototype.updateVis = function(){
                     }
                 })
                 .attr("opacity", function(d) {
-                    vis.alpha = 1;
-                    vis.stateName = d.name;
-                    for (i = 0; i < vis.filteredPolicyData.length; i++) {
-                        if (vis.filteredPolicyData[i]['State'] === vis.stateName) {
-                            vis.alpha = 0.3;
-                            console.log(vis.stateName)
+                    if (vis.selectedValue === 'all'){
+                        vis.alpha = 1
+                    }
+                    else{
+                        vis.alpha = 1;
+                        vis.stateName = d.name;
+                        for (i = 0; i < vis.filteredPolicyData.length; i++) {
+                            if (vis.filteredPolicyData[i]['State'] === vis.stateName) {
+                                vis.alpha = 0.3;
+                                console.log(vis.stateName)
+                            }
                         }
                     }
                     return vis.alpha;
@@ -205,10 +247,17 @@ map2Vis.prototype.updateVis = function(){
         .attr("opacity", function(d) {
             vis.alpha = 1;
             vis.stateName = d.name;
-            for (i = 0; i < vis.filteredPolicyData.length; i++) {
-                if (vis.filteredPolicyData[i]['State'] === vis.stateName) {
-                    vis.alpha = 0.3;
-                    //console.log(vis.stateName)
+            if (vis.selectedValue === 'all'){
+                vis.alpha = 1
+            }
+            else{
+                vis.alpha = 1;
+                vis.stateName = d.name;
+                for (i = 0; i < vis.filteredPolicyData.length; i++) {
+                    if (vis.filteredPolicyData[i]['State'] === vis.stateName) {
+                        vis.alpha = 0.3;
+                        console.log(vis.stateName)
+                    }
                 }
             }
             return vis.alpha;
