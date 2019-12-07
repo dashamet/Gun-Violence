@@ -31,6 +31,7 @@ map2Vis.prototype.initVis = function() {
     vis.path = d3.geoPath()
         .projection(vis.projection);
 
+    //assign state name to data set
     vis.stateNameData.forEach(function (d) {
         vis.mapData.forEach(function (e) {
             if (d.id === e.id) {
@@ -39,6 +40,7 @@ map2Vis.prototype.initVis = function() {
         })
     });
 
+    //draw map
     vis.svg.selectAll(".state")
         .data(vis.mapData)
         .enter().append("path")
@@ -46,44 +48,8 @@ map2Vis.prototype.initVis = function() {
         .attr("class", "state")
         .attr("d", vis.path)
         .attr("fill", 'transparent')
-        // .on('mouseover', function(d){
-        //
-        //     // set selectedState
-        //     selectedState = d.name;
-        //     myMap2LineVis.wrangleData();
-        //
-        //     d3.select(this)
-        //         .attr('fill', 'rgb(105,105,105)')
-        //         .style('opacity', 1)
-        // })
-        // .on('mouseout', function(d){
-        //
-        //     myMap2LineVis.wrangleData();
-        //
-        //     // return state back to original color (code in updateVis)
-        //     d3.select(this)
-        //         .attr("fill", function(d) {
-        //             vis.stateName = d.name;
-        //             vis.index = 0;
-        //             for (i = 0; i < vis.deathData2016.length; i++) {
-        //                 if (vis.deathData2016[i]['State'] === vis.stateName) {
-        //                     vis.index = i;
-        //                 }
-        //             }
-        //             vis.val = vis.deathData2016[vis.index]['death_crude_rate'];
-        //             if (isNaN(vis.val)) {
-        //                 return "Grey"
-        //             }
-        //             else {
-        //                 return vis.colorScale(vis.val);
-        //             }
-        //         })
-        // })
-        //state border from grey back to black
         .attr('stroke', 'white')
         .attr('stroke-width', 1)
-
-
         .on('click', function(d){
             console.log(d);
         });
@@ -94,12 +60,13 @@ map2Vis.prototype.initVis = function() {
 map2Vis.prototype.wrangleData = function() {
     let vis = this;
 
+    //reset displayData
     vis.displayData = [];
 
+    //get data from only 2016 for chloropleth
     vis.deathData2016 = vis.deathData.filter(function(d){
         return d.Year === "2016";
     });
-    //vis.deathRates = [];
 
     vis.deathData2016.forEach(function(item, index){
         vis.deathRate = item['TotalFirearmDeaths']/item['Population'];
@@ -107,6 +74,7 @@ map2Vis.prototype.wrangleData = function() {
         vis.deathRates[index] = vis.deathRate
     });
 
+    //load policy data
     vis.policyData.forEach(function(d){
         d.Implemented = +d.Implemented;
         d.Repealed = +d.Repealed;
@@ -119,12 +87,8 @@ map2Vis.prototype.wrangleData = function() {
 map2Vis.prototype.updateVis = function(){
     let vis = this;
 
+    //selected Value for dropdown and sort policy data based on selection
     vis.selectedValue = d3.select("#data-value").property("value");
-
-
-    //hide all states
-    //vis.svg.selectAll('.state').transition().duration(1000).attr('opacity', 0);
-
 
     vis.filteredPolicyData = vis.policyData.filter(function(d){
         if (vis.selectedValue === 'all'){
@@ -134,7 +98,9 @@ map2Vis.prototype.updateVis = function(){
             return d.Law === vis.selectedValue && d.Extant === 1;
         }
     });
-    console.log(vis.filteredPolicyData.length)
+    console.log(vis.filteredPolicyData.length);
+
+    //create color scale
     vis.colorScale = d3.scaleQuantize()
         .domain(d3.extent(vis.deathRates))
         .range(["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#de2d26", "#a50f15"]);
@@ -142,8 +108,8 @@ map2Vis.prototype.updateVis = function(){
     // Make legend
     vis.lsW = vis.width/25;
     vis.lsH = vis.width/25;
-    console.log('?')
-    vis.drInt = (d3.max(vis.deathRates)-d3.min(vis.deathRates))/6
+    console.log('?');
+    vis.drInt = (d3.max(vis.deathRates)-d3.min(vis.deathRates))/6;
     for(i = 0; i < 6; i++){
         vis.svg.append('rect')
             .attr('width', vis.lsW)
@@ -173,18 +139,20 @@ map2Vis.prototype.updateVis = function(){
         .attr('font-size', 3*vis.lsH/4 + 'px');
 
     vis.svg.append('text')
-        .attr('x', vis.width + vis.lsH + 1)
-        .attr('y', vis.height + vis.margin.bottom)
+        .attr('x', vis.width + vis.lsH - 10)
+        .attr('y', vis.height + vis.margin.bottom - 10)
         .attr('text-anchor', 'middle')
         .text('* # of firearm deaths/population * 1000')
         .attr('font-size', 3*vis.lsH/4 - 5 + 'px')
-        .attr("fill", "grey")
+        .attr("fill", "grey");
 
+    //on hover, change state color to show selected and link to area graph
     vis.svg.selectAll(".state")
         .on('mouseover', function(d){
 
             // set selectedState
             selectedState = d.name;
+            //call area graph
             myMap2LineVis.wrangleData();
 
             d3.select(this)
@@ -231,6 +199,8 @@ map2Vis.prototype.updateVis = function(){
                 })
         })
         .transition().duration(800)
+
+        //chloropleth - color in states based on policy and death data
         .attr("fill", function(d) {
             vis.stateName = d.name;
             vis.index = 0;

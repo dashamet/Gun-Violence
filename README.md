@@ -57,8 +57,8 @@ vis-map2.js:
 states without certain firearm policies (page 6)
    
 vis-map2line.js  
-- linked line graph to vis-map2, updated when hover on a state
- and includes lines with policy data(page 6)
+- linked area graph (was originally a line graph but changed to an area graph) to 
+vis-map2.js, updated when hover on a state and includes lines with policy data(page 6)
 
 index.html  
 - where pagepiler is run as well as creating divs for all of our
