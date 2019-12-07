@@ -165,7 +165,7 @@ map2Vis.prototype.updateVis = function(){
             .text(function(){
                 console.log(d3.min(vis.deathRates));
                 //return d3.min(vis.deathRates)+i*vis.drInt
-                return d3.format(".1e")(d3.min(vis.deathRates)+i*vis.drInt*1000)
+                return d3.format(",.2r")(d3.min(vis.deathRates)+i*vis.drInt*1000)
                 //return d3.format(".0000%")(d3.min(vis.deathRates)+i*vis.drInt*1000)
             })
             .attr('font-size', 3*vis.lsH/4 + 'px');
