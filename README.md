@@ -28,6 +28,7 @@ jquery.counterup.min.js
 jquery.min.js  
 jquery.pagepiling.js  
 jquery.waypoints.min.js  
+my.js   
 popper.min.js  
 queue.min.js  
 topojson.v1.min.js  
@@ -36,14 +37,33 @@ bootstrap.min.css
 jquery.pagepiling.css
 
 #Our Code:  
-main.js  
-my.js  
-vis-dots.js  
-vis-line.js  
-vis-map1.js  
-vis-map2.js  
+main.js: 
+- Initialize visualizations  
+ 
+vis-dots.js: 
+- Memorial visualization with dot animations (page 5)  
+
+vis-line.js: 
+- Injuries and deaths over time line graph with updates text
+when text or circle hovered(page 3)  
+
+vis-map1.js: 
+- Plotting incidents of gun violence on a state map, 
+with dropdowns to sort by injury or death, gender, or 
+age range (page 4)
+
+vis-map2.js: 
+- chloropleth and corresponding legend with dropdown to show 
+states without certain firearm policies (page 6)
+   
 vis-map2line.js  
+- linked line graph to vis-map2, updated when hover on a state
+ and includes lines with policy data(page 6)
+
 index.html  
+- where pagepiler is run as well as creating divs for all of our
+visualizations and static pages
+
 style.css 
 
 #Data Links
