@@ -35,31 +35,28 @@
         <div class="row justify-content-center" style="height: 5vh">
             <h5> Each point represents a victim of gun violence in 2019. Hover over a point to show more detail and select filters using the dropdowns below.</h5>
         </div>
-        <div class="row justify-content-center align-self-center" style="height: 5vh">
-            <!-- dropdown -->
-            <!--<div class="row justify-content-center" style="height: 5vh">-->
-            <!--<div class="align-self-center">-->
-            <!--  dropdown  -->
-            <form class="form-inline">
-                <!--<div class="form-group">-->
-                <select class="form-control" id="ranking-type" onchange="myMapOne.updateVis()">
-                    <option value="">Both</option>
-                    <option value=".Injured">Injuries</option>
-                    <option value=".Killed">Deaths</option>
-                </select>
-                <select class="form-control" id="gender" onchange="myMapOne.updateVis()">
-                    <option value="">Both</option>
-                    <option value=".male">Males</option>
-                    <option value=".female">Females</option>
-                </select>
-                <select class="form-control" id="age" onchange="myMapOne.updateVis()">
-                    <option value="">Both</option>
-                    <option value=".child">Children</option>
-                    <option value=".teen">Teens</option>
-                </select>
-                <!--</div>-->
+        <div class="row" style="height: 5vh">
+
+            <form class="form-inline center">
+                <div class="form-group center " id="selection">
+                    <label for="selection">Select data: &nbsp</label>
+                    <select class="form-control" id="ranking-type" onchange="myMapOne.updateVis()">
+                        <option value="">Injuries and deaths</option>
+                        <option value=".Injured">Injuries</option>
+                        <option value=".Killed">Deaths</option>
+                    </select>
+                    <select class="form-control" id="gender" onchange="myMapOne.updateVis()">
+                        <option value="">Males and females</option>
+                        <option value=".male">Males</option>
+                        <option value=".female">Females</option>
+                    </select>
+                    <select class="form-control" id="age" onchange="myMapOne.updateVis()">
+                        <option value="">Children and teens</option>
+                        <option value=".child">Children</option>
+                        <option value=".teen">Teens</option>
+                    </select>
+                </div>
             </form>
-            <!--</div>-->
         </div>
         <div class="row justify-content-center" id="map1" style="height: 75vh;"></div>
     </div>
@@ -70,9 +67,9 @@
             <h3>In Memoriam</h3>
         </div>
         <div class="row justify-content-center" style="height: 5vh">
-            <h5>Each red circle represents one of the last 500 youth firearm deaths. Each black circle represents one of the last 500 youth firearm injuries. </h5>
+            <h5>Each red circle represents one of the last 500 youth deaths by firearms in 2019. Each black circle represents one of the last 500 youth injuries by firearms in 2019. </h5>
         </div>
-        <div class="row justify-content-center" style="height: 5vh">
+        <div class="row justify-content-center buttons" style="height: 5vh">
             <div>
                 <button type="button" class = "btn btn-main" onclick = "myDotVis.playAnimation()">Play Once</button>
                 <!--<button type="button" class = "btn btn-main" onclick = "myDotVis.stopAnimation()">Stop</button>-->
@@ -89,14 +86,13 @@
             <h3> Policy has Power.</h3>
         </div>
         <div class="row justify-content-center" style="height: 10vh">
-            <h5>Select a policy to see its correlation with firearm death rate in 2016 in states across the US.
+            <h5>Select a policy to see its correlation with its 2016 firearm death rates.
                 <br><br>
-                Hover over a state to view the number of firearm deaths over time. The black lines indicate when a law was implemented. Hover over a line to see more details.</h5>
+                Hover over a state to view the number of firearm deaths over time. The black lines indicate when a law was implemented. Hover over a line to view more details about the law.</h5>
         </div>
-        <!--  dropdown  -->
-        <div class="row justify-content-center" style="height: 10vh">
+        <div class="row" style="height: 10vh">
 
-            <form class="form-inline">
+            <form class="form-inline policy-button">
                 <div class="form-group">
                     <label for="data-value">States without: &nbsp</label>
                     <select class="form-control" id="data-value" onchange = "myMap2.updateVis()">
@@ -129,7 +125,7 @@
         </div>
     </div>
 
-    <div class="section sec9 center">
+    <div class="section sec8 center">
         <div class="row">
             <div class="col-sm">
                 <img src="css/img/dasha.jpg" width="392.3px" height = "308.1px" alt="dasha-headshot">
@@ -148,7 +144,7 @@
                 </div>
             </div>
             <div class="col-sm">
-                <img class = "crop-jess" src="css/img/jess-headshot.jpg" width="330px" height = "308px" alt="jess-headshot">
+                <img class = "crop-jess" src="css/img/jessica.jpg" width="330px" height = "308px" alt="jess-headshot">
                 <span class="bio">Jessica Bishai</span> ('20) concentrates in Statistics (Data Science) with a secondary in Global Health and Health Policy at Harvard University.
                 <div>
                     <a href = "https://www.linkedin.com/in/jessica-bishai-55a503131/"> <img src="css/img/linkedin.png" width="34.1px" height = "34.1px" alt="jess-linkedin"> </a>
