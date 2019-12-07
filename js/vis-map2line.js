@@ -38,14 +38,6 @@ map2LineVis.prototype.initVis = function() {
         .attr("class", "tooltip")
         .style("opacity", 0);
 
-    // clip path
-    // vis.svg.append("defs")
-    //     .append("clipPath")
-    //     .attr("id", "clip")
-    //     .append("rect")
-    //     .attr("width", vis.width)
-    //     .attr("height", vis.height);
-
     // for line graph
     vis.parseTime = d3.timeParse("%Y");
 
@@ -81,7 +73,7 @@ map2LineVis.prototype.initVis = function() {
         .append("text")
         .attr("id", "y-text");
 
-    //initialize path
+    //initialize area path
     vis.pathGroup = vis.svg.append('g')
         .attr('class', 'path-group');
 
@@ -140,8 +132,8 @@ map2LineVis.prototype.initDataWrangling = function(){
         .key(function(d){ return d.State})
         .entries(vis.policyfilteredData);
 
-    console.log(vis.nestedData);
-    console.log(vis.policyNest);
+    // console.log(vis.nestedData);
+    // console.log(vis.policyNest);
 
     this.wrangleData();
 }
@@ -230,12 +222,9 @@ map2LineVis.prototype.updateVis = function(){
         .data(vis.policyDisplayData)
         .enter().append("line")
         .merge(vis.policyGroup)
-        //filter out data that extends before line graph data (aka 1978)
-        // .filter(function(d){
-        //     return d.Implemented > 1978
-        // })
         .attr("stroke-width", 2)
         .attr("stroke", "black")
+        //make policy lines  prior to 1978 opaque
         .attr("opacity", function(d){
             if(d.Implemented < 1978){
                 return .4;
@@ -248,6 +237,7 @@ map2LineVis.prototype.updateVis = function(){
         .attr("y1", 0)
         //length
         .attr("y2", vis.height)
+        //orient policy data that extends before line graph data (< 1978) before line graph starts
         .attr("x1", function(d){
             if(d.Implemented < 1978){
                 return 10
@@ -294,5 +284,6 @@ map2LineVis.prototype.updateVis = function(){
                 .duration(50)
                 .style("opacity", 0);
         })
+        //transition for policy lines
         .transition().duration(300);
 };
