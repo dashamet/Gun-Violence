@@ -18,6 +18,17 @@ body {
     padding-bottom: 10px;
 }
 
+.crop img {
+    width: 400px;
+    height: 300px;
+    margin: -75px 0 0 -100px;
+}
+
+.crop-jess img{
+    width: 330px;
+    height: 308px;
+}
+
 .center {
     text-align: center;
 }
