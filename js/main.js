@@ -4,8 +4,6 @@ let myLineVis;
 let myMapOne;
 let myMap2LineVis;
 
-console.log("test");
-
 // init global switch
 let selectedState = '';
 
