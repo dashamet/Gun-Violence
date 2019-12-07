@@ -91,7 +91,7 @@ dotVis.prototype.updateVis = function(){
 
     vis.animateGender = function(){
         d3.selectAll(".dotLabel").remove();
-        vis.nCol = 25;
+        vis.nCol = 30;
         d3.selectAll('.customCircle.male')
             .transition()
             .duration(800)
