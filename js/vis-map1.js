@@ -15,7 +15,7 @@ mapOneVis = function(_parentElement, _mapData, _stateNameData, _deathData, _shoo
 mapOneVis.prototype.initVis = function() {
     let vis = this;
 
-    vis.margin = {top: 0, right: 0, bottom: 0, left: 0};
+    vis.margin = {top: 10, right: 10, bottom: 10, left: 10};
     vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = $('#' + vis.parentElement).height() -vis.margin.top - vis.margin.bottom;
 
