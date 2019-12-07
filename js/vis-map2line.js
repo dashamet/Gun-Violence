@@ -6,9 +6,13 @@ map2LineVis = function(_parentElement, _mapData, _stateNameData, _deathData, _po
     this.deathData = _deathData;
     this.policyData = _policyData;
 
+    //initialize nested data
     this.nestedData = [];
+    this.policyNest = [];
 
+    //initialize display data
     this.displayData = [];
+    this.policyDisplayData = [];
 
     // call method initVis
     this.initVis();
@@ -27,6 +31,12 @@ map2LineVis.prototype.initVis = function() {
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+
+    // Append Div for tooltip to SVG
+    vis.div = d3.select("#kmap2")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
     // clip path
     // vis.svg.append("defs")
@@ -48,14 +58,13 @@ map2LineVis.prototype.initVis = function() {
     vis.area = d3.area()
         .curve(d3.curveMonotoneX)
         .defined(d => !isNaN(d.TotalFirearmDeaths))
-        .x(function(d) { console.log(vis.x(vis.parseTime(d.Year)));
-        if(d.Year){
+        .x(function(d) {
+            if(d.Year){
             return vis.x(vis.parseTime(d.Year));
-        }
-              })
+            }
+        })
         .y0(vis.y(0))
         .y1(d => vis.y(d.TotalFirearmDeaths));
-
 
     vis.xAxis = vis.svg.append("g")
         .attr("class", "axis x-axis")
@@ -64,6 +73,15 @@ map2LineVis.prototype.initVis = function() {
     vis.yAxis = vis.svg.append("g")
         .attr("class", "axis y-axis");
 
+    //make sure y-axis text appends only once
+    vis.yGroup = vis.svg.append("g")
+        .attr("class", "y-group");
+
+    vis.yText = vis.yGroup
+        .append("text")
+        .attr("id", "y-text");
+
+    //initialize path
     vis.pathGroup = vis.svg.append('g')
         .attr('class', 'path-group');
 
@@ -71,25 +89,17 @@ map2LineVis.prototype.initVis = function() {
         .append('path')
         .attr('id', 'myLine');
 
-    //policy data lines
-    //add lines for when policy created
-    /*vis.svg.selectAll("policyLine")
-        .data(vis.filteredPolicyData)
-        .enter().append("line")
-        .attr("stroke-width", 2)
-        .attr("stroke", "black")
-        .attr("x1", 30)
-        // .attr("x2", function(d){
-        //     return d.Implemented
-        // })
-        // .attr("y1", function(d){
-        //      return d.Implemented
-        // })
-        .attr("x2", 30)
-        .attr("y1", 572)
+    //title group
+    vis.titleGroup = vis.svg.append("g")
+        .attr("class", "title-group");
 
-        .attr("y2", 0);*/
+    vis.title = vis.titleGroup
+        .append("text")
+        .attr("id", "my-title");
 
+    //initialize policy data lines
+    vis.policyGroup = vis.svg.append("g")
+        .attr("class", "policy-group");
 
     this.initDataWrangling();
 };
@@ -98,47 +108,40 @@ map2LineVis.prototype.initVis = function() {
 map2LineVis.prototype.initDataWrangling = function(){
     let vis = this;
 
+    //load line graph data
     vis.deathData.forEach(function (d) {
         d.Year = +d.Year;
-        // d.FirearmHomicides = +d.FirearmHomicides;
-        // d.FirearmSuicides = +d.FirearmSuicides;
-        // d.TotalHuntingLicensesTagsPermitsandStamps = +d.TotalHuntingLicensesTagsPermitsandStamps;
-        // d.BackgroundCheckHandgun = +d.BackgroundCheckHandgun;
-        // d.BackgroundCheckLongGun = +d.BackgroundCheckLongGun;
-        // d.BackgroundCheckMultipleGunTypes = +d.BackgroundCheckMultipleGunTypes;
-        // d.BackgroundCheckRentalsHandgun = +d.BackgroundCheckRentalsHandgun;
-        // d.BackgroundCheckRentalsLongGun = +d.BackgroundCheckRentalsLongGun;
-        // d.BackgroundCheckPrivateSaleHandgun = +d.BackgroundCheckPrivateSaleHandgun;
-        // d.BackgroundCheckPrivateSaleLongGun = +d.BackgroundCheckPrivateSaleLongGun;
         // d.BackgroundCheckTotals = +d.BackgroundCheckTotals;
-        // d.PersonsUnder5years = +d.PersonsUnder5years;
-        // d.Persons5to9years = +d.Persons5to9years;
-        // d.Persons10to14years = +d.Persons10to14years;
-        // d.Persons15to19years = +d.Persons15to19years;
-        // d.TotalChildPop = +d.TotalChildPop;
         d.TotalFirearmDeaths = +d.TotalFirearmDeaths;
     });
     console.log(vis.deathData);
 
     //load policy data
     vis.policyData.forEach(function(d){
-        d.Implemented = vis.parseTime(d.Implemented);
+        d.Implemented = +d.Implemented;
     });
 
+    //sort the years
     vis.filteredData = vis.deathData.sort(function(a,b){
         return a.Year - b.Year
     });
 
     vis.policyfilteredData = vis.policyData.sort(function(a,b){
-        return a.Year - b.Year
+        return a.Implemented - b.Implemented
     });
 
-    // nest data
+    // nest line graph data
     vis.nestedData = d3.nest()
         .key(function(d){ return d.State})
         .entries(vis.filteredData);
 
+    // nest policy line data
+    vis.policyNest = d3.nest()
+        .key(function(d){ return d.State})
+        .entries(vis.policyfilteredData);
+
     console.log(vis.nestedData);
+    console.log(vis.policyNest);
 
     this.wrangleData();
 }
@@ -149,13 +152,21 @@ map2LineVis.prototype.wrangleData = function(){
 
     // reset displayData
     vis.displayData = [];
+    vis.policyDisplayData = [];
 
     // iterate over nestedData and grab only selected States
     vis.nestedData.forEach(function(d){
         if (d.key === selectedState){
             vis.displayData = d.values;
         }
-    })
+    });
+
+    // iterate over policyData and grab only selected States
+    vis.policyNest.forEach(function(d){
+        if (d.key === selectedState){
+            vis.policyDisplayData = d.values;
+        }
+    });
 
     this.updateVis();
 };
@@ -167,9 +178,10 @@ map2LineVis.prototype.updateVis = function(){
     vis.x.domain(d3.extent(vis.displayData, function(d) { return vis.parseTime(d.Year); }));
     vis.y.domain([0, d3.max(vis.displayData, function(d) {return d.TotalFirearmDeaths})]);
 
-    //console.log(vis.filteredData);
-    console.log(selectedState);
-    console.log(vis.displayData);
+    // console.log(selectedState);
+    //console.log(vis.displayData);
+
+    console.log(vis.policyDisplayData);
 
     //draw path
     vis.path
@@ -190,7 +202,7 @@ map2LineVis.prototype.updateVis = function(){
         .call(d3.axisLeft(vis.y));
 
     // Add the Y Axis label
-    vis.svg.append("text")
+    vis.yText
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - vis.margin.left + 16)
         .attr("x",0 - (vis.height / 2))
@@ -200,5 +212,69 @@ map2LineVis.prototype.updateVis = function(){
         .style("fill", "grey")
         .text("Total Number of Firearm Deaths");
 
+    // Add dynamically changing title
+    vis.title
+        .attr("x", (vis.width / 2))
+        .attr("y", 0 - (vis.margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "18px")
+        .style("fill", "grey")
+        .text(selectedState);
 
+    //make lines from previous selected state disappear
+    vis.svg.selectAll("line").attr('opacity', 0);
+
+    //add lines for when state policy implemented
+    vis.policy = vis.policyGroup
+        .selectAll("policyLine")
+        .data(vis.policyDisplayData)
+        .enter().append("line")
+        .merge(vis.policyGroup)
+        //filter out data that extends before line graph data (aka 1978)
+        .filter(function(d){
+            return d.Implemented > 1978
+        })
+        .attr("stroke-width", 2)
+        .attr("stroke", "black")
+        //how far down
+        .attr("y1", 0)
+        //length
+        .attr("y2", vis.height)
+        .attr("x1", function(d){
+            return(vis.x(vis.parseTime(d.Implemented)));
+        })
+        .attr("x2", function(d){
+           return(vis.x(vis.parseTime(d.Implemented)));
+        })
+        //on hover, show law and the year law was implemented
+        .on("mouseover", function(d) {
+            vis.div.transition()
+                .duration(50)
+                .style("opacity", .9);
+            vis.div.html(function () {
+                if (d.Implemented === ""){
+                    return "<strong> Type of Law: </strong>" + d.Law
+                }
+                else{
+                    if(d.Law === "min_age_possession"){
+                        return"<strong> Implemented: </strong>" + d.Implemented + " <br> "
+                            + "<strong> Type of Law: </strong>" + "Minimum Age for Firearm Possession"
+                    }
+                   else{
+                        return"<strong> Implemented: </strong>" + d.Implemented + " <br> "
+                            + "<strong> Type of Law: </strong>" + "Minimum Age For Purchasing Firearms"
+                    }
+                }
+            })
+                .style("left", (270) + "px")
+                .style("top", (500) + "px");
+        })
+
+        //fade out tooltip on mouse out
+        .on("mouseout", function(d) {
+            vis.div.transition()
+                .duration(50)
+                .style("opacity", 0);
+        })
+        .transition().duration(300);
 };
