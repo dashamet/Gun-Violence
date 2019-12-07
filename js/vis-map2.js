@@ -163,10 +163,10 @@ map2Vis.prototype.updateVis = function(){
             .attr('y', 5*vis.height/8+i*vis.lsH + 3*vis.lsH/4 + 20)
             .attr('text-anchor', 'beginning')
             .text(function(){
-                console.log(d3.min(vis.deathRates));
-                //return d3.min(vis.deathRates)+i*vis.drInt
-                return d3.format(",.2r")(d3.min(vis.deathRates)+i*vis.drInt*1000)
-                //return d3.format(".0000%")(d3.min(vis.deathRates)+i*vis.drInt*1000)
+                vis.startNum = d3.format(",.2r")(d3.min(vis.deathRates)+i*vis.drInt*1000)
+                vis.endNum = d3.format(",.2r")(d3.min(vis.deathRates)+(i+1)*vis.drInt*1000)
+                console.log(vis.startNum, vis.endNum);
+                return vis.startNum + ' - ' + vis.endNum;
             })
             .attr('font-size', 3*vis.lsH/4 + 'px');
     }
