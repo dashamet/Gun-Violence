@@ -3,7 +3,7 @@
 ## Project Description
 Our project is a data-driven exploration of the toll firearms have taken on children and teenagers in the United States. We visualize causes of firearm injuries and deaths over time, the geography of gun violence, a breakdown of its victims, and the relationship between firearm deaths and gun control policy. 
 
-A video overview of our project can be found [here](www.google.com). 
+A video overview of our project can be found [here](https://www.youtube.com/watch?v=DsNb6ZF8-Y8&feature=youtu.be). 
 
 To learn more about our data sources and our creative process, check out our [process book](https://docs.google.com/document/d/1cwD3-cQMEhZHYYeOAjc17EDM-yCXPW24efqupfw35rI/edit?usp=sharing). 
 
