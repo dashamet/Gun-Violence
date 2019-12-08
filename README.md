@@ -1,4 +1,4 @@
-# CS171-Final-Project: Underage and Underfire
+# CS171 Final Project: Underage and Underfire
 
 ## Project Description
 Our project is a data-driven exploration of the toll firearms have taken on children and teenagers. We visualize causes of firearm injuries and deaths over time, the geography of gun violence, a breakdown of its victims, and the relationship between firearm deaths and gun control policy. 
