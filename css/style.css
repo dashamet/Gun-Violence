@@ -74,7 +74,7 @@ p{
 .line{ margin: 30px; overflow:hidden;}
 
 h3{
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .axis line{
@@ -101,6 +101,7 @@ h3{
 h5{
     color:grey;
     font-size: 12pt;
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 
@@ -184,4 +185,9 @@ ol{
     color: white;
     font-weight: normal;
     text-decoration: underline;
+}
+
+#in-memoriam{
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
