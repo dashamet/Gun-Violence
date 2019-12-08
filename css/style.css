@@ -59,19 +59,7 @@ body {
 }
 
 .sec7{
-    background-color: black;
-}
-
-#punchline{
-    color: darkRed;
-}
-
-#punchline a{
-    color: red;
-}
-
-#punchline-text{
-    vertical-align: center;
+    color: white;
 }
 
 p{
@@ -190,4 +178,10 @@ ol{
 
 .asterisk{
     text-align: center;
+}
+
+#learn-more{
+    color: white;
+    font-weight: normal;
+    text-decoration: underline;
 }

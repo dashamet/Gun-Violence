@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('#pagepiling').pagepiling({
-        sectionsColor: ['white', 'black', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
+        sectionsColor: ['white', 'black', 'white', 'white', 'white', 'white', 'black', 'white', 'white'],
         anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage', 'sixthPage', 'seventhPage', 'eighthPage', 'ninthPage']
     })
 
