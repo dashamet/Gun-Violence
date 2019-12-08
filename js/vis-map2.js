@@ -115,34 +115,34 @@ map2Vis.prototype.updateVis = function(){
             .attr('width', vis.lsW)
             .attr('height', vis.lsH)
             .attr('x', vis.width-12)
-            .attr('y', vis.height-i*vis.lsH)
+            .attr('y', 7/8*vis.height - vis.lsH*i)//5/8*vis.height+vis.lsH+i*vis.lsH)
             .attr('fill', function(){
                 return vis.colorScale(d3.min(vis.deathRates)+i*vis.drInt)
             });
         vis.svg.append('text')
             .attr('x', vis.width + vis.lsH - 10)
-            .attr('y', vis.height-i*vis.lsH+vis.lsH/2)
+            .attr('y', 7/8*vis.height - vis.lsH*i + vis.lsH/2)
             .attr('text-anchor', 'beginning')
             .text(function(){
-                vis.startNum = d3.format(",.2r")(d3.min(vis.deathRates)+i*vis.drInt*1000)
-                vis.endNum = d3.format(",.2r")(d3.min(vis.deathRates)+(i+1)*vis.drInt*1000)
+                vis.startNum = d3.format(",.2r")(d3.min(vis.deathRates)+i*vis.drInt*1000);
+                vis.endNum = d3.format(",.2r")(d3.min(vis.deathRates)+(i+1)*vis.drInt*1000);
                 console.log(vis.startNum, vis.endNum);
                 return vis.startNum + ' - ' + vis.endNum;
             })
             .attr('font-size', 3*vis.lsH/4 - 4 + 'px');
     }
     vis.svg.append('text')
-        .attr('x', vis.width + vis.lsH + 5)
-        .attr('y', 5*vis.height/8)
+        .attr('x', vis.width + vis.lsH + 15)
+        .attr('y', 7*vis.height/8-vis.lsH*5.5)
         .attr('text-anchor', 'middle')
         .text('Death Rate*')
         .attr('font-size', 3*vis.lsH/4 + 'px');
 
     vis.svg.append('text')
-        .attr('x', vis.width + vis.lsH - 10)
-        .attr('y', vis.height + vis.margin.bottom - 10)
+        .attr('x', vis.width + 2*vis.lsW)
+        .attr('y', 7*vis.height/8 + 2*vis.lsH)
         .attr('text-anchor', 'middle')
-        .text('* # of firearm deaths/population * 1000')
+        .text('* firearm deaths/population * 1000')
         .attr('font-size', 3*vis.lsH/4 - 5 + 'px')
         .attr("fill", "grey");
 
