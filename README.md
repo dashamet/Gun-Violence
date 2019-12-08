@@ -26,6 +26,12 @@ To learn more about our data sources and our creative process, check out our [pr
    
 * `vis-map2line.js` contains code for an area graph (linked to the choropoleth map above) which shows deaths by firearms over time in a selected state as well as when a particular policy was implemented in that state (page 6)
 
+## Data
+We relied on three main sources of data:
+1. [The Center for Disease Control and Prevention (CDC)](https://www.cdc.gov/injury/wisqars/index.html)
+2. [Gun Violence Archive](https://www.gunviolencearchive.org/reports)
+3. [RAND](https://www.rand.org/pubs/tools/TL283-1.html)
+
 ## Libraries
 bootstrap.min.css 
 bootstrap.min.js  
@@ -39,9 +45,4 @@ popper.min.js
 queue.min.js  
 topojson.v1.min.js   
 
-## Data
-We relied on three main sources of data:
-1. [The Center for Disease Control and Prevention (CDC)](https://www.cdc.gov/injury/wisqars/index.html)
-2. [Gun Violence Archive](https://www.gunviolencearchive.org/reports)
-3. [RAND](https://www.rand.org/pubs/tools/TL283-1.html)
 
