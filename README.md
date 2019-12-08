@@ -18,13 +18,13 @@ To learn more about our data sources and our creative process, check out our [pr
 
 * `vis-line.js` contains code for a line graph depicting causes of injuries and deaths over time (page 3)  
 
-* `vis-map1.js` contains code for a map showing victims based on age, gender, and type of harm (page 4)
+* `vis-map1.js` contains code for a map showing victims filtered based on age, gender, and type of harm (page 4)
 
 * `vis-dots.js` contains code for an animated visualization depicting victims as dots (page 5)  
 
-* `vis-map2.js` contains code for a choropleth map showing the correlation between states' firearm death rate and gun control policies (page 6)
+* `vis-map2.js` contains code for a choropleth map showing the correlation between states' firearm death rates and gun control policies (page 6)
    
-* `vis-map2line.js` contains code for the area graph (linked to the choropoleth map above) which shows deaths by firearms in a selected state as well as when a particular policy was implemented in that state (page 6)
+* `vis-map2line.js` contains code for an area graph (linked to the choropoleth map above) which shows deaths by firearms over time in a selected state as well as when a particular policy was implemented in that state (page 6)
 
 ## Libraries
 bootstrap.min.css 
