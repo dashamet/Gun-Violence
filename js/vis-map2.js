@@ -148,37 +148,30 @@ map2Vis.prototype.updateVis = function(){
 
     //on click, change state color to show selected and link to area graph
     vis.svg.selectAll(".state")
-        .on('click', function(d){
-
-            // set selectedState
-            selectedState = d.name;
-            //call area graph
-            myMap2LineVis.wrangleData();
-
+        .on('mouseover', function(d){
             d3.select(this)
                 .attr('fill', 'rgb(105,105,105)')
                 .attr('opacity', 1)
-
-            myMap2LineVis.wrangleData();
-
-            // return state back to original color (code in updateVis)
+        })
+        // return state back to original color (code in updateVis)
+        .on('mouseout', function(d){
             d3.select(this)
-                .attr("fill", function(d) {
-                    vis.stateName = d.name;
-                    vis.index = 0;
-                    for (i = 0; i < vis.deathData2016.length; i++) {
-                        if (vis.deathData2016[i]['State'] === vis.stateName) {
-                            vis.index = i;
-                        }
+            .attr("fill", function(d) {
+                vis.stateName = d.name;
+                vis.index = 0;
+                for (i = 0; i < vis.deathData2016.length; i++) {
+                    if (vis.deathData2016[i]['State'] === vis.stateName) {
+                        vis.index = i;
                     }
-                    vis.val = vis.deathData2016[vis.index]['death_crude_rate'];
-                    if (isNaN(vis.val)) {
-                        return "Grey"
-                    }
-                    else {
-                        return vis.colorScale(vis.val);
-                    }
-                })
+                }
+                vis.val = vis.deathData2016[vis.index]['death_crude_rate'];
+                if (isNaN(vis.val)) {
+                    return "Grey"
+                }
+                else {
+                    return vis.colorScale(vis.val);
+                }
+            })
                 .attr("opacity", function(d) {
                     if (vis.selectedValue === 'all'){
                         vis.alpha = 1
@@ -195,6 +188,14 @@ map2Vis.prototype.updateVis = function(){
                     }
                     return vis.alpha;
                 })
+        })
+        .on('click', function(d){
+
+            // set selectedState
+            selectedState = d.name;
+            //call area graph
+            myMap2LineVis.wrangleData();
+
         })
         .transition().duration(800)
 
