@@ -1,3 +1,4 @@
+/* tooltip for map1 and map2line*/
 div.tooltip {
     position: absolute;
     text-align: center;
@@ -11,6 +12,7 @@ div.tooltip {
     font-family: Georgia, cursive;
 }
 
+/*index.html css*/
 body {
     font-family: Georgia, cursive;
     padding-left: 12px;
@@ -56,8 +58,11 @@ body {
     margin-left: 10px;
 }
 
-#punchline{
+.sec7{
     background-color: black;
+}
+
+#punchline{
     color: darkRed;
 }
 
@@ -133,6 +138,7 @@ a:hover{
     margin-top: 10px;
 }
 
+/*memorial visualization css*/
 .btn-main{
     background: black;
     color: white;
@@ -151,6 +157,7 @@ a:hover{
     border: 2px solid red;
 }
 
+/*for about author's page and data page*/
 img{
     opacity: 0.9;
 }
