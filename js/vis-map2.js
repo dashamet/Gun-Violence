@@ -146,9 +146,9 @@ map2Vis.prototype.updateVis = function(){
         .attr('font-size', 3*vis.lsH/4 - 5 + 'px')
         .attr("fill", "grey");
 
-    //on hover, change state color to show selected and link to area graph
+    //on click, change state color to show selected and link to area graph
     vis.svg.selectAll(".state")
-        .on('mouseover', function(d){
+        .on('click', function(d){
 
             // set selectedState
             selectedState = d.name;
@@ -158,8 +158,6 @@ map2Vis.prototype.updateVis = function(){
             d3.select(this)
                 .attr('fill', 'rgb(105,105,105)')
                 .attr('opacity', 1)
-        })
-        .on('mouseout', function(d){
 
             myMap2LineVis.wrangleData();
 

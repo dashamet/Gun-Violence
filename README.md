@@ -44,8 +44,8 @@ vis-dots.js:
 - Memorial visualization with dot animations (page 5)  
 
 vis-line.js: 
-- Injuries and deaths over time line graph with updates text
-when text or circle hovered(page 3)  
+- line graph that depicts injuries and deaths over time, updates text
+when text or circle hovered (page 3)  
 
 vis-map1.js: 
 - Plotting incidents of gun violence on a state map, 
@@ -53,12 +53,12 @@ with dropdowns to sort by injury or death, gender, or
 age range (page 4)
 
 vis-map2.js: 
-- chloropleth and corresponding legend with dropdown to show 
+- choropleth and corresponding legend with dropdown to show 
 states without certain firearm policies (page 6)
    
 vis-map2line.js  
 - linked area graph (was originally a line graph but changed to an area graph) to 
-vis-map2.js, updated when hover on a state and includes lines with policy data(page 6)
+vis-map2.js, updated when a state is clicked and includes lines with policy data (page 6)
 
 index.html  
 - where pagepiler is run as well as creating divs for all of our
