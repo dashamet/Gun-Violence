@@ -10,7 +10,7 @@ lineVis.prototype.initVis = function() {
     let vis = this;
 
     // Creating variables for the SVG dimensions
-    vis.margin = {top: 150, right: 220, bottom: 30, left: 80};
+    vis.margin = {top: 150, right: 220, bottom: 60, left: 80};
     vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right - 100;
     vis.height = $('#' + vis.parentElement).height() - vis.margin.top - vis.margin.bottom;
 
