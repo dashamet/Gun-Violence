@@ -142,7 +142,7 @@ map2Vis.prototype.updateVis = function(){
         .attr('x', vis.width + 2*vis.lsW)
         .attr('y', 7*vis.height/8 + 2*vis.lsH)
         .attr('text-anchor', 'middle')
-        .text('* firearm deaths/population * 1000')
+        .text('* firearm deaths/population × 1000')
         .attr('font-size', 3*vis.lsH/4 - 5 + 'px')
         .attr("fill", "grey");
 
