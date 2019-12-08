@@ -1,73 +1,47 @@
-# CS171-Final-Project: UnderAge and Underfire
+# CS171-Final-Project: Underage and Underfire
 
-#Project Description
- Our group hopes our project will shed light on the toll firearms take on 
- children and teenagers through suicide, homicide, accidental 
- death, and injury.
- 
- Our Visualizations show the rates and type of 
- firearm injuries and deaths over time and the amount of children and teens, male and female, 
- who have been killed or injured by firearms. We make sure to humanize this crisis in our country 
- and memorialize the victims, as well as illustrate how certain types of policies have
- impacted total firearm deaths over time.
- 
- Especially with the latter visualization, we hope to contribute in a small way to ultimately 
- reducing gun violence by spreading awareness of policies that have saved lives. 
+## Project Description
+Our project is a data-driven exploration of the toll firearms have taken on children and teenagers. We visualize causes of firearm injuries and deaths over time, the geography of gun violence, a breakdown of its victims, and the relationship between firearm deaths and gun control policy. 
 
+A video overview of our project can be found [here](www.google.com). 
 
-There are adequate descriptions of how to interact with our visualizations, but in case of confusion,
-here is the link to the video that briefly shows how
-to interact with our visualizations:  
-LINK HERE
+To learn more about our data sources and our creative process, check out our [process book](https://docs.google.com/document/d/1cwD3-cQMEhZHYYeOAjc17EDM-yCXPW24efqupfw35rI/edit?usp=sharing). 
 
-#Libraries:  
+## Code
+* `index.html` contains our HTML code
+
+* `style.css` contains our CSS code
+
+* `my.js` contains our jQuery code
+
+* `main.js` initializes the visualizations contained in the following .js files
+
+* `vis-line.js` contains code for a line graph depicting causes of injuries and deaths over time (page 3)  
+
+* `vis-map1.js` contains code for a map showing victims based on age, gender, and type of harm (page 4)
+
+* `vis-dots.js` contains code for an animated visualization depicting victims as dots (page 5)  
+
+* `vis-map2.js` contains code for a choropleth map showing the correlation between states' firearm death rate and gun control policies (page 6)
+   
+* `vis-map2line.js` contains code for the area graph (linked to the choropoleth map above) which shows deaths by firearms in a selected state as well as when a particular policy was implemented in that state (page 6)
+
+## Libraries
+bootstrap.min.css 
 bootstrap.min.js  
 colorbrewer.js  
 d3.min.js  
 jquery.counterup.min.js  
 jquery.min.js  
+jquery.pagepiling.css
 jquery.pagepiling.js  
-jquery.waypoints.min.js  
-my.js   
 popper.min.js  
 queue.min.js  
-topojson.v1.min.js  
-waypoint.js  
-bootstrap.min.css  
-jquery.pagepiling.css
+topojson.v1.min.js   
 
-#Our Code:  
-main.js: 
-- Initialize visualizations  
- 
-vis-dots.js: 
-- Memorial visualization with dot animations (page 5)  
+## Data
+We relied on three main sources of data:
+1. [The Center for Disease Control and Prevention (CDC)](https://www.cdc.gov/injury/wisqars/index.html)
+2. [Gun Violence Archive](https://www.gunviolencearchive.org/reports)
+3. [RAND](https://www.rand.org/pubs/tools/TL283-1.html)
 
-vis-line.js: 
-- line graph that depicts injuries and deaths over time, updates text
-when text or circle hovered (page 3)  
-
-vis-map1.js: 
-- Plotting incidents of gun violence on a state map, 
-with dropdowns to sort by injury or death, gender, or 
-age range (page 4)
-
-vis-map2.js: 
-- choropleth and corresponding legend with dropdown to show 
-states without certain firearm policies (page 6)
-   
-vis-map2line.js  
-- linked area graph (was originally a line graph but changed to an area graph) to 
-vis-map2.js, updated when a state is clicked and includes lines with policy data (page 6)
-
-index.html  
-- where pagepiler is run as well as creating divs for all of our
-visualizations and static pages
-
-style.css 
-
-#Data Links
-Our data was scraped from a variety of sources.   
-
-Here is the link to our process book if you want
-to learn more about our sources and our creative process:  https://docs.google.com/document/d/1cwD3-cQMEhZHYYeOAjc17EDM-yCXPW24efqupfw35rI/edit?usp=sharing
