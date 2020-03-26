@@ -3,7 +3,7 @@
 ## Project Description
 Our project is a data-driven exploration of the toll firearms have taken on children and teenagers in the United States. We visualize causes of firearm injuries and deaths over time, the geography of gun violence, a breakdown of its victims, and the relationship between firearm deaths and gun control policy. 
 
-Our website can be found [here](https://dashamet.github.io/cs171-final-project/).
+Our website can be found [here](https://dashamet.github.io).
 
 A video overview of our project can be found [here](https://www.youtube.com/watch?v=DsNb6ZF8-Y8&feature=youtu.be). 
 
